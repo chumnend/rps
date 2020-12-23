@@ -1,1 +1,1 @@
-export { FirebaseContext, FirebaseProvider } from './firebase.context';
+export * from './firebase.context';

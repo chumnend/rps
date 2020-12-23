@@ -19,7 +19,6 @@ const App = () => {
       <Router>
         <Header />
         <hr />
-
         <Switch>
           <Route path={ROUTES.ADMIN} component={Admin} />
           <Route path={ROUTES.ACCOUNT} component={Account} />
