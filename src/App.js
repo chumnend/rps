@@ -14,7 +14,7 @@ import SignIn from './containers/SignIn';
 import SignUp from './containers/SignUp';
 import { useAuth } from './store/auth';
 import { useFirebase } from './store/firebase';
-import * as ROUTES from './utils/constants/routes';
+import * as ROUTES from './constants/routes';
 
 const App = () => {
   const [loading, setLoading] = useState(true);

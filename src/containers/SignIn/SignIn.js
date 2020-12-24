@@ -4,8 +4,8 @@ import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormInput from '../../components/FormInput';
 import { useFirebase } from '../../store/firebase';
-import * as ROUTES from '../../utils/constants/routes';
-import useInputState from '../../utils/hooks/useInputState';
+import * as ROUTES from '../../constants/routes';
+import useInputState from '../../hooks/useInputState';
 
 const SignIn = () => {
   const [email, changeEmail] = useInputState('');

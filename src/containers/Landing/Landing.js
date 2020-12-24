@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
-import * as ROUTES from '../../utils/constants/routes';
+import * as ROUTES from '../../constants/routes';
 
 const Landing = () => {
   const history = useHistory();

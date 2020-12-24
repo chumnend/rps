@@ -3,7 +3,7 @@ import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormInput from '../../components/FormInput';
 import { useFirebase } from '../../store/firebase';
-import useInputState from '../../utils/hooks/useInputState';
+import useInputState from '../../hooks/useInputState';
 
 const PasswordChange = () => {
   const [password, changePassword] = useInputState('');

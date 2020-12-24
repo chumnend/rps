@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import SignOutButton from '../SignOutButton';
-import * as ROUTES from '../../utils/constants/routes';
+import * as ROUTES from '../../constants/routes';
 
 const Navigation = (props) => {
   return (
