@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../Button';
-import * as ROUTES from '../../constants/routes';
 import { useFirebase } from '../../store/firebase';
+import * as ROUTES from '../../utils/constants/routes';
 
 const SignOutButton = () => {
   const history = useHistory();

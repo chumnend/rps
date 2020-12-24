@@ -1,20 +1,23 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
-import * as ROUTES from './constants/routes';
+import Loader from './components/Loader';
+import Account from './containers/Account';
+import Admin from './containers/Admin';
+import Game from './containers/Game';
+import Games from './containers/Games';
+import Landing from './containers/Landing';
+import NotFound from './containers/NotFound';
+import PasswordForget from './containers/PasswordForget';
+import SignIn from './containers/SignIn';
+import SignUp from './containers/SignUp';
 import { useAuth } from './store/auth';
 import { useFirebase } from './store/firebase';
-import Account from './pages/Account';
-import Admin from './pages/Admin';
-import Game from './pages/Game';
-import Games from './pages/Games';
-import Landing from './pages/Landing';
-import NotFound from './pages/NotFound';
-import PasswordForget from './pages/PasswordForget';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+import * as ROUTES from './utils/constants/routes';
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
   const auth = useAuth();
   const firebase = useFirebase();
 
@@ -23,13 +26,18 @@ const App = () => {
 
   useEffect(() => {
     const listener = firebaseRef.current.auth.onAuthStateChanged((user) => {
-      user ? authRef.current.setUser({ user }) : authRef.current.setUser(null);
+      user ? authRef.current.setUser(user) : authRef.current.setUser(null);
+      setLoading(false);
     });
 
     return () => {
       listener();
     };
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
