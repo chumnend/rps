@@ -27,8 +27,8 @@ const FirebaseProvider = (props) => {
     return auth.currentUser.updatePassword(password);
   };
 
-  const users = () => db.collection('users').get();
-  const user = (id) => db.collection('users').doc(id).get();
+  const users = () => db.collection('users');
+  const user = (id) => db.collection('users').doc(id);
 
   const firebaseValues = {
     app,

@@ -30,9 +30,12 @@ const App = () => {
       if (!authUser) {
         authRef.current.setUser(null);
       } else {
-        firebaseRef.current.user(authUser.uid).then((doc) => {
-          authRef.current.setUser(doc.data());
-        });
+        firebaseRef.current
+          .user(authUser.uid)
+          .get()
+          .then((doc) => {
+            authRef.current.setUser(doc.data());
+          });
       }
 
       setLoading(false);

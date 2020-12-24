@@ -9,7 +9,7 @@ const Navigation = (props) => {
     <nav>
       <ul>
         <li>
-          <Link to={ROUTES.LANDING}>Find Game</Link>
+          <Link to={ROUTES.LANDING}>Home</Link>
         </li>
         {props.auth.user && (
           <li>
