@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Loader from './components/Loader';
+import ProtectedRoute from './components/ProtectedRoute';
 import Account from './containers/Account';
 import Admin from './containers/Admin';
 import Game from './containers/Game';
@@ -44,15 +45,39 @@ const App = () => {
       <Header auth={auth} />
       <hr />
       <Switch>
-        <Route path={ROUTES.ADMIN} component={Admin} />
-        <Route path={ROUTES.ACCOUNT} component={Account} />
-        <Route path={ROUTES.GAME} component={Game} />
+        <ProtectedRoute
+          condition={false}
+          redirect={ROUTES.SIGN_IN}
+          path={ROUTES.ADMIN}
+          component={Admin}
+        />
+        <ProtectedRoute
+          condition={auth.user !== null}
+          redirect={ROUTES.SIGN_IN}
+          path={ROUTES.ACCOUNT}
+          component={Account}
+        />
+        <ProtectedRoute
+          condition={!auth.user !== null}
+          redirect={ROUTES.LANDING}
+          path={ROUTES.SIGN_UP}
+          component={SignUp}
+        />
+        <ProtectedRoute
+          condition={auth.user === null}
+          redirect={ROUTES.LANDING}
+          path={ROUTES.SIGN_IN}
+          component={SignIn}
+        />
+        <ProtectedRoute
+          condition={!auth.user === null}
+          redirect={ROUTES.ACCOUNT}
+          path={ROUTES.PASSWORD_FORGET}
+          component={PasswordForget}
+        />
         <Route path={ROUTES.GAMES} component={Games} />
-        <Route path={ROUTES.ACCOUNT} component={Account} />
+        <Route path={ROUTES.GAME} component={Game} />
         <Route exact path={ROUTES.LANDING} component={Landing} />
-        <Route path={ROUTES.SIGN_UP} component={SignUp} />
-        <Route path={ROUTES.SIGN_IN} component={SignIn} />
-        <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
         <Route component={NotFound} />
       </Switch>
     </>
