@@ -43,6 +43,8 @@ const SignUp = () => {
     <div>
       <h1>SignUp</h1>
       <Form onSubmit={onSubmit}>
+        {error && <p>{error.message}</p>}
+
         <FormInput
           label="Username"
           type="text"
@@ -77,8 +79,6 @@ const SignUp = () => {
         />
 
         <Button disabled={isInvalid()}>Sign up</Button>
-
-        {error && <p>{error.message}</p>}
 
         <p>
           Already have an account? <Link to={ROUTES.SIGN_IN}>Sign In</Link>
