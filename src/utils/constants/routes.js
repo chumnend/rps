@@ -6,3 +6,4 @@ export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pw-forget';
 export const GAMES = '/games';
 export const GAME = '/game/:id';
+export const GAME_WITH_ID = (id) => `/game/${id}`;
