@@ -31,6 +31,11 @@ const Navigation = (props) => {
             <Link to={ROUTES.SIGN_IN}>Login</Link>
           </li>
         )}
+        {props.auth.user && props.auth.user.admin && (
+          <li>
+            <Link to={ROUTES.ADMIN}>Admin</Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

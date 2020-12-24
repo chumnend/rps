@@ -20,14 +20,21 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   const auth = useAuth();
-  const firebase = useFirebase();
-
   const authRef = useRef(auth);
+
+  const firebase = useFirebase();
   const firebaseRef = useRef(firebase);
 
   useEffect(() => {
-    const listener = firebaseRef.current.auth.onAuthStateChanged((user) => {
-      user ? authRef.current.setUser(user) : authRef.current.setUser(null);
+    const listener = firebaseRef.current.auth.onAuthStateChanged((authUser) => {
+      if (!authUser) {
+        authRef.current.setUser(null);
+      } else {
+        firebaseRef.current.user(authUser.uid).then((doc) => {
+          authRef.current.setUser(doc.data());
+        });
+      }
+
       setLoading(false);
     });
 
@@ -46,8 +53,8 @@ const App = () => {
       <hr />
       <Switch>
         <ProtectedRoute
-          condition={false}
-          redirect={ROUTES.SIGN_IN}
+          condition={auth.user !== null && auth.user.admin}
+          redirect={ROUTES.LANDING}
           path={ROUTES.ADMIN}
           component={Admin}
         />

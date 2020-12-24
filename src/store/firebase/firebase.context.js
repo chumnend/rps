@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { app, auth } from './firebase.config';
+import { app, auth, db } from './firebase.config';
 
 const FirebaseContext = React.createContext();
 
@@ -27,9 +27,14 @@ const FirebaseProvider = (props) => {
     return auth.currentUser.updatePassword(password);
   };
 
+  const users = () => db.collection('users').get();
+  const user = (id) => db.collection('users').doc(id).get();
+
   const firebaseValues = {
     app,
     auth,
+    users,
+    user,
     register,
     login,
     logout,

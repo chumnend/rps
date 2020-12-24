@@ -31,8 +31,17 @@ const SignUp = () => {
 
     firebase
       .register(email, password)
+      .then((authUser) => {
+        return firebase.user(authUser.user.uid).set({
+          id: authUser.user.uid,
+          username,
+          email,
+          wins: 0,
+          losses: 0,
+        });
+      })
       .then(() => {
-        history.push(ROUTES.LANDING);
+        history.push(ROUTES.ACCOUNT);
       })
       .catch((error) => {
         setError(error);
