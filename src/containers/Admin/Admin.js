@@ -10,14 +10,17 @@ const Admin = () => {
   const firebaseRef = useRef(firebase);
 
   useEffect(() => {
-    firebaseRef.current.users().then((snapshot) => {
-      const foundUsers = [];
-      snapshot.forEach((doc) => {
-        foundUsers.push(doc.data());
+    firebaseRef.current
+      .users()
+      .get()
+      .then((snapshot) => {
+        const foundUsers = [];
+        snapshot.forEach((doc) => {
+          foundUsers.push(doc.data());
+        });
+        setUsers(foundUsers);
+        setLoading(false);
       });
-      setUsers(foundUsers);
-      setLoading(false);
-    });
   }, []);
 
   return (
