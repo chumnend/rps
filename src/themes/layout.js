@@ -1,1 +1,3 @@
-export const layout = {};
+export const layout = {
+  navHeight: '50px',
+};

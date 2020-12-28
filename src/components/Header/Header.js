@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../Logo';
 import Navigation from '../Navigation';
+import * as Styles from './styles';
 
 const Header = (props) => {
   return (
-    <header>
-      <Logo />
-      <Navigation auth={props.auth} />
-    </header>
+    <Styles.Header>
+      <Styles.Container>
+        <Logo />
+        <Navigation auth={props.auth} />
+      </Styles.Container>
+    </Styles.Header>
   );
 };
 

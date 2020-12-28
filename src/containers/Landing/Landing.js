@@ -17,7 +17,7 @@ const Landing = () => {
 
   return (
     <div>
-      <h1>Welcome to RPS Duels!</h1>
+      <h1>RPS Duels!</h1>
       <Button onClick={findGames}>Find Games</Button>
       <Button onClick={hostGame}>Host Game</Button>
     </div>

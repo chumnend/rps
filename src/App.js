@@ -53,7 +53,6 @@ const App = () => {
   return (
     <>
       <Header auth={auth} />
-      <hr />
       <Switch>
         <ProtectedRoute
           condition={auth.user !== null && auth.user.admin}
