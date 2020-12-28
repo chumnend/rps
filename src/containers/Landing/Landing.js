@@ -39,8 +39,12 @@ const Landing = () => {
   return (
     <div>
       <h1>RPS Duels!</h1>
-      <Button onClick={findGames}>Find Games</Button>
-      <Button onClick={hostGame}>Host Game</Button>
+      <Button size="lg" onClick={findGames}>
+        Find Games
+      </Button>
+      <Button size="lg" onClick={hostGame}>
+        Host Game
+      </Button>
     </div>
   );
 };

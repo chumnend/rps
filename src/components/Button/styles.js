@@ -8,12 +8,9 @@ export const Button = styled.button`
   font: inherit;
   line-height: 1;
   border-radius: 5px;
-
-  margin: 0.5em;
-  margin: ${(props) => props.size === 'sm' && 0};
-  padding: 1em 2em;
+  padding: 0.5em;
   padding: ${(props) => props.size === 'sm' && 0};
-
+  padding: ${(props) => props.size === 'lg' && '1em 2em'};
   cursor: pointer;
   transition: 0.4s;
 
