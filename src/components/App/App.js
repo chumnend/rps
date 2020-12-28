@@ -22,7 +22,6 @@ const App = () => {
 
   const auth = useAuth();
   const authRef = useRef(auth);
-
   const firebase = useFirebase();
   const firebaseRef = useRef(firebase);
 
@@ -43,7 +42,7 @@ const App = () => {
     });
 
     return () => {
-      listener();
+      listener(); // unsubscribe to listener
     };
   }, []);
 
