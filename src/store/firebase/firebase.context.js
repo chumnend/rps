@@ -7,6 +7,7 @@ const FirebaseContext = React.createContext();
 const useFirebase = () => React.useContext(FirebaseContext);
 
 const FirebaseProvider = (props) => {
+  // USER API
   const register = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
@@ -27,19 +28,34 @@ const FirebaseProvider = (props) => {
     return auth.currentUser.updatePassword(password);
   };
 
-  const users = () => db.collection('users');
-  const user = (id) => db.collection('users').doc(id);
+  const users = () => {
+    return db.collection('users');
+  };
+  const user = (id) => {
+    return db.collection('users').doc(id);
+  };
+
+  // GAME API
+  const games = () => {
+    return db.collection('games');
+  };
+
+  const game = (id) => {
+    return db.collection('games').doc(id);
+  };
 
   const firebaseValues = {
     app,
     auth,
-    users,
-    user,
     register,
     login,
     logout,
     resetPassword,
     updatePassword,
+    users,
+    user,
+    games,
+    game,
   };
 
   return (
