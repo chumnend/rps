@@ -13,7 +13,11 @@ const SignOutButton = () => {
     history.push(ROUTES.LANDING);
   };
 
-  return <Button onClick={handleLogout}>Log Out</Button>;
+  return (
+    <Button size="sm" onClick={handleLogout}>
+      Log Out
+    </Button>
+  );
 };
 
 export default SignOutButton;
