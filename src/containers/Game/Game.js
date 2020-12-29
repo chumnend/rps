@@ -18,19 +18,8 @@ const Game = () => {
   const firebase = useFirebase();
   const firebaseRef = useRef(firebase);
 
-  const onLeave = useCallback(() => {
-    if (isHost) {
-      firebaseRef.current.game(id).delete();
-    }
-
-    if (isChallenger) {
-      firebaseRef.current.game(id).update({
-        challenger: null,
-      });
-    }
-  }, [id, isHost, isChallenger]);
-
-  useEffect(() => {
+  // onJoin - Setups on game listener for updating from firebase
+  const onJoin = useCallback(() => {
     const listener = firebaseRef.current.game(id).onSnapshot((snapshot) => {
       const gameData = snapshot.data();
 
@@ -60,13 +49,31 @@ const Game = () => {
       setGame(gameData);
     });
 
+    return listener;
+  }, [id, history]);
+
+  // onLeave - cleans up firebase state depending on game role
+  const onLeave = useCallback(() => {
+    if (isHost) {
+      firebaseRef.current.game(id).delete();
+    }
+
+    if (isChallenger) {
+      firebaseRef.current.game(id).update({
+        challenger: null,
+      });
+    }
+  }, [id, isHost, isChallenger]);
+
+  useEffect(() => {
+    const listener = onJoin();
     setLoading(false);
 
     return () => {
       listener(); // unsubscribe to listener
       onLeave(); // clean up the room
     };
-  }, [id, history, onLeave]);
+  }, [onJoin, onLeave]);
 
   if (loading) {
     return <Loader />;
@@ -75,8 +82,29 @@ const Game = () => {
   return (
     <div>
       <h1>Game</h1>
+
+      <div>
+        {game && game.host && (
+          <div>
+            <p>User: {game.host.username}</p>
+            <p>Wins: {game.host.wins}</p>
+            <p>Losses: {game.host.losses}</p>
+            <p>{isHost && '(YOU)'}</p>
+          </div>
+        )}
+        <hr />
+        {game && game.challenger && (
+          <div>
+            <p>User: {game.challenger.username}</p>
+            <p>Wins: {game.challenger.wins}</p>
+            <p>Losses: {game.challenger.losses}</p>
+            <p>{isChallenger && '(YOU)'}</p>
+          </div>
+        )}
+      </div>
+
+      <hr />
       <p>{game && game.isMatchmaking && 'Waiting'}</p>
-      <p>{isHost && 'host'}</p>
     </div>
   );
 };
