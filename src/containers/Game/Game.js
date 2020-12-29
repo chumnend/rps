@@ -63,12 +63,15 @@ const Game = () => {
   // onLeave - cleans up firebase state depending on game role
   const onLeave = useCallback(() => {
     if (isHost) {
+      // if host, delete the game room
       firebaseRef.current.game(id).delete();
     }
 
     if (isChallenger) {
+      // if challenger, set room into matchmaking mode
       firebaseRef.current.game(id).update({
         challenger: null,
+        isMatchmaking: true,
       });
     }
   }, [id, isHost, isChallenger]);
