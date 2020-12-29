@@ -29,8 +29,9 @@ const Game = () => {
         return;
       }
 
-      // determine if current user is the host
+      // assign user roles (host or challenger)
       if (gameData.host.id === authRef.current.user.id) {
+        // determine if current user is the host
         setHost(true);
       } else if (!gameData.challenger) {
         // if no challenger, set this user as challenger
@@ -44,6 +45,13 @@ const Game = () => {
       ) {
         // if challenger already exists
         history.push(ROUTES.GAMES);
+      }
+
+      // change matchmaking state
+      if (gameData.host && gameData.challenger) {
+        firebaseRef.current.game(id).update({
+          isMatchmaking: false,
+        });
       }
 
       setGame(gameData);

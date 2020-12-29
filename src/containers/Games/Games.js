@@ -20,7 +20,10 @@ const Games = () => {
       .then((snapshot) => {
         const foundGames = [];
         snapshot.forEach((doc) => {
-          foundGames.push(doc.data());
+          const gameData = doc.data();
+          if (gameData.isMatchmaking) {
+            foundGames.push(doc.data());
+          }
         });
         setGames(foundGames);
       });
