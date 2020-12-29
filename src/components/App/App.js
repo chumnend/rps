@@ -7,6 +7,7 @@ import Account from '../../containers/Account';
 import Admin from '../../containers/Admin';
 import Game from '../../containers/Game';
 import Games from '../../containers/Games';
+import Home from '../../containers/Home';
 import Landing from '../../containers/Landing';
 import NotFound from '../../containers/NotFound';
 import PasswordForget from '../../containers/PasswordForget';
@@ -55,38 +56,68 @@ const App = () => {
       <Header auth={auth} />
       <Switch>
         <ProtectedRoute
+          exact
+          path={ROUTES.HOME}
+          condition={auth.user !== null}
+          redirect={ROUTES.LANDING}
+          component={Home}
+        />
+        <ProtectedRoute
+          exact
+          path={ROUTES.ADMIN}
           condition={auth.user !== null && auth.user.admin}
           redirect={ROUTES.LANDING}
-          path={ROUTES.ADMIN}
           component={Admin}
         />
         <ProtectedRoute
+          exact
+          path={ROUTES.ACCOUNT}
           condition={auth.user !== null}
           redirect={ROUTES.SIGN_IN}
-          path={ROUTES.ACCOUNT}
           component={Account}
         />
         <ProtectedRoute
-          condition={!auth.user !== null}
-          redirect={ROUTES.LANDING}
+          exact
+          path={ROUTES.GAMES}
+          condition={auth.user !== null}
+          redirect={ROUTES.SIGN_IN}
+          component={Games}
+        />
+        <ProtectedRoute
+          exact
+          path={ROUTES.GAME}
+          condition={auth.user !== null}
+          redirect={ROUTES.SIGN_IN}
+          component={Game}
+        />
+        <ProtectedRoute
+          exact
+          path={ROUTES.LANDING}
+          condition={auth.user === null}
+          redirect={ROUTES.HOME}
+          component={Landing}
+        />
+        <ProtectedRoute
+          exact
           path={ROUTES.SIGN_UP}
+          condition={auth.user === null}
+          redirect={ROUTES.LANDING}
           component={SignUp}
         />
         <ProtectedRoute
+          exact
+          path={ROUTES.SIGN_IN}
           condition={auth.user === null}
           redirect={ROUTES.LANDING}
-          path={ROUTES.SIGN_IN}
           component={SignIn}
         />
         <ProtectedRoute
-          condition={!auth.user === null}
-          redirect={ROUTES.ACCOUNT}
+          exact
           path={ROUTES.PASSWORD_FORGET}
+          condition={auth.user === null}
+          redirect={ROUTES.ACCOUNT}
           component={PasswordForget}
         />
-        <Route path={ROUTES.GAMES} component={Games} />
-        <Route path={ROUTES.GAME} component={Game} />
-        <Route exact path={ROUTES.LANDING} component={Landing} />
         <Route component={NotFound} />
       </Switch>
     </Styles.App>
