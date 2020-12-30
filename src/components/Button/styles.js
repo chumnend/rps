@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { color } from '../../themes';
 
 export const Button = styled.button`
-  background: ${color.blue};
+  background: ${color.white};
   color: ${color.black};
-  border: 1px solid ${color.blue};
+  border: 1px solid ${color.black};
   font: inherit;
   line-height: 1;
   border-radius: 5px;
@@ -12,11 +12,4 @@ export const Button = styled.button`
   padding: ${(props) => props.size === 'sm' && 0};
   padding: ${(props) => props.size === 'lg' && '1em 2em'};
   cursor: pointer;
-  transition: 0.4s;
-
-  &:hover,
-  &:focus {
-    color: ${color.white};
-    border: 1px solid ${color.white};
-  }
 `;
