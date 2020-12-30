@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { color } from '../../themes';
 
 export const Button = styled.button`
-  background: ${color.blue};
+  background: ${color.white};
   color: ${color.black};
-  border: 1px solid ${color.blue};
+  border: 1px solid ${color.black};
   font: inherit;
   line-height: 1;
   border-radius: 5px;
