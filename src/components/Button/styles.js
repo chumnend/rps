@@ -12,11 +12,4 @@ export const Button = styled.button`
   padding: ${(props) => props.size === 'sm' && 0};
   padding: ${(props) => props.size === 'lg' && '1em 2em'};
   cursor: pointer;
-  transition: 0.4s;
-
-  &:hover,
-  &:focus {
-    color: ${color.white};
-    border: 1px solid ${color.white};
-  }
 `;
