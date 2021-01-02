@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Styles from './styles';
 
 const Form = (props) => {
-  return <form onSubmit={props.onSubmit}>{props.children}</form>;
+  return <Styles.Form onSubmit={props.onSubmit}>{props.children}</Styles.Form>;
 };
 
 Form.propTypes = {

@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Styles from './styles';
 
 const FormInput = (props) => {
   return (
-    <div>
-      <label htmlFor={props.id}>{props.label}</label>
-      <input
+    <Styles.FormInput>
+      <Styles.Label htmlFor={props.id}>{props.label}</Styles.Label>
+      <Styles.Input
         type={props.type}
         placeholder={props.placeholder}
         id={props.id}
         value={props.value}
         onChange={props.onChange}
       />
-    </div>
+    </Styles.FormInput>
   );
 };
 

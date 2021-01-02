@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormInput from '../../components/FormInput';
+import FormTag from '../../components/FormTag';
 import { useFirebase } from '../../store/firebase';
 import * as ROUTES from '../../constants/routes';
 import useInputState from '../../hooks/useInputState';
@@ -34,8 +35,9 @@ const SignIn = () => {
 
   return (
     <div>
-      <h1>SignIn</h1>
       <Form onSubmit={onSubmit}>
+        <FormTag>Log in to your account and get playing!</FormTag>
+
         {error && <p>{error.message}</p>}
 
         <FormInput
@@ -57,13 +59,13 @@ const SignIn = () => {
 
         <Button disabled={isInvalid()}>Sign In</Button>
 
-        <p>
+        <FormTag>
           Don&apos;t have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-        </p>
+        </FormTag>
 
-        <p>
+        <FormTag>
           <Link to={ROUTES.PASSWORD_FORGET}>Forgot your password?</Link>
-        </p>
+        </FormTag>
       </Form>
     </div>
   );
