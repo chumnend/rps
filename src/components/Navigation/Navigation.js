@@ -10,27 +10,43 @@ const Navigation = (props) => {
       <Styles.Ul>
         {props.auth.user && (
           <li>
-            <Link to={ROUTES.ACCOUNT}>Account</Link>
+            <Link to={ROUTES.ACCOUNT}>
+              <i className="fas fa-user" />
+              <p>Account</p>
+            </Link>
           </li>
         )}
         {props.auth.user && props.auth.user.admin && (
           <li>
-            <Link to={ROUTES.ADMIN}>Admin</Link>
+            <Link to={ROUTES.ADMIN}>
+              <i className="fas fa-user-shield" />
+              <p>Admin</p>
+            </Link>
           </li>
         )}
         {props.auth.user && (
           <li>
-            <Link to={ROUTES.LOGOUT}>Logout</Link>
+            <Link to={ROUTES.LOGOUT}>
+              <i className="fas fa-sign-out-alt" />
+              <p>Sign Out</p>
+            </Link>
+          </li>
+        )}
+
+        {!props.auth.user && (
+          <li>
+            <Link to={ROUTES.SIGN_UP}>
+              <i className="fas fa-user-plus" />
+              <p>Sign Up</p>
+            </Link>
           </li>
         )}
         {!props.auth.user && (
           <li>
-            <Link to={ROUTES.SIGN_UP}>Register</Link>
-          </li>
-        )}
-        {!props.auth.user && (
-          <li>
-            <Link to={ROUTES.SIGN_IN}>Login</Link>
+            <Link to={ROUTES.SIGN_IN}>
+              <i className="fas fa-sign-in-alt" />
+              <p>Sign In</p>
+            </Link>
           </li>
         )}
       </Styles.Ul>

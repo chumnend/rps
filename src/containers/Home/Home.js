@@ -39,6 +39,8 @@ const Home = () => {
   return (
     <div>
       <h1>RPS Duels!</h1>
+      <p>Get started by looking for a game or start your own match!</p>
+
       <Button size="lg" onClick={findGames}>
         Find Games
       </Button>

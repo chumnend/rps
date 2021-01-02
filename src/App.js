@@ -28,6 +28,8 @@ const App = () => {
 
   useEffect(() => {
     const listener = firebaseRef.current.auth.onAuthStateChanged((authUser) => {
+      setLoading(true);
+
       if (!authUser) {
         authRef.current.setUser(null);
       } else {

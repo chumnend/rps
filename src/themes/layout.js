@@ -1,3 +1,3 @@
 export const layout = {
-  navHeight: '50px',
+  navHeight: '60px',
 };
