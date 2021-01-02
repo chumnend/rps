@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from './store/auth';
 import { FirebaseProvider } from './store/firebase';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

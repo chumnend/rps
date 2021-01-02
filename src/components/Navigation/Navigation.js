@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import * as Styles from './styles';
 
@@ -9,45 +8,45 @@ const Navigation = (props) => {
     <Styles.Nav>
       <Styles.Ul>
         {props.auth.user && (
-          <li>
-            <Link to={ROUTES.ACCOUNT}>
+          <Styles.Li>
+            <Styles.Icon to={ROUTES.ACCOUNT}>
               <i className="fas fa-user" />
               <p>Account</p>
-            </Link>
-          </li>
+            </Styles.Icon>
+          </Styles.Li>
         )}
         {props.auth.user && props.auth.user.admin && (
-          <li>
-            <Link to={ROUTES.ADMIN}>
+          <Styles.Li>
+            <Styles.Icon to={ROUTES.ADMIN}>
               <i className="fas fa-user-shield" />
               <p>Admin</p>
-            </Link>
-          </li>
+            </Styles.Icon>
+          </Styles.Li>
         )}
         {props.auth.user && (
-          <li>
-            <Link to={ROUTES.LOGOUT}>
+          <Styles.Li>
+            <Styles.Icon to={ROUTES.LOGOUT}>
               <i className="fas fa-sign-out-alt" />
               <p>Sign Out</p>
-            </Link>
-          </li>
+            </Styles.Icon>
+          </Styles.Li>
         )}
 
         {!props.auth.user && (
-          <li>
-            <Link to={ROUTES.SIGN_UP}>
+          <Styles.Li>
+            <Styles.Icon to={ROUTES.SIGN_UP}>
               <i className="fas fa-user-plus" />
               <p>Sign Up</p>
-            </Link>
-          </li>
+            </Styles.Icon>
+          </Styles.Li>
         )}
         {!props.auth.user && (
-          <li>
-            <Link to={ROUTES.SIGN_IN}>
+          <Styles.Li>
+            <Styles.Icon to={ROUTES.SIGN_IN}>
               <i className="fas fa-sign-in-alt" />
               <p>Sign In</p>
-            </Link>
-          </li>
+            </Styles.Icon>
+          </Styles.Li>
         )}
       </Styles.Ul>
     </Styles.Nav>

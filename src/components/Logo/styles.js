@@ -2,20 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { color } from '../../themes';
 
-export const Nav = styled.nav`
-  height: 100%;
-`;
-
-export const Ul = styled.ul`
-  height: 100%;
-  list-style: none;
-  display: flex;
-`;
-
-export const Li = styled.li`
-  height: 100%;
-`;
-
 export const Icon = styled(Link)`
   height: 100%;
   display: flex;
