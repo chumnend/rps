@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 import Loader from '../../components/Loader';
+import Page from '../../components/Page';
 import * as ROUTES from '../../constants/routes';
 import { useFirebase } from '../../store/firebase';
 
@@ -40,7 +41,7 @@ const Games = () => {
   }
 
   return (
-    <div>
+    <Page>
       <ul>
         {games.map((g) => (
           <li key={g.id}>
@@ -49,7 +50,7 @@ const Games = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Page>
   );
 };
 

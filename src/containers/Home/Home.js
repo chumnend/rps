@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
+import Page from '../../components/Page';
 import * as ROUTES from '../../constants/routes';
 import { useAuth } from '../../store/auth';
 import { useFirebase } from '../../store/firebase';
@@ -37,7 +38,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <Page>
       <h1>RPS Duels!</h1>
       <p>Get started by looking for a game or start your own match!</p>
 
@@ -47,7 +48,7 @@ const Home = () => {
       <Button size="lg" onClick={hostGame}>
         Host Game
       </Button>
-    </div>
+    </Page>
   );
 };
 

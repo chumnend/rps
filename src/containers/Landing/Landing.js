@@ -1,8 +1,9 @@
 import React from 'react';
+import Page from '../../components/Page';
 
 const Landing = () => {
   return (
-    <div>
+    <Page>
       <h1>RPS Duels</h1>
       <p>Up for a challenge?</p>
 
@@ -13,7 +14,7 @@ const Landing = () => {
         <li>Ready up and wait for your opponent to do the same</li>
         <li>Face off in an epic duel!</li>
       </ol>
-    </div>
+    </Page>
   );
 };
 

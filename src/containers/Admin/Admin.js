@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Loader from '../../components/Loader';
+import Page from '../../components/Page';
 import { useFirebase } from '../../store/firebase';
 
 const Admin = () => {
@@ -41,7 +42,7 @@ const Admin = () => {
   }
 
   return (
-    <div>
+    <Page>
       <h1>Admin</h1>
       <h3>Users:</h3>
       <ul>
@@ -59,7 +60,7 @@ const Admin = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Page>
   );
 };
 

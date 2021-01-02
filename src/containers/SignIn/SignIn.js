@@ -4,6 +4,7 @@ import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormInput from '../../components/FormInput';
 import FormTag from '../../components/FormTag';
+import Page from '../../components/Page';
 import { useFirebase } from '../../store/firebase';
 import * as ROUTES from '../../constants/routes';
 import useInputState from '../../hooks/useInputState';
@@ -34,7 +35,7 @@ const SignIn = () => {
   };
 
   return (
-    <div>
+    <Page>
       <Form onSubmit={onSubmit}>
         <FormTag>Log in to your account and get playing!</FormTag>
 
@@ -67,7 +68,7 @@ const SignIn = () => {
           <Link to={ROUTES.PASSWORD_FORGET}>Forgot your password?</Link>
         </FormTag>
       </Form>
-    </div>
+    </Page>
   );
 };
 

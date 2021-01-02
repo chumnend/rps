@@ -1,17 +1,19 @@
 import React from 'react';
-import PasswordChange from '../PasswordChange';
-import PasswordForget from '../PasswordForget';
+import { PasswordChangeForm } from '../PasswordChange';
+import { PasswordForgetForm } from '../PasswordForget';
+import Page from '../../components/Page';
 import { useAuth } from '../../store/auth';
 
 const Account = () => {
   const auth = useAuth();
 
   return (
-    <div>
+    <Page>
       <h1>Account: {auth.user.email} </h1>
-      <PasswordChange />
-      <PasswordForget />
-    </div>
+      <PasswordChangeForm />
+      <br />
+      <PasswordForgetForm />
+    </Page>
   );
 };
 
