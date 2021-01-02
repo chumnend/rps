@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import SignOutButton from '../SignOutButton';
 import * as ROUTES from '../../constants/routes';
 import * as Styles from './styles';
 
@@ -21,7 +20,7 @@ const Navigation = (props) => {
         )}
         {props.auth.user && (
           <li>
-            <SignOutButton />
+            <Link to={ROUTES.LOGOUT}>Logout</Link>
           </li>
         )}
         {!props.auth.user && (

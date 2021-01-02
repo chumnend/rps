@@ -9,6 +9,7 @@ import Game from './containers/Game';
 import Games from './containers/Games';
 import Home from './containers/Home';
 import Landing from './containers/Landing';
+import Logout from './containers/Logout';
 import NotFound from './containers/NotFound';
 import PasswordForget from './containers/PasswordForget';
 import SignIn from './containers/SignIn';
@@ -117,6 +118,7 @@ const App = () => {
           redirect={ROUTES.ACCOUNT}
           component={PasswordForget}
         />
+        <Route exact path={ROUTES.LOGOUT} component={Logout} />
         <Route component={NotFound} />
       </Switch>
     </>
