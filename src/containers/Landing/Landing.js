@@ -1,12 +1,11 @@
 import React from 'react';
 import Page from '../../components/Page';
+import logo from '../../assets/logo-320x300.png';
 
 const Landing = () => {
   return (
     <Page>
-      <h1>RPS Duels</h1>
-      <p>Up for a challenge?</p>
-
+      <img src={logo} alt="RPS Duels: Ready for a challenge" />
       <h3>How to play</h3>
       <ol>
         <li>Create an account or log into your account</li>
