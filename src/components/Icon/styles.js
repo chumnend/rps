@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { color } from '../../themes';
+import { color, device } from '../../themes';
 
 export const Icon = styled(Link)`
   height: 100%;
@@ -19,5 +19,17 @@ export const Icon = styled(Link)`
 
   p {
     font-size: 0.8rem;
+  }
+
+  @media all and (min-width: ${device.md}) {
+    i {
+      font-size: 2rem;
+    }
+  }
+
+  @media all and (min-width: ${device.md}) {
+    i {
+      font-size: 2rem;
+    }
   }
 `;
