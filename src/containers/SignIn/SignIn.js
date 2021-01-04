@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormInput from '../../components/FormInput';
+import FormLink from '../../components/FormLink';
 import FormTag from '../../components/FormTag';
 import Page from '../../components/Page';
 import { useFirebase } from '../../store/firebase';
@@ -61,11 +62,12 @@ const SignIn = () => {
         <Button disabled={isInvalid()}>Sign In</Button>
 
         <FormTag>
-          Don&apos;t have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+          Don&apos;t have an account?{' '}
+          <FormLink to={ROUTES.SIGN_UP}>Sign Up</FormLink>
         </FormTag>
 
         <FormTag>
-          <Link to={ROUTES.PASSWORD_FORGET}>Forgot your password?</Link>
+          <FormLink to={ROUTES.PASSWORD_FORGET}>Forgot your password?</FormLink>
         </FormTag>
       </Form>
     </Page>
