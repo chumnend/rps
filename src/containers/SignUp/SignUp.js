@@ -5,7 +5,6 @@ import Form from '../../components/Form';
 import FormInput from '../../components/FormInput';
 import FormLink from '../../components/FormLink';
 import FormTag from '../../components/FormTag';
-import Link from '../../components/Link';
 import Page from '../../components/Page';
 import { useFirebase } from '../../store/firebase';
 import * as ROUTES from '../../constants/routes';
