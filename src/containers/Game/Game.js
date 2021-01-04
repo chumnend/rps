@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Loader from '../../components/Loader';
+import Page from '../../components/Page';
 import * as ROUTES from '../../constants/routes';
 import { useAuth } from '../../store/auth';
 import { useFirebase } from '../../store/firebase';
@@ -91,7 +92,7 @@ const Game = () => {
   }
 
   return (
-    <div>
+    <Page>
       <h1>Game</h1>
 
       <div>
@@ -116,7 +117,7 @@ const Game = () => {
 
       <hr />
       <p>{game && game.isMatchmaking && 'Waiting'}</p>
-    </div>
+    </Page>
   );
 };
 

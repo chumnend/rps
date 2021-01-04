@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormInput from '../../components/FormInput';
+import FormTag from '../../components/FormTag';
+import Page from '../../components/Page';
 import { useFirebase } from '../../store/firebase';
 import useInputState from '../../hooks/useInputState';
 
-const PasswordChange = () => {
+export const PasswordChangeForm = () => {
   const [password, changePassword] = useInputState('');
   const [password2, changePassword2] = useInputState('');
   const [error, setError] = useState(null);
@@ -31,8 +33,9 @@ const PasswordChange = () => {
 
   return (
     <div>
-      <h1>PasswordChange</h1>
       <Form onSubmit={onSubmit}>
+        <FormTag>Change your password</FormTag>
+
         {error && <p>{error.message}</p>}
 
         <FormInput
@@ -55,6 +58,14 @@ const PasswordChange = () => {
         <Button disabled={isInvalid()}>Change Password</Button>
       </Form>
     </div>
+  );
+};
+
+const PasswordChange = () => {
+  return (
+    <Page>
+      <PasswordChangeForm />
+    </Page>
   );
 };
 
