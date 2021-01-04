@@ -3,5 +3,5 @@ export const device = {
   sm: '575px',
   md: '768px',
   lg: '991px',
-  xl: '1199',
+  xl: '1199px',
 };
