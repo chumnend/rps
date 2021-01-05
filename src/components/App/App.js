@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Header from '../Header';
 import Loader from '../Loader';
@@ -15,42 +15,13 @@ import PasswordForget from '../../containers/PasswordForget';
 import SignIn from '../../containers/SignIn';
 import SignUp from '../../containers/SignUp';
 import { useAuth } from '../../store/auth';
-import { useFirebase } from '../../store/firebase';
 import * as ROUTES from '../../constants/routes';
 import * as Styles from './styles';
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-
   const auth = useAuth();
-  const authRef = useRef(auth);
-  const firebase = useFirebase();
-  const firebaseRef = useRef(firebase);
 
-  useEffect(() => {
-    const listener = firebaseRef.current.auth.onAuthStateChanged((authUser) => {
-      setLoading(true);
-
-      if (!authUser) {
-        authRef.current.setUser(null);
-      } else {
-        firebaseRef.current
-          .user(authUser.uid)
-          .get()
-          .then((doc) => {
-            authRef.current.setUser(doc.data());
-          });
-      }
-
-      setLoading(false);
-    });
-
-    return () => {
-      listener(); // unsubscribe to listener
-    };
-  }, []);
-
-  if (loading) {
+  if (auth.loading) {
     return <Loader />;
   }
 
