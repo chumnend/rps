@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { app, auth, db } from './firebase.config';
+import { auth, db } from './firebase.config';
 
 const FirebaseContext = React.createContext();
 
@@ -45,8 +45,8 @@ const FirebaseProvider = (props) => {
   };
 
   const firebaseValues = {
-    app,
     auth,
+    db,
     register,
     login,
     logout,
