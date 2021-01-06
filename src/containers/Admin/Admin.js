@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import List from '../../components/List';
+import ListItem from '../../components/ListItem';
+import ListTitle from '../../components/ListTitle';
 import Loader from '../../components/Loader';
 import Page from '../../components/Page';
 import { useFirebase } from '../../store/firebase';
@@ -41,25 +44,34 @@ const Admin = () => {
     return <Loader />;
   }
 
+  const userList = users.map((u) => (
+    <ListItem key={u.id}>
+      {u.username} - {u.email}
+    </ListItem>
+  ));
+
+  let gameList;
+  if (games.length === 0) {
+    gameList = <ListItem>No games have been created.</ListItem>;
+  } else {
+    gameList = games.map((g) => (
+      <ListItem key={g.id}>
+        {g.name} - {g.host.username}
+      </ListItem>
+    ));
+  }
+
   return (
     <Page>
-      <h1>Admin</h1>
-      <h3>Users:</h3>
-      <ul>
-        {users.map((u) => (
-          <li key={u.id}>
-            {u.username} - {u.email}
-          </li>
-        ))}
-      </ul>
-      <h3>Games:</h3>
-      <ul>
-        {games.map((g) => (
-          <li key={g.id}>
-            {g.name} - {g.host.username}
-          </li>
-        ))}
-      </ul>
+      <List>
+        <ListTitle>Users</ListTitle>
+        {userList}
+      </List>
+      <br />
+      <List>
+        <ListTitle>Games</ListTitle>
+        {gameList}
+      </List>
     </Page>
   );
 };
