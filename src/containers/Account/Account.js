@@ -1,6 +1,7 @@
 import React from 'react';
 import { PasswordChangeForm } from '../PasswordChange';
 import { PasswordForgetForm } from '../PasswordForget';
+import AccountCard from '../../components/AccountCard';
 import Page from '../../components/Page';
 import { useAuth } from '../../store/auth';
 
@@ -9,7 +10,8 @@ const Account = () => {
 
   return (
     <Page>
-      <h1>Account: {auth.user.email} </h1>
+      <AccountCard user={auth.user} />
+      <br />
       <PasswordChangeForm />
       <br />
       <PasswordForgetForm />
