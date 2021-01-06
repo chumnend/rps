@@ -44,23 +44,33 @@ const Admin = () => {
     return <Loader />;
   }
 
+  const userList = users.map((u) => (
+    <ListItem key={u.id}>
+      {u.username} - {u.email}
+    </ListItem>
+  ));
+
+  let gameList;
+  if (games.length === 0) {
+    gameList = <ListItem>No games have been created.</ListItem>;
+  } else {
+    gameList = games.map((g) => (
+      <ListItem key={g.id}>
+        {g.name} - {g.host.username}
+      </ListItem>
+    ));
+  }
+
   return (
     <Page>
       <List>
         <ListTitle>Users</ListTitle>
-        {users.map((u) => (
-          <ListItem key={u.id}>
-            {u.username} - {u.email}
-          </ListItem>
-        ))}
+        {userList}
       </List>
+      <br />
       <List>
         <ListTitle>Games</ListTitle>
-        {games.map((g) => (
-          <ListItem key={g.id}>
-            {g.name} - {g.host.username}
-          </ListItem>
-        ))}
+        {gameList}
       </List>
     </Page>
   );
