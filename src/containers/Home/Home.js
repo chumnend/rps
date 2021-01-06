@@ -1,6 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
+import List from '../../components/List';
+import ListTitle from '../../components/ListTitle';
+import ListItem from '../../components/ListItem';
 import Page from '../../components/Page';
 import * as ROUTES from '../../constants/routes';
 import { useAuth } from '../../store/auth';
@@ -39,15 +42,16 @@ const Home = () => {
 
   return (
     <Page>
-      <h1>RPS Duels!</h1>
-      <p>Get started by looking for a game or start your own match!</p>
-
-      <Button size="lg" onClick={findGames}>
-        Find Games
-      </Button>
-      <Button size="lg" onClick={hostGame}>
-        Host Game
-      </Button>
+      <List>
+        <ListTitle>Ready for a match?</ListTitle>
+        <ListItem>
+          <Button onClick={findGames}>Find Games</Button>
+        </ListItem>
+        <ListItem>OR</ListItem>
+        <ListItem>
+          <Button onClick={hostGame}>Host Game</Button>
+        </ListItem>
+      </List>
     </Page>
   );
 };

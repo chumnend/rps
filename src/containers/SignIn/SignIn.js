@@ -59,7 +59,9 @@ const SignIn = () => {
           onChange={changePassword}
         />
 
-        <Button disabled={isInvalid()}>Sign In</Button>
+        <Button theme="secondary" disabled={isInvalid()}>
+          Sign In
+        </Button>
 
         <FormTag>
           Don&apos;t have an account?{' '}

@@ -17,5 +17,7 @@ export const Input = styled.input`
   border-radius: 4px;
   border-color: ${color.grey};
   background: ${color.white};
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
+  font-family: inherit;
+  font-size: 1rem;
 `;

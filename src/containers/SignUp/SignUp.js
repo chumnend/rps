@@ -91,7 +91,9 @@ const SignUp = () => {
           onChange={changePassword2}
         />
 
-        <Button disabled={isInvalid()}>Sign up</Button>
+        <Button theme="secondary" disabled={isInvalid()}>
+          Sign up
+        </Button>
 
         <FormTag>
           Already have an account?{' '}
