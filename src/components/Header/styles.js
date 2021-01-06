@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../themes';
 
 export const Header = styled.header`
   width: 100%;
@@ -23,6 +24,10 @@ export const Ul = styled.ul`
   height: 100%;
   list-style: none;
   display: flex;
+
+  @media all and (min-width: ${device.lg}) {
+    gap: 1rem;
+  }
 `;
 
 export const Li = styled.li`

@@ -46,7 +46,9 @@ export const PasswordForgetForm = () => {
           onChange={changeEmail}
         />
 
-        <Button disabled={isInvalid()}>Reset Password</Button>
+        <Button theme="secondary" disabled={isInvalid()}>
+          Reset Password
+        </Button>
       </Form>
     </div>
   );

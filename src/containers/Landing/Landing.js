@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Banner from '../../components/Banner';
 import Page from '../../components/Page';
+import Link from '../../components/Link';
 import List from '../../components/List';
 import ListTitle from '../../components/ListTitle';
 import ListItem from '../../components/ListItem';

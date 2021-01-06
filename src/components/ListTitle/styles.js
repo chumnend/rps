@@ -5,8 +5,7 @@ export const ListTitle = styled.h3`
   font-size: 2rem;
   font-weight: 700;
   text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 0.5rem;
+  text-align: center;
   margin-bottom: 1rem;
 
   @media all and (min-width: ${device.md}) {
