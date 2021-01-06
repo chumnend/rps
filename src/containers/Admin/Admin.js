@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import List from '../../components/List';
+import ListItem from '../../components/ListItem';
+import ListTitle from '../../components/ListTitle';
 import Loader from '../../components/Loader';
 import Page from '../../components/Page';
 import { useFirebase } from '../../store/firebase';
@@ -43,23 +46,22 @@ const Admin = () => {
 
   return (
     <Page>
-      <h1>Admin</h1>
-      <h3>Users:</h3>
-      <ul>
+      <List>
+        <ListTitle>Users</ListTitle>
         {users.map((u) => (
-          <li key={u.id}>
+          <ListItem key={u.id}>
             {u.username} - {u.email}
-          </li>
+          </ListItem>
         ))}
-      </ul>
-      <h3>Games:</h3>
-      <ul>
+      </List>
+      <List>
+        <ListTitle>Games</ListTitle>
         {games.map((g) => (
-          <li key={g.id}>
+          <ListItem key={g.id}>
             {g.name} - {g.host.username}
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </Page>
   );
 };
