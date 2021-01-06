@@ -55,7 +55,9 @@ export const PasswordChangeForm = () => {
           onChange={changePassword2}
         />
 
-        <Button disabled={isInvalid()}>Change Password</Button>
+        <Button theme="secondary" disabled={isInvalid()}>
+          Change Password
+        </Button>
       </Form>
     </div>
   );

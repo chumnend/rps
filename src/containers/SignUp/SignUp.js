@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormInput from '../../components/FormInput';
+import FormLink from '../../components/FormLink';
 import FormTag from '../../components/FormTag';
 import Page from '../../components/Page';
 import { useFirebase } from '../../store/firebase';
@@ -90,10 +91,13 @@ const SignUp = () => {
           onChange={changePassword2}
         />
 
-        <Button disabled={isInvalid()}>Sign up</Button>
+        <Button theme="secondary" disabled={isInvalid()}>
+          Sign up
+        </Button>
 
         <FormTag>
-          Already have an account? <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+          Already have an account?{' '}
+          <FormLink to={ROUTES.SIGN_IN}>Sign In</FormLink>
         </FormTag>
       </Form>
     </Page>
