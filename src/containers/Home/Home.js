@@ -45,11 +45,15 @@ const Home = () => {
       <List>
         <ListTitle>Ready for a match?</ListTitle>
         <ListItem>
-          <Button onClick={findGames}>Find Games</Button>
+          <Button size="lg" onClick={findGames}>
+            Find Games
+          </Button>
         </ListItem>
         <ListItem>OR</ListItem>
         <ListItem>
-          <Button onClick={hostGame}>Host Game</Button>
+          <Button size="lg" onClick={hostGame}>
+            Host Game
+          </Button>
         </ListItem>
       </List>
     </Page>

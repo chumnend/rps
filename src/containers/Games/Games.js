@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '../../components/Button';
+import GamesList from '../../components/GamesList';
 import Loader from '../../components/Loader';
 import Page from '../../components/Page';
 import * as ROUTES from '../../constants/routes';
@@ -27,9 +27,8 @@ const Games = () => {
           }
         });
         setGames(foundGames);
+        setLoading(false);
       });
-
-    setLoading(false);
   }, []);
 
   const handleJoin = (id) => {
@@ -42,14 +41,7 @@ const Games = () => {
 
   return (
     <Page>
-      <ul>
-        {games.map((g) => (
-          <li key={g.id}>
-            <p>{g.name}</p>
-            <Button onClick={() => handleJoin(g.id)}>Join</Button>
-          </li>
-        ))}
-      </ul>
+      <GamesList games={games} handleJoin={handleJoin} />
     </Page>
   );
 };

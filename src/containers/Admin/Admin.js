@@ -50,10 +50,8 @@ const Admin = () => {
     </ListItem>
   ));
 
-  let gameList;
-  if (games.length === 0) {
-    gameList = <ListItem>No games have been created.</ListItem>;
-  } else {
+  let gameList = <ListItem>No games have been created.</ListItem>;
+  if (games.length > 0) {
     gameList = games.map((g) => (
       <ListItem key={g.id}>
         {g.name} - {g.host.username}
