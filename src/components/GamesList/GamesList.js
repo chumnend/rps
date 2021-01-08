@@ -15,7 +15,7 @@ const GamesList = (props) => {
           key={g.id}
           id={g.id}
           name={g.name}
-          handleJoin={g.handleJoin}
+          handleJoin={props.handleJoin}
         />
       ))}
     </Styles.GamesList>

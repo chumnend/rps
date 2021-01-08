@@ -24,7 +24,7 @@ export const Button = styled.button`
   ${(props) => {
     if (props.size === 'sm') {
       return `
-        padding: 0.5rem 1rem;
+        padding: 0.8rem 1rem;
         font-size: 0.8rem;
       `;
     } else if (props.size === 'lg') {
