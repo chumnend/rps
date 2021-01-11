@@ -10,10 +10,13 @@ const GamesListItem = (props) => {
 
   return (
     <Styles.GamesListItem>
-      <p>{props.name}</p>
-      <Button theme="secondary" onClick={handleClick}>
-        Join
-      </Button>
+      <Styles.Title>{props.name}</Styles.Title>
+      <br />
+      <Styles.ButtonRightAlign>
+        <Button size="sm" theme="secondary" onClick={handleClick}>
+          Join
+        </Button>
+      </Styles.ButtonRightAlign>
     </Styles.GamesListItem>
   );
 };

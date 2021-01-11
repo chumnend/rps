@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import GameUserStats from '../../components/GameUserStats';
 import Loader from '../../components/Loader';
 import Page from '../../components/Page';
 import * as ROUTES from '../../constants/routes';
@@ -10,7 +11,6 @@ const Game = () => {
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState(null);
   const [isHost, setHost] = useState(false);
-  const [isChallenger, setChallenger] = useState(false);
 
   const { id } = useParams();
   const history = useHistory();
@@ -39,7 +39,6 @@ const Game = () => {
         firebaseRef.current.game(id).update({
           challenger: authRef.current.user,
         });
-        setChallenger(true);
       } else if (
         gameData.challenger &&
         gameData.challenger.id !== authRef.current.user.id
@@ -56,6 +55,7 @@ const Game = () => {
       }
 
       setGame(gameData);
+      setLoading(false);
     });
 
     return listener;
@@ -68,18 +68,18 @@ const Game = () => {
       firebaseRef.current.game(id).delete();
     }
 
-    if (isChallenger) {
+    if (!isHost) {
       // if challenger, set room into matchmaking mode
       firebaseRef.current.game(id).update({
         challenger: null,
         isMatchmaking: true,
       });
     }
-  }, [id, isHost, isChallenger]);
+  }, [id, isHost]);
 
+  // on page render, initialize the game
   useEffect(() => {
     const listener = onJoin();
-    setLoading(false);
 
     return () => {
       listener(); // unsubscribe to listener
@@ -93,30 +93,13 @@ const Game = () => {
 
   return (
     <Page>
-      <h1>Game</h1>
-
-      <div>
-        {game && game.host && (
-          <div>
-            <p>User: {game.host.username}</p>
-            <p>Wins: {game.host.wins}</p>
-            <p>Losses: {game.host.losses}</p>
-            <p>{isHost && '(YOU)'}</p>
-          </div>
-        )}
-        <hr />
-        {game && game.challenger && (
-          <div>
-            <p>User: {game.challenger.username}</p>
-            <p>Wins: {game.challenger.wins}</p>
-            <p>Losses: {game.challenger.losses}</p>
-            <p>{isChallenger && '(YOU)'}</p>
-          </div>
-        )}
-      </div>
-
+      <GameUserStats
+        host={game.host}
+        challenger={game.challenger}
+        isHost={isHost}
+      />
       <hr />
-      <p>{game && game.isMatchmaking && 'Waiting'}</p>
+      <p>{game.isMatchmaking && 'Waiting'}</p>
     </Page>
   );
 };
