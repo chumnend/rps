@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '../../components/Button';
+import GamesList from '../../components/GamesList';
 import Loader from '../../components/Loader';
 import Page from '../../components/Page';
+import { STATE } from '../Game';
 import * as ROUTES from '../../constants/routes';
 import { useFirebase } from '../../store/firebase';
 
@@ -22,14 +23,13 @@ const Games = () => {
         const foundGames = [];
         snapshot.forEach((doc) => {
           const gameData = doc.data();
-          if (gameData.isMatchmaking) {
+          if (gameData.state === STATE.MATCHMAKING) {
             foundGames.push(doc.data());
           }
         });
         setGames(foundGames);
+        setLoading(false);
       });
-
-    setLoading(false);
   }, []);
 
   const handleJoin = (id) => {
@@ -42,14 +42,7 @@ const Games = () => {
 
   return (
     <Page>
-      <ul>
-        {games.map((g) => (
-          <li key={g.id}>
-            <p>{g.name}</p>
-            <Button onClick={() => handleJoin(g.id)}>Join</Button>
-          </li>
-        ))}
-      </ul>
+      <GamesList games={games} handleJoin={handleJoin} />
     </Page>
   );
 };

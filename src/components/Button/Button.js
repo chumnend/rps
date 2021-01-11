@@ -12,7 +12,8 @@ Button.defaultProps = {
 
 Button.propTypes = {
   children: PropTypes.node,
-  theme: PropTypes.oneOf(['primary', 'secondary']),
+  theme: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 export default Button;

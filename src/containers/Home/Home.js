@@ -5,6 +5,7 @@ import List from '../../components/List';
 import ListTitle from '../../components/ListTitle';
 import ListItem from '../../components/ListItem';
 import Page from '../../components/Page';
+import { STATE } from '../Game';
 import * as ROUTES from '../../constants/routes';
 import { useAuth } from '../../store/auth';
 import { useFirebase } from '../../store/firebase';
@@ -30,9 +31,15 @@ const Home = () => {
             name: `vs. ${auth.user.username}`,
             host: auth.user,
             challenger: null,
-            isMatchmaking: true,
-            isPlaying: false,
-            isSelectingMove: false,
+            state: STATE.MATCHMAKING,
+            round: 1,
+            roundResult: null,
+            hostReady: false,
+            hostMove: null,
+            hostScore: 0,
+            challengerReady: false,
+            challengerMove: null,
+            challengerScore: 0,
           })
           .then(() => {
             history.push(ROUTES.GAME_WITH_ID(doc.id));
@@ -45,11 +52,15 @@ const Home = () => {
       <List>
         <ListTitle>Ready for a match?</ListTitle>
         <ListItem>
-          <Button onClick={findGames}>Find Games</Button>
+          <Button size="lg" onClick={findGames}>
+            Find Games
+          </Button>
         </ListItem>
         <ListItem>OR</ListItem>
         <ListItem>
-          <Button onClick={hostGame}>Host Game</Button>
+          <Button size="lg" onClick={hostGame}>
+            Host Game
+          </Button>
         </ListItem>
       </List>
     </Page>
