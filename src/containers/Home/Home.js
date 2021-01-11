@@ -33,6 +33,7 @@ const Home = () => {
             challenger: null,
             state: STATE.MATCHMAKING,
             round: 1,
+            roundResult: null,
             hostReady: false,
             hostMove: null,
             hostScore: 0,
