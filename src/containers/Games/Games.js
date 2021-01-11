@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import GamesList from '../../components/GamesList';
 import Loader from '../../components/Loader';
 import Page from '../../components/Page';
+import { STATE } from '../Game';
 import * as ROUTES from '../../constants/routes';
 import { useFirebase } from '../../store/firebase';
 
@@ -22,7 +23,7 @@ const Games = () => {
         const foundGames = [];
         snapshot.forEach((doc) => {
           const gameData = doc.data();
-          if (gameData.isMatchmaking) {
+          if (gameData.state === STATE.MATCHMAKING) {
             foundGames.push(doc.data());
           }
         });

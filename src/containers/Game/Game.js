@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import Button from '../../components/Button';
 import GameUserStats from '../../components/GameUserStats';
 import Loader from '../../components/Loader';
 import Page from '../../components/Page';
@@ -7,10 +8,19 @@ import * as ROUTES from '../../constants/routes';
 import { useAuth } from '../../store/auth';
 import { useFirebase } from '../../store/firebase';
 
+export const STATE = {
+  MATCHMAKING: 'matchmaking',
+  READY_UP: 'ready_up',
+  MAKE_MOVE: 'make_move',
+  ROUND_RESULT: 'round_result',
+  GAME_OVER: 'game_over',
+};
+
 const Game = () => {
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState(null);
   const [isHost, setHost] = useState(false);
+  const [isReady, setReady] = useState(false);
 
   const { id } = useParams();
   const history = useHistory();
@@ -47,10 +57,25 @@ const Game = () => {
         history.push(ROUTES.GAMES);
       }
 
-      // change matchmaking state
-      if (gameData.host && gameData.challenger) {
+      // check if two players are present
+      if (
+        gameData.state === STATE.MATCHMAKING &&
+        gameData.host &&
+        gameData.challenger
+      ) {
         firebaseRef.current.game(id).update({
-          isMatchmaking: false,
+          state: STATE.READY_UP,
+        });
+      }
+
+      // check if both players are ready
+      if (
+        gameData.state === STATE.READY_UP &&
+        gameData.hostReady &&
+        gameData.challengerReady
+      ) {
+        firebaseRef.current.game(id).update({
+          state: STATE.MAKE_MOVE,
         });
       }
 
@@ -72,7 +97,14 @@ const Game = () => {
       // if challenger, set room into matchmaking mode
       firebaseRef.current.game(id).update({
         challenger: null,
-        isMatchmaking: true,
+        state: STATE.MATCHMAKING,
+        round: 1,
+        hostReady: false,
+        hostMove: null,
+        hostScore: 0,
+        challengerReady: false,
+        challengerMove: null,
+        challengerScore: 0,
       });
     }
   }, [id, isHost]);
@@ -91,6 +123,63 @@ const Game = () => {
     return <Loader />;
   }
 
+  // set this user to ready up
+  const handleReadyUp = () => {
+    if (isHost) {
+      firebaseRef.current.game(id).update({
+        hostReady: true,
+      });
+    } else {
+      firebaseRef.current.game(id).update({
+        challengerReady: true,
+      });
+    }
+
+    setReady(true);
+  };
+
+  // set game state view
+  let gameState = null;
+  switch (game.state) {
+    case STATE.MATCHMAKING:
+      gameState = <p>Waiting for Challenger</p>;
+      break;
+    case STATE.READY_UP:
+      gameState = (
+        <div>
+          <p>Waiting for players to be ready...</p>
+
+          <Button onClick={handleReadyUp} disabled={isReady}>
+            Ready Up
+          </Button>
+        </div>
+      );
+      break;
+    case STATE.MAKE_MOVE:
+      gameState = (
+        <div>
+          <p>Starting game...</p>
+        </div>
+      );
+      break;
+    case STATE.ROUND_RESULT:
+      gameState = (
+        <div>
+          <p>Revealing result...</p>
+        </div>
+      );
+      break;
+    case STATE.GAME_OVER:
+      gameState = (
+        <div>
+          <p>Match End...</p>
+        </div>
+      );
+      break;
+    default:
+      gameState = null;
+  }
+
   return (
     <Page>
       <GameUserStats
@@ -99,7 +188,7 @@ const Game = () => {
         isHost={isHost}
       />
       <hr />
-      <p>{game.isMatchmaking && 'Waiting'}</p>
+      {gameState}
     </Page>
   );
 };
