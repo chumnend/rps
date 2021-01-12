@@ -45,192 +45,197 @@ const Game = () => {
 
   // onJoin - Setups on game listener for updating from firebase
   const onJoin = useCallback(() => {
-    const listener = firebaseRef.current.game(id).onSnapshot((snapshot) => {
-      const gameData = snapshot.data();
+    const listener = firebaseRef.current
+      .game(id)
+      .onSnapshot(async (snapshot) => {
+        const gameData = snapshot.data();
 
-      // if game does not exist, bounce to home
-      if (!gameData) {
-        history.push(ROUTES.LANDING);
-        return;
-      }
-
-      // assign user roles (host or challenger)
-      if (gameData.host.id === authRef.current.user.id) {
-        // determine if current user is the host
-        setHost(true);
-      } else if (!gameData.challenger) {
-        // if no challenger, set this user as challenger
-        firebaseRef.current.game(id).update({
-          challenger: authRef.current.user,
-        });
-      } else if (
-        gameData.challenger &&
-        gameData.challenger.id !== authRef.current.user.id
-      ) {
-        // if challenger already exists
-        history.push(ROUTES.GAMES);
-      }
-
-      // if challenger left mid game, re-initialize host
-      if (gameData.state === STATE.MATCHMAKING && !gameData.challenger) {
-        setReady(false);
-        setMove(false);
-      }
-
-      // check if two players are present
-      if (
-        gameData.state === STATE.MATCHMAKING &&
-        gameData.host &&
-        gameData.challenger
-      ) {
-        firebaseRef.current.game(id).update({
-          state: STATE.READY_UP,
-        });
-      }
-
-      // check if both players are ready
-      if (
-        gameData.state === STATE.READY_UP &&
-        gameData.hostReady &&
-        gameData.challengerReady
-      ) {
-        firebaseRef.current.game(id).update({
-          state: STATE.MAKE_MOVE,
-        });
-
-        setMove(false);
-      }
-
-      // check player moves
-      if (
-        gameData.state === STATE.MAKE_MOVE &&
-        gameData.hostMove &&
-        gameData.challengerMove
-      ) {
-        let hostScore = gameData.hostScore;
-        let challengerScore = gameData.challengerScore;
-        let roundResult = null;
-
-        if (gameData.hostMove === gameData.challengerMove) {
-          // same moves result in a draw
-          roundResult = RESULT.DRAW;
-        } else if (
-          (gameData.hostMove === MOVE.ROCK &&
-            gameData.challengerMove === MOVE.SCISSOR) ||
-          (gameData.hostMove === MOVE.PAPER &&
-            gameData.challengerMove === MOVE.ROCK) ||
-          (gameData.hostMove === MOVE.SCISSOR &&
-            gameData.challengerMove === MOVE.PAPER)
-        ) {
-          // host wins
-          hostScore++;
-          roundResult = RESULT.HOST_WIN;
-        } else {
-          challengerScore++;
-          roundResult = RESULT.CHALLENGER_WIN;
+        // if game does not exist, bounce to home
+        if (!gameData) {
+          history.push(ROUTES.LANDING);
+          return;
         }
 
-        // check if game over state
-        if (hostScore === 3 || challengerScore === 3) {
-          // update user win/loss statistics
-          if (hostScore === 3) {
-            const updatedHostWins = gameData.host.wins + 1;
-            const updatedChallengerLosses = gameData.challenger.losses + 1;
+        // assign user roles (host or challenger)
+        if (gameData.host.id === authRef.current.user.id) {
+          // determine if current user is the host
+          setHost(true);
+        } else if (!gameData.challenger) {
+          // if no challenger, set this user as challenger
+          firebaseRef.current.game(id).update({
+            challenger: authRef.current.user,
+          });
+        } else if (
+          gameData.challenger &&
+          gameData.challenger.id !== authRef.current.user.id
+        ) {
+          // if challenger already exists
+          history.push(ROUTES.GAMES);
+        }
 
-            firebaseRef.current.user(gameData.host.id).update({
-              wins: updatedHostWins,
-            });
+        // if challenger left mid game, re-initialize host
+        if (gameData.state === STATE.MATCHMAKING && !gameData.challenger) {
+          setReady(false);
+          setMove(false);
+        }
 
-            firebaseRef.current.user(gameData.challenger.id).update({
-              losses: updatedChallengerLosses,
+        // check if two players are present
+        if (
+          gameData.state === STATE.MATCHMAKING &&
+          gameData.host &&
+          gameData.challenger
+        ) {
+          firebaseRef.current.game(id).update({
+            state: STATE.READY_UP,
+          });
+        }
+
+        // check if both players are ready
+        if (
+          gameData.state === STATE.READY_UP &&
+          gameData.hostReady &&
+          gameData.challengerReady
+        ) {
+          firebaseRef.current.game(id).update({
+            state: STATE.MAKE_MOVE,
+          });
+
+          setMove(false);
+        }
+
+        // check player moves
+        if (
+          gameData.state === STATE.MAKE_MOVE &&
+          gameData.hostMove &&
+          gameData.challengerMove
+        ) {
+          let hostScore = gameData.hostScore;
+          let challengerScore = gameData.challengerScore;
+          let roundResult = null;
+
+          if (gameData.hostMove === gameData.challengerMove) {
+            // same moves result in a draw
+            roundResult = RESULT.DRAW;
+          } else if (
+            (gameData.hostMove === MOVE.ROCK &&
+              gameData.challengerMove === MOVE.SCISSOR) ||
+            (gameData.hostMove === MOVE.PAPER &&
+              gameData.challengerMove === MOVE.ROCK) ||
+            (gameData.hostMove === MOVE.SCISSOR &&
+              gameData.challengerMove === MOVE.PAPER)
+          ) {
+            // host wins
+            hostScore++;
+            roundResult = RESULT.HOST_WIN;
+          } else {
+            challengerScore++;
+            roundResult = RESULT.CHALLENGER_WIN;
+          }
+
+          // check if game over state
+          if (hostScore === 3 || challengerScore === 3) {
+            // update user win/loss statistics
+            if (hostScore === 3) {
+              const updatedHostWins = gameData.host.wins + 1;
+              const updatedChallengerLosses = gameData.challenger.losses + 1;
+
+              firebaseRef.current.user(gameData.host.id).update({
+                wins: updatedHostWins,
+              });
+
+              firebaseRef.current.user(gameData.challenger.id).update({
+                losses: updatedChallengerLosses,
+              });
+            } else {
+              const updatedHostLosses = gameData.host.losses + 1;
+              const updatedChallengerWins = gameData.challenger.wins + 1;
+
+              firebaseRef.current.user(gameData.host.id).update({
+                losses: updatedHostLosses,
+              });
+
+              firebaseRef.current.user(gameData.challenger.id).update({
+                wins: updatedChallengerWins,
+              });
+            }
+
+            // update to game over state
+            const updatedHost = await firebaseRef.current
+              .user(gameData.host.id)
+              .get();
+            const updatedHostData = updatedHost.data();
+
+            const updatedChallenger = await firebaseRef.current
+              .user(gameData.challenger.id)
+              .get();
+            const updatedChallengerData = updatedChallenger.data();
+
+            firebaseRef.current.game(id).update({
+              state: STATE.GAME_OVER,
+              roundResult: roundResult,
+              host: updatedHostData,
+              hostReady: false,
+              hostScore: hostScore,
+              challenger: updatedChallengerData,
+              challengerReady: false,
+              challengerScore: challengerScore,
             });
           } else {
-            const updatedHostLosses = gameData.host.losses + 1;
-            const updatedChallengerWins = gameData.challenger.wins + 1;
-
-            firebaseRef.current.user(gameData.host.id).update({
-              losses: updatedHostLosses,
-            });
-
-            firebaseRef.current.user(gameData.challenger.id).update({
-              wins: updatedChallengerWins,
+            // update to round result state
+            firebaseRef.current.game(id).update({
+              state: STATE.ROUND_RESULT,
+              roundResult: roundResult,
+              hostReady: false,
+              hostScore: hostScore,
+              challengerReady: false,
+              challengerScore: challengerScore,
             });
           }
 
-          // update to game over state
-          const updatedHost = firebaseRef.current.user(gameData.host.id);
-          const updatedChallenger = firebaseRef.current.user(
-            gameData.challenger.id,
-          );
-
-          firebaseRef.current.game(id).update({
-            state: STATE.GAME_OVER,
-            roundResult: roundResult,
-            host: updatedHost,
-            hostReady: false,
-            hostScore: hostScore,
-            challenger: updatedChallenger,
-            challengerReady: false,
-            challengerScore: challengerScore,
-          });
-        } else {
-          // update to round result state
-          firebaseRef.current.game(id).update({
-            state: STATE.ROUND_RESULT,
-            roundResult: roundResult,
-            hostReady: false,
-            hostScore: hostScore,
-            challengerReady: false,
-            challengerScore: challengerScore,
-          });
+          setReady(false);
         }
 
-        setReady(false);
-      }
+        // move to next round
+        if (
+          gameData.state === STATE.ROUND_RESULT &&
+          gameData.hostReady &&
+          gameData.challengerReady
+        ) {
+          const nextRound = gameData.round + 1;
 
-      // move to next round
-      if (
-        gameData.state === STATE.ROUND_RESULT &&
-        gameData.hostReady &&
-        gameData.challengerReady
-      ) {
-        const nextRound = gameData.round + 1;
+          firebaseRef.current.game(id).update({
+            state: STATE.MAKE_MOVE,
+            round: nextRound,
+            roundResult: null,
+            hostMove: null,
+            challengerMove: null,
+          });
 
-        firebaseRef.current.game(id).update({
-          state: STATE.MAKE_MOVE,
-          round: nextRound,
-          roundResult: null,
-          hostMove: null,
-          challengerMove: null,
-        });
+          setMove(false);
+        }
 
-        setMove(false);
-      }
+        // move to rematch
+        if (
+          gameData.state === STATE.GAME_OVER &&
+          gameData.hostReady &&
+          gameData.challengerReady
+        ) {
+          firebaseRef.current.game(id).update({
+            state: STATE.MAKE_MOVE,
+            round: 1,
+            roundResult: null,
+            hostMove: null,
+            hostScore: 0,
+            challengerMove: null,
+            challengerScore: 0,
+          });
 
-      // move to rematch
-      if (
-        gameData.state === STATE.GAME_OVER &&
-        gameData.hostReady &&
-        gameData.challengerReady
-      ) {
-        firebaseRef.current.game(id).update({
-          state: STATE.MAKE_MOVE,
-          round: 1,
-          roundResult: null,
-          hostMove: null,
-          hostScore: 0,
-          challengerMove: null,
-          challengerScore: 0,
-        });
+          setMove(false);
+        }
 
-        // update user statistics
-
-        setMove(false);
-      }
-
-      setGame(gameData);
-      setLoading(false);
-    });
+        setGame(gameData);
+        setLoading(false);
+      });
 
     return listener;
   }, [id, history]);

@@ -25,7 +25,13 @@ const AuthProvider = (props) => {
           .user(authUser.uid)
           .get()
           .then((doc) => {
-            setUser(doc.data());
+            const user = doc.data();
+
+            firebaseRef.current.user(user.id).onSnapshot((doc) => {
+              setUser(doc.data());
+            });
+
+            setUser(user);
             setLoading(false);
           });
       }
