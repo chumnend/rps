@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import GamesList from '../../components/GamesList';
-import Loader from '../../components/Loader';
-import Page from '../../components/Page';
-import { STATE } from '../Game';
-import * as ROUTES from '../../constants/routes';
-import { useFirebase } from '../../store/firebase';
+import GamesList from '../components/GamesList';
+import Loader from '../components/Loader';
+import Page from '../components/Page';
+import { STATE } from './Game';
+import * as ROUTES from '../constants/routes';
+import { useFirebase } from '../store/firebase';
 
 const Games = () => {
   const [loading, setLoading] = useState(true);

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '../../components/Button';
-import Form from '../../components/Form';
-import FormInput from '../../components/FormInput';
-import FormLink from '../../components/FormLink';
-import FormTag from '../../components/FormTag';
-import Page from '../../components/Page';
-import { useFirebase } from '../../store/firebase';
-import * as ROUTES from '../../constants/routes';
-import useInputState from '../../hooks/useInputState';
+import Button from '../components/Button';
+import Form from '../components/Form';
+import FormInput from '../components/FormInput';
+import FormLink from '../components/FormLink';
+import FormTag from '../components/FormTag';
+import Page from '../components/Page';
+import { useFirebase } from '../store/firebase';
+import * as ROUTES from '../constants/routes';
+import useInputState from '../hooks/useInputState';
 
 const SignUp = () => {
   const [username, changeUsername] = useInputState('');

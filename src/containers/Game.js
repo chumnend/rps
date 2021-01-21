@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import Button from '../../components/Button';
-import GameScoreboard from '../../components/GameScoreboard';
-import GameUserStats from '../../components/GameUserStats';
-import Loader from '../../components/Loader';
-import Page from '../../components/Page';
-import * as ROUTES from '../../constants/routes';
-import { useAuth } from '../../store/auth';
-import { useFirebase } from '../../store/firebase';
+import Button from '../components/Button';
+import GameScoreboard from '../components/GameScoreboard';
+import GameUserStats from '../components/GameUserStats';
+import Loader from '../components/Loader';
+import Page from '../components/Page';
+import * as ROUTES from '../constants/routes';
+import { useAuth } from '../store/auth';
+import { useFirebase } from '../store/firebase';
 
 export const STATE = {
   MATCHMAKING: 'matchmaking',

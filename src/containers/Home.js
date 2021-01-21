@@ -1,14 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '../../components/Button';
-import List from '../../components/List';
-import ListTitle from '../../components/ListTitle';
-import ListItem from '../../components/ListItem';
-import Page from '../../components/Page';
-import { STATE } from '../Game';
-import * as ROUTES from '../../constants/routes';
-import { useAuth } from '../../store/auth';
-import { useFirebase } from '../../store/firebase';
+import Button from '../components/Button';
+import List from '../components/List';
+import ListTitle from '../components/ListTitle';
+import ListItem from '../components/ListItem';
+import Page from '../components/Page';
+import { STATE } from './Game';
+import * as ROUTES from '../constants/routes';
+import { useAuth } from '../store/auth';
+import { useFirebase } from '../store/firebase';
 
 const Home = () => {
   const history = useHistory();

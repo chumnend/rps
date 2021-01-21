@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Button from '../../components/Button';
-import Form from '../../components/Form';
-import FormInput from '../../components/FormInput';
-import FormTag from '../../components/FormTag';
-import Page from '../../components/Page';
-import { useFirebase } from '../../store/firebase';
-import useInputState from '../../hooks/useInputState';
+import Button from '../components/Button';
+import Form from '../components/Form';
+import FormInput from '../components/FormInput';
+import FormTag from '../components/FormTag';
+import Page from '../components/Page';
+import { useFirebase } from '../store/firebase';
+import useInputState from '../hooks/useInputState';
 
 export const PasswordChangeForm = () => {
   const [password, changePassword] = useInputState('');

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Banner from '../../components/Banner';
-import Page from '../../components/Page';
-import List from '../../components/List';
-import ListTitle from '../../components/ListTitle';
-import ListItem from '../../components/ListItem';
-import * as ROUTES from '../../constants/routes';
+import Banner from '../components/Banner';
+import Page from '../components/Page';
+import List from '../components/List';
+import ListTitle from '../components/ListTitle';
+import ListItem from '../components/ListItem';
+import * as ROUTES from '../constants/routes';
 
 const Landing = () => {
   return (
