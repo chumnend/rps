@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { device } from '../../themes';
+import { device, layout } from '../../themes';
 
 export const Page = styled.div`
   width: 100%;
   height: 100%;
-  padding: 2rem 0;
+  min-height: calc(100vh - ${layout.headerHeight});
+  padding: 1rem 0;
 
   @media all and (min-width: ${device.md}) {
     width: 80%;

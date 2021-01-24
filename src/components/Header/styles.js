@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { device } from '../../themes';
+import { device, layout } from '../../themes';
 
 export const Header = styled.header`
   width: 100%;
-  height: auto;
+  height: ${layout.headerHeight};
   box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.3);
 `;
 

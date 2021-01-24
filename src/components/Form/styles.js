@@ -3,6 +3,7 @@ import { color, device } from '../../themes';
 
 export const Form = styled.form`
   width: 100%;
+  height: 100%;
   background: ${color.white};
   padding: 1.5rem;
   display: flex;
