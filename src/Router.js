@@ -1,19 +1,19 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ProtectedRoute from '../ProtectedRoute';
-import Account from '../../containers/Account';
-import Admin from '../../containers/Admin';
-import Game from '../../containers/Game';
-import Games from '../../containers/Games';
-import Home from '../../containers/Home';
-import Landing from '../../containers/Landing';
-import Logout from '../../containers/Logout';
-import NotFound from '../../containers/NotFound';
-import PasswordForget from '../../containers/PasswordForget';
-import SignIn from '../../containers/SignIn';
-import SignUp from '../../containers/SignUp';
-import * as ROUTES from '../../constants/routes';
+import ProtectedRoute from './components/ProtectedRoute';
+import Account from './containers/Account';
+import Admin from './containers/Admin';
+import Game from './containers/Game';
+import Games from './containers/Games';
+import Home from './containers/Home';
+import Landing from './containers/Landing';
+import Logout from './containers/Logout';
+import NotFound from './containers/NotFound';
+import PasswordForget from './containers/PasswordForget';
+import SignIn from './containers/SignIn';
+import SignUp from './containers/SignUp';
+import * as ROUTES from './constants/routes';
 
 const Router = (props) => {
   return (
