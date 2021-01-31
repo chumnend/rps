@@ -4,21 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { color, device } from '../themes';
 
-const Icon = (props) => {
-  return (
-    <StyledIcon to={props.to}>
-      <i className={props.classname} />
-      <p>{props.title}</p>
-    </StyledIcon>
-  );
-};
-
-Icon.propTypes = {
-  to: PropTypes.string,
-  classname: PropTypes.string,
-  title: PropTypes.string,
-};
-
+// Styles =================================================
 const StyledIcon = styled(Link)`
   height: 100%;
   display: flex;
@@ -50,5 +36,21 @@ const StyledIcon = styled(Link)`
     }
   }
 `;
+
+// Component ==============================================
+const Icon = (props) => {
+  return (
+    <StyledIcon to={props.to}>
+      <i className={props.classname} />
+      <p>{props.title}</p>
+    </StyledIcon>
+  );
+};
+
+Icon.propTypes = {
+  to: PropTypes.string,
+  classname: PropTypes.string,
+  title: PropTypes.string,
+};
 
 export default Icon;

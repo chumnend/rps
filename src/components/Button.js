@@ -3,21 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { color } from '../themes';
 
-const Button = (props) => {
-  return <StyledButton {...props}>{props.children}</StyledButton>;
-};
-
-Button.defaultProps = {
-  theme: 'primary',
-};
-
-Button.propTypes = {
-  children: PropTypes.node,
-  theme: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-};
-
-export const StyledButton = styled.button`
+// Styles =================================================
+const StyledButton = styled.button`
   border-radius: 3px;
   text-align: center;
   text-decoration: none;
@@ -79,5 +66,20 @@ export const StyledButton = styled.button`
     }
   }}
 `;
+
+// Component ==============================================
+const Button = (props) => {
+  return <StyledButton {...props}>{props.children}</StyledButton>;
+};
+
+Button.defaultProps = {
+  theme: 'primary',
+};
+
+Button.propTypes = {
+  children: PropTypes.node,
+  theme: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+};
 
 export default Button;

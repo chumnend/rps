@@ -4,25 +4,7 @@ import GamesListItem from './GamesListItem';
 import styled from 'styled-components';
 import { device } from '../themes';
 
-const GamesList = (props) => {
-  if (props.games.length === 0) {
-    return <p>No games have been created.</p>;
-  }
-
-  return (
-    <StyledGamesList>
-      {props.games.map((g) => (
-        <GamesListItem
-          key={g.id}
-          id={g.id}
-          name={g.name}
-          handleJoin={props.handleJoin}
-        />
-      ))}
-    </StyledGamesList>
-  );
-};
-
+// Styles =================================================
 const StyledGamesList = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -49,6 +31,26 @@ const StyledGamesList = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
 `;
+
+// Component ==============================================
+const GamesList = (props) => {
+  if (props.games.length === 0) {
+    return <p>No games have been created.</p>;
+  }
+
+  return (
+    <StyledGamesList>
+      {props.games.map((g) => (
+        <GamesListItem
+          key={g.id}
+          id={g.id}
+          name={g.name}
+          handleJoin={props.handleJoin}
+        />
+      ))}
+    </StyledGamesList>
+  );
+};
 
 GamesList.propTypes = {
   games: PropTypes.array,

@@ -5,6 +5,41 @@ import * as ROUTES from '../constants/routes';
 import styled from 'styled-components';
 import { device, layout } from '../themes';
 
+// Styles =================================================
+const StyledHeader = styled.header`
+  width: 100%;
+  height: ${layout.headerHeight};
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.3);
+`;
+
+const StyledContainer = styled.div`
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledNav = styled.nav`
+  height: 100%;
+`;
+
+const StyledUl = styled.ul`
+  height: 100%;
+  list-style: none;
+  display: flex;
+
+  @media all and (min-width: ${device.lg}) {
+    gap: 1rem;
+  }
+`;
+
+const StyledLi = styled.li`
+  height: 100%;
+`;
+
+// Component ==============================================
 const Header = (props) => {
   return (
     <StyledHeader>
@@ -64,39 +99,6 @@ const Header = (props) => {
     </StyledHeader>
   );
 };
-
-const StyledHeader = styled.header`
-  width: 100%;
-  height: ${layout.headerHeight};
-  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.3);
-`;
-
-const StyledContainer = styled.div`
-  width: 90%;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const StyledNav = styled.nav`
-  height: 100%;
-`;
-
-const StyledUl = styled.ul`
-  height: 100%;
-  list-style: none;
-  display: flex;
-
-  @media all and (min-width: ${device.lg}) {
-    gap: 1rem;
-  }
-`;
-
-const StyledLi = styled.li`
-  height: 100%;
-`;
 
 Header.propTypes = {
   auth: PropTypes.object,

@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { color } from '../themes';
 
-const List = (props) => {
-  return <StyledList>{props.children}</StyledList>;
-};
-
+// Styles =================================================
 export const StyledList = styled.ul`
   width: 90%;
   margin: 0 auto;
@@ -16,6 +13,11 @@ export const StyledList = styled.ul`
   flex-direction: column;
   align-items: center;
 `;
+
+// Component ==============================================
+const List = (props) => {
+  return <StyledList>{props.children}</StyledList>;
+};
 
 List.propTypes = {
   children: PropTypes.node,

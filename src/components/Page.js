@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { device, layout } from '../themes';
 
-const Page = (props) => {
-  return <StyledPage>{props.children}</StyledPage>;
-};
-
+// Styles =================================================
 const StyledPage = styled.div`
   width: 100%;
   height: 100%;
@@ -18,6 +15,11 @@ const StyledPage = styled.div`
     margin: 0 auto;
   }
 `;
+
+// Component ==============================================
+const Page = (props) => {
+  return <StyledPage {...props}>{props.children}</StyledPage>;
+};
 
 Page.propTypes = {
   children: PropTypes.node,

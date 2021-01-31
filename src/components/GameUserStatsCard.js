@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { color } from '../themes';
 
+// Styles =================================================
+const StyledGameUserStatsCard = styled.div`
+  height: auto;
+  padding: 1rem;
+  background: ${color.white};
+`;
+
+// Component ==============================================
 const GameUserStatsCard = (props) => {
   if (!props.user) {
     return (
@@ -21,12 +29,6 @@ const GameUserStatsCard = (props) => {
     </StyledGameUserStatsCard>
   );
 };
-
-const StyledGameUserStatsCard = styled.div`
-  height: auto;
-  padding: 1rem;
-  background: ${color.white};
-`;
 
 GameUserStatsCard.propTypes = {
   user: PropTypes.object,

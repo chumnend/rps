@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { color, device } from '../themes';
 
-const Form = (props) => {
-  return <StyledForm onSubmit={props.onSubmit}>{props.children}</StyledForm>;
-};
-
+// Styles =================================================
 const StyledForm = styled.form`
   width: 100%;
   height: 100%;
@@ -28,6 +25,11 @@ const StyledForm = styled.form`
     border-radius: 5px;
   }
 `;
+
+// Component ==============================================
+const Form = (props) => {
+  return <StyledForm onSubmit={props.onSubmit}>{props.children}</StyledForm>;
+};
 
 Form.propTypes = {
   children: PropTypes.node,

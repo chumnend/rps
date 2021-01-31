@@ -4,10 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { color } from '../themes';
 
-const FormLink = (props) => {
-  return <StyledLink {...props}>{props.children}</StyledLink>;
-};
-
+// Style ==================================================
 const StyledLink = styled(Link)`
   color: ${color.black};
 
@@ -15,6 +12,11 @@ const StyledLink = styled(Link)`
     color: ${color.grey};
   }
 `;
+
+// Comppnent ==============================================
+const FormLink = (props) => {
+  return <StyledLink {...props}>{props.children}</StyledLink>;
+};
 
 FormLink.propTypes = {
   children: PropTypes.node,

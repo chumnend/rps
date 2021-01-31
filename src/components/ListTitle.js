@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { device } from '../themes';
 
-const ListTitle = (props) => {
-  return <StyledListTitle>{props.children}</StyledListTitle>;
-};
-
+// Styles =================================================
 const StyledListTitle = styled.h3`
   font-size: 2rem;
   font-weight: 700;
@@ -22,6 +19,11 @@ const StyledListTitle = styled.h3`
     font-size: 4rem;
   }
 `;
+
+// Component ==============================================
+const ListTitle = (props) => {
+  return <StyledListTitle>{props.children}</StyledListTitle>;
+};
 
 ListTitle.propTypes = {
   children: PropTypes.node,

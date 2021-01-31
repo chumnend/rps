@@ -3,20 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { color, device } from '../themes';
 
-const AccountCard = (props) => {
-  return (
-    <StyledAccountCard>
-      <h3>Account Details</h3>
-      <p>Username: {props.user.username}</p>
-      <p>Email: {props.user.email}</p>
-      <br />
-      <h3>Statistics</h3>
-      <p>Wins: {props.user.wins}</p>
-      <p>Losses: {props.user.losses}</p>
-    </StyledAccountCard>
-  );
-};
-
+// Styles =================================================
 const StyledAccountCard = styled.div`
   width: 100%;
   background: ${color.white};
@@ -37,6 +24,21 @@ const StyledAccountCard = styled.div`
     border-radius: 5px;
   }
 `;
+
+// Component ==============================================
+const AccountCard = (props) => {
+  return (
+    <StyledAccountCard>
+      <h3>Account Details</h3>
+      <p>Username: {props.user.username}</p>
+      <p>Email: {props.user.email}</p>
+      <br />
+      <h3>Statistics</h3>
+      <p>Wins: {props.user.wins}</p>
+      <p>Losses: {props.user.losses}</p>
+    </StyledAccountCard>
+  );
+};
 
 AccountCard.propTypes = {
   user: PropTypes.object,

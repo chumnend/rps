@@ -2,10 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { color } from '../themes';
 
-const Loader = () => {
-  return <StyledLoader>Loading...</StyledLoader>;
-};
-
+// Styles =================================================
 const load = keyframes`
   0%,
   100% {
@@ -49,5 +46,10 @@ export const StyledLoader = styled.div`
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 `;
+
+// Component ==============================================
+const Loader = () => {
+  return <StyledLoader>Loading...</StyledLoader>;
+};
 
 export default Loader;
