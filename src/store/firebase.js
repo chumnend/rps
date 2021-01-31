@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { auth, db } from './firebase.config';
+import { auth, db } from '../config';
 
 const FirebaseContext = React.createContext();
 
