@@ -3,21 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { color } from '../themes';
 
-const FormInput = (props) => {
-  return (
-    <StyledFormInput>
-      <StyledLabel htmlFor={props.id}>{props.label}</StyledLabel>
-      <StyledInput
-        type={props.type}
-        placeholder={props.placeholder}
-        id={props.id}
-        value={props.value}
-        onChange={props.onChange}
-      />
-    </StyledFormInput>
-  );
-};
-
+// Styles =================================================
 const StyledFormInput = styled.div`
   display: flex;
   flex-direction: column;
@@ -38,6 +24,22 @@ const StyledInput = styled.input`
   font-family: inherit;
   font-size: 1rem;
 `;
+
+// Component ==============================================
+const FormInput = (props) => {
+  return (
+    <StyledFormInput>
+      <StyledLabel htmlFor={props.id}>{props.label}</StyledLabel>
+      <StyledInput
+        type={props.type}
+        placeholder={props.placeholder}
+        id={props.id}
+        value={props.value}
+        onChange={props.onChange}
+      />
+    </StyledFormInput>
+  );
+};
 
 FormInput.defaultProps = {
   type: 'text',

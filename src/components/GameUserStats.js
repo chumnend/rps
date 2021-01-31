@@ -3,6 +3,16 @@ import PropTypes from 'prop-types';
 import GameUserStatsCard from './GameUserStatsCard';
 import styled from 'styled-components';
 
+// Styles =================================================
+const StyledGameUserStats = styled.div`
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+// Component ==============================================
 const GameUserStats = (props) => {
   return (
     <StyledGameUserStats>
@@ -12,14 +22,6 @@ const GameUserStats = (props) => {
     </StyledGameUserStats>
   );
 };
-
-const StyledGameUserStats = styled.div`
-  width: 100%;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
 
 GameUserStats.propTypes = {
   host: PropTypes.object,

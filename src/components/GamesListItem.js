@@ -4,6 +4,23 @@ import Button from './Button';
 import styled from 'styled-components';
 import { color } from '../themes';
 
+// Styles =================================================
+const StyledGamesListItem = styled.div`
+  width: 100%;
+  background: ${color.white};
+  padding: 0.5rem 1rem;
+`;
+
+const StyledTitle = styled.h3`
+  font-size: 1.5rem;
+`;
+
+const StyledButtonRightAlign = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
+// Component ==============================================
 const GamesListItem = (props) => {
   const handleClick = () => {
     props.handleJoin(props.id);
@@ -21,21 +38,6 @@ const GamesListItem = (props) => {
     </StyledGamesListItem>
   );
 };
-
-const StyledGamesListItem = styled.div`
-  width: 100%;
-  background: ${color.white};
-  padding: 0.5rem 1rem;
-`;
-
-const StyledTitle = styled.h3`
-  font-size: 1.5rem;
-`;
-
-const StyledButtonRightAlign = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-`;
 
 GamesListItem.propTypes = {
   id: PropTypes.string,

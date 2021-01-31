@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { device } from '../themes';
 
-const ListItem = (props) => {
-  return <StyledListItem>{props.children}</StyledListItem>;
-};
-
+// Styles =================================================
 const StyledListItem = styled.li`
   font-size: 1rem;
   margin-bottom: 0.5rem;
@@ -20,6 +17,11 @@ const StyledListItem = styled.li`
     font-size: 2rem;
   }
 `;
+
+// Component ==============================================
+const ListItem = (props) => {
+  return <StyledListItem>{props.children}</StyledListItem>;
+};
 
 ListItem.propTypes = {
   children: PropTypes.node,
