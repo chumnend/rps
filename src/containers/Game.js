@@ -8,26 +8,7 @@ import Page from '../components/Page';
 import * as ROUTES from '../constants/routes';
 import { useAuth } from '../store/auth';
 import { useFirebase } from '../store/firebase';
-
-export const STATE = {
-  MATCHMAKING: 'matchmaking',
-  READY_UP: 'ready_up',
-  MAKE_MOVE: 'make_move',
-  ROUND_RESULT: 'round_result',
-  GAME_OVER: 'game_over',
-};
-
-export const MOVE = {
-  ROCK: 'rock',
-  PAPER: 'paper',
-  SCISSOR: 'scissor',
-};
-
-export const RESULT = {
-  HOST_WIN: 'host_win',
-  CHALLENGER_WIN: 'challenger_win',
-  DRAW: 'draw',
-};
+import * as GAME from '../constants/game';
 
 const Game = () => {
   const [loading, setLoading] = useState(true);
@@ -74,30 +55,30 @@ const Game = () => {
         }
 
         // if challenger left mid game, re-initialize host
-        if (gameData.state === STATE.MATCHMAKING && !gameData.challenger) {
+        if (gameData.state === GAME.STATE_MATCHMAKING && !gameData.challenger) {
           setReady(false);
           setMove(false);
         }
 
         // check if two players are present
         if (
-          gameData.state === STATE.MATCHMAKING &&
+          gameData.state === GAME.STATE_MATCHMAKING &&
           gameData.host &&
           gameData.challenger
         ) {
           firebaseRef.current.game(id).update({
-            state: STATE.READY_UP,
+            state: GAME.STATE_READY_UP,
           });
         }
 
         // check if both players are ready
         if (
-          gameData.state === STATE.READY_UP &&
+          gameData.state === GAME.STATE_READY_UP &&
           gameData.hostReady &&
           gameData.challengerReady
         ) {
           firebaseRef.current.game(id).update({
-            state: STATE.MAKE_MOVE,
+            state: GAME.STATE_MAKE_MOVE,
           });
 
           setMove(false);
@@ -105,7 +86,7 @@ const Game = () => {
 
         // check player moves
         if (
-          gameData.state === STATE.MAKE_MOVE &&
+          gameData.state === GAME.STATE_MAKE_MOVE &&
           gameData.hostMove &&
           gameData.challengerMove
         ) {
@@ -115,21 +96,21 @@ const Game = () => {
 
           if (gameData.hostMove === gameData.challengerMove) {
             // same moves result in a draw
-            roundResult = RESULT.DRAW;
+            roundResult = GAME.RESULT_DRAW;
           } else if (
-            (gameData.hostMove === MOVE.ROCK &&
-              gameData.challengerMove === MOVE.SCISSOR) ||
-            (gameData.hostMove === MOVE.PAPER &&
-              gameData.challengerMove === MOVE.ROCK) ||
-            (gameData.hostMove === MOVE.SCISSOR &&
-              gameData.challengerMove === MOVE.PAPER)
+            (gameData.hostMove === GAME.MOVE_ROCK &&
+              gameData.challengerMove === GAME.MOVE_SCISSOR) ||
+            (gameData.hostMove === GAME.MOVE_PAPER &&
+              gameData.challengerMove === GAME.MOVE_ROCK) ||
+            (gameData.hostMove === GAME.MOVE_SCISSOR &&
+              gameData.challengerMove === GAME.MOVE_PAPER)
           ) {
             // host wins
             hostScore++;
-            roundResult = RESULT.HOST_WIN;
+            roundResult = GAME.RESULT_HOST_WIN;
           } else {
             challengerScore++;
-            roundResult = RESULT.CHALLENGER_WIN;
+            roundResult = GAME.RESULT_CHALLENGER_WIN;
           }
 
           // check if game over state
@@ -171,7 +152,7 @@ const Game = () => {
             const updatedChallengerData = updatedChallenger.data();
 
             firebaseRef.current.game(id).update({
-              state: STATE.GAME_OVER,
+              state: GAME.STATE_GAME_OVER,
               roundResult: roundResult,
               host: updatedHostData,
               hostReady: false,
@@ -183,7 +164,7 @@ const Game = () => {
           } else {
             // update to round result state
             firebaseRef.current.game(id).update({
-              state: STATE.ROUND_RESULT,
+              state: GAME.STATE_ROUND_RESULT,
               roundResult: roundResult,
               hostReady: false,
               hostScore: hostScore,
@@ -197,14 +178,14 @@ const Game = () => {
 
         // move to next round
         if (
-          gameData.state === STATE.ROUND_RESULT &&
+          gameData.state === GAME.STATE_ROUND_RESULT &&
           gameData.hostReady &&
           gameData.challengerReady
         ) {
           const nextRound = gameData.round + 1;
 
           firebaseRef.current.game(id).update({
-            state: STATE.MAKE_MOVE,
+            state: GAME.STATE_MAKE_MOVE,
             round: nextRound,
             roundResult: null,
             hostMove: null,
@@ -216,12 +197,12 @@ const Game = () => {
 
         // move to rematch
         if (
-          gameData.state === STATE.GAME_OVER &&
+          gameData.state === GAME.STATE_GAME_OVER &&
           gameData.hostReady &&
           gameData.challengerReady
         ) {
           firebaseRef.current.game(id).update({
-            state: STATE.MAKE_MOVE,
+            state: GAME.STATE_MAKE_MOVE,
             round: 1,
             roundResult: null,
             hostMove: null,
@@ -251,7 +232,7 @@ const Game = () => {
       // if challenger, set room into matchmaking mode
       firebaseRef.current.game(id).update({
         challenger: null,
-        state: STATE.MATCHMAKING,
+        state: GAME.STATE_MATCHMAKING,
         round: 1,
         hostReady: false,
         hostMove: null,
@@ -315,10 +296,10 @@ const Game = () => {
   // set game state view
   let gameState = null;
   switch (game.state) {
-    case STATE.MATCHMAKING:
+    case GAME.STATE_MATCHMAKING:
       gameState = <p>Waiting for Challenger</p>;
       break;
-    case STATE.READY_UP:
+    case GAME.STATE_READY_UP:
       gameState = (
         <div>
           <p>Waiting for players to be ready...</p>
@@ -329,7 +310,7 @@ const Game = () => {
         </div>
       );
       break;
-    case STATE.MAKE_MOVE:
+    case GAME.STATE_MAKE_MOVE:
       gameState = (
         <div>
           <GameScoreboard
@@ -340,19 +321,28 @@ const Game = () => {
 
           {moveMade ? <p>Waiting for opponent</p> : <p>Make your move</p>}
 
-          <Button onClick={() => handleMove(MOVE.ROCK)} disabled={moveMade}>
+          <Button
+            onClick={() => handleMove(GAME.MOVE_ROCK)}
+            disabled={moveMade}
+          >
             Rock
           </Button>
-          <Button onClick={() => handleMove(MOVE.PAPER)} disabled={moveMade}>
+          <Button
+            onClick={() => handleMove(GAME.MOVE_PAPER)}
+            disabled={moveMade}
+          >
             Paper
           </Button>
-          <Button onClick={() => handleMove(MOVE.SCISSOR)} disabled={moveMade}>
+          <Button
+            onClick={() => handleMove(GAME.MOVE_SCISSOR)}
+            disabled={moveMade}
+          >
             Scissor
           </Button>
         </div>
       );
       break;
-    case STATE.ROUND_RESULT:
+    case GAME.STATE_ROUND_RESULT:
       gameState = (
         <div>
           <GameScoreboard
@@ -365,19 +355,19 @@ const Game = () => {
             {game.hostMove} - {game.challengerMove}
           </div>
 
-          {isHost && game.roundResult === RESULT.HOST_WIN && (
+          {isHost && game.roundResult === GAME.RESULT_HOST_WIN && (
             <p>You win this round!</p>
           )}
-          {!isHost && game.roundResult === RESULT.HOST_WIN && (
+          {!isHost && game.roundResult === GAME.RESULT_HOST_WIN && (
             <p>You lost this round!</p>
           )}
-          {isHost && game.roundResult === RESULT.CHALLENGER_WIN && (
+          {isHost && game.roundResult === GAME.RESULT_CHALLENGER_WIN && (
             <p>You lost this round!</p>
           )}
-          {!isHost && game.roundResult === RESULT.CHALLENGER_WIN && (
+          {!isHost && game.roundResult === GAME.RESULT_CHALLENGER_WIN && (
             <p>You win this round!</p>
           )}
-          {game.roundResult === RESULT.DRAW && <p>Draw!</p>}
+          {game.roundResult === GAME.RESULT_DRAW && <p>Draw!</p>}
 
           <Button onClick={handleReadyUp} disabled={isReady}>
             Next
@@ -385,7 +375,7 @@ const Game = () => {
         </div>
       );
       break;
-    case STATE.GAME_OVER:
+    case GAME.STATE_GAME_OVER:
       gameState = (
         <div>
           <GameScoreboard
@@ -394,16 +384,16 @@ const Game = () => {
             challengerScore={game.challengerScore}
           />
 
-          {isHost && game.roundResult === RESULT.HOST_WIN && (
+          {isHost && game.roundResult === GAME.RESULT_HOST_WIN && (
             <p>Game Over, You win!</p>
           )}
-          {!isHost && game.roundResult === RESULT.HOST_WIN && (
+          {!isHost && game.roundResult === GAME.RESULT_HOST_WIN && (
             <p>Game Over, You lose!</p>
           )}
-          {isHost && game.roundResult === RESULT.CHALLENGER_WIN && (
+          {isHost && game.roundResult === GAME.RESULT_CHALLENGER_WIN && (
             <p>Game Over, You lose!</p>
           )}
-          {!isHost && game.roundResult === RESULT.CHALLENGER_WIN && (
+          {!isHost && game.roundResult === GAME.RESULT_CHALLENGER_WIN && (
             <p>Game Over, You win!</p>
           )}
 

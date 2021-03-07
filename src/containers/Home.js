@@ -5,7 +5,7 @@ import List from '../components/List';
 import ListTitle from '../components/ListTitle';
 import ListItem from '../components/ListItem';
 import Page from '../components/Page';
-import { STATE } from './Game';
+import * as GAME from '../constants/game';
 import * as ROUTES from '../constants/routes';
 import { useAuth } from '../store/auth';
 import { useFirebase } from '../store/firebase';
@@ -31,7 +31,7 @@ const Home = () => {
             name: `vs. ${auth.user.username}`,
             host: auth.user,
             challenger: null,
-            state: STATE.MATCHMAKING,
+            state: GAME.STATE_MATCHMAKING,
             round: 1,
             roundResult: null,
             hostReady: false,
