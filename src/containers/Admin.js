@@ -4,7 +4,7 @@ import ListItem from '../components/ListItem';
 import ListTitle from '../components/ListTitle';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
-import { useFirebase } from '../store/firebase';
+import useFirebase from '../hooks/useFirebase';
 
 const Admin = () => {
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ const Admin = () => {
 
   useEffect(() => {
     firebaseRef.current
-      .users()
+      .getUsers()
       .get()
       .then((snapshot) => {
         const foundUsers = [];
@@ -27,7 +27,7 @@ const Admin = () => {
       });
 
     firebaseRef.current
-      .games()
+      .getGames()
       .get()
       .then((snapshot) => {
         const foundGames = [];

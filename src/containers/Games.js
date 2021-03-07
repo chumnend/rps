@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 import Page from '../components/Page';
 import * as GAME from '../constants/game';
 import * as ROUTES from '../constants/routes';
-import { useFirebase } from '../store/firebase';
+import useFirebase from '../hooks/useFirebase';
 
 const Games = () => {
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const Games = () => {
 
   useEffect(() => {
     firebaseRef.current
-      .games()
+      .getGames()
       .get()
       .then((snapshot) => {
         const foundGames = [];

@@ -5,10 +5,9 @@ import GameScoreboard from '../components/GameScoreboard';
 import GameUserStats from '../components/GameUserStats';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
-import * as ROUTES from '../constants/routes';
-import { useAuth } from '../store/auth';
-import { useFirebase } from '../store/firebase';
+import useFirebase from '../hooks/useFirebase';
 import * as GAME from '../constants/game';
+import * as ROUTES from '../constants/routes';
 
 const Game = () => {
   const [loading, setLoading] = useState(true);
@@ -19,15 +18,13 @@ const Game = () => {
 
   const { id } = useParams();
   const history = useHistory();
-  const auth = useAuth();
-  const authRef = useRef(auth);
   const firebase = useFirebase();
   const firebaseRef = useRef(firebase);
 
   // onJoin - Setups on game listener for updating from firebase
   const onJoin = useCallback(() => {
     const listener = firebaseRef.current
-      .game(id)
+      .getGame(id)
       .onSnapshot(async (snapshot) => {
         const gameData = snapshot.data();
 
@@ -38,17 +35,17 @@ const Game = () => {
         }
 
         // assign user roles (host or challenger)
-        if (gameData.host.id === authRef.current.user.id) {
+        if (gameData.host.id === firebaseRef.current.user.id) {
           // determine if current user is the host
           setHost(true);
         } else if (!gameData.challenger) {
           // if no challenger, set this user as challenger
-          firebaseRef.current.game(id).update({
-            challenger: authRef.current.user,
+          firebaseRef.current.getGame(id).update({
+            challenger: firebaseRef.current.user,
           });
         } else if (
           gameData.challenger &&
-          gameData.challenger.id !== authRef.current.user.id
+          gameData.challenger.id !== firebaseRef.current.user.id
         ) {
           // if challenger already exists
           history.push(ROUTES.GAMES);
@@ -66,7 +63,7 @@ const Game = () => {
           gameData.host &&
           gameData.challenger
         ) {
-          firebaseRef.current.game(id).update({
+          firebaseRef.current.getGame(id).update({
             state: GAME.STATE_READY_UP,
           });
         }
@@ -77,7 +74,7 @@ const Game = () => {
           gameData.hostReady &&
           gameData.challengerReady
         ) {
-          firebaseRef.current.game(id).update({
+          firebaseRef.current.getGame(id).update({
             state: GAME.STATE_MAKE_MOVE,
           });
 
@@ -120,38 +117,38 @@ const Game = () => {
               const updatedHostWins = gameData.host.wins + 1;
               const updatedChallengerLosses = gameData.challenger.losses + 1;
 
-              firebaseRef.current.user(gameData.host.id).update({
+              firebaseRef.current.getUser(gameData.host.id).update({
                 wins: updatedHostWins,
               });
 
-              firebaseRef.current.user(gameData.challenger.id).update({
+              firebaseRef.current.getUser(gameData.challenger.id).update({
                 losses: updatedChallengerLosses,
               });
             } else {
               const updatedHostLosses = gameData.host.losses + 1;
               const updatedChallengerWins = gameData.challenger.wins + 1;
 
-              firebaseRef.current.user(gameData.host.id).update({
+              firebaseRef.current.getUser(gameData.host.id).update({
                 losses: updatedHostLosses,
               });
 
-              firebaseRef.current.user(gameData.challenger.id).update({
+              firebaseRef.current.getUser(gameData.challenger.id).update({
                 wins: updatedChallengerWins,
               });
             }
 
             // update to game over state
             const updatedHost = await firebaseRef.current
-              .user(gameData.host.id)
+              .getUser(gameData.host.id)
               .get();
             const updatedHostData = updatedHost.data();
 
             const updatedChallenger = await firebaseRef.current
-              .user(gameData.challenger.id)
+              .getUser(gameData.challenger.id)
               .get();
             const updatedChallengerData = updatedChallenger.data();
 
-            firebaseRef.current.game(id).update({
+            firebaseRef.current.getGame(id).update({
               state: GAME.STATE_GAME_OVER,
               roundResult: roundResult,
               host: updatedHostData,
@@ -163,7 +160,7 @@ const Game = () => {
             });
           } else {
             // update to round result state
-            firebaseRef.current.game(id).update({
+            firebaseRef.current.getGame(id).update({
               state: GAME.STATE_ROUND_RESULT,
               roundResult: roundResult,
               hostReady: false,
@@ -184,7 +181,7 @@ const Game = () => {
         ) {
           const nextRound = gameData.round + 1;
 
-          firebaseRef.current.game(id).update({
+          firebaseRef.current.getGame(id).update({
             state: GAME.STATE_MAKE_MOVE,
             round: nextRound,
             roundResult: null,
@@ -201,7 +198,7 @@ const Game = () => {
           gameData.hostReady &&
           gameData.challengerReady
         ) {
-          firebaseRef.current.game(id).update({
+          firebaseRef.current.getGame(id).update({
             state: GAME.STATE_MAKE_MOVE,
             round: 1,
             roundResult: null,
@@ -225,12 +222,12 @@ const Game = () => {
   const onLeave = useCallback(() => {
     if (isHost) {
       // if host, delete the game room
-      firebaseRef.current.game(id).delete();
+      firebaseRef.current.getGame(id).delete();
     }
 
     if (!isHost) {
       // if challenger, set room into matchmaking mode
-      firebaseRef.current.game(id).update({
+      firebaseRef.current.getGame(id).update({
         challenger: null,
         state: GAME.STATE_MATCHMAKING,
         round: 1,
@@ -261,11 +258,11 @@ const Game = () => {
   // set this user to ready up
   const handleReadyUp = () => {
     if (isHost) {
-      firebaseRef.current.game(id).update({
+      firebaseRef.current.getGame(id).update({
         hostReady: true,
       });
     } else {
-      firebaseRef.current.game(id).update({
+      firebaseRef.current.getGame(id).update({
         challengerReady: true,
       });
     }
@@ -276,11 +273,11 @@ const Game = () => {
   // set user move
   const handleMove = (move) => {
     if (isHost) {
-      firebaseRef.current.game(id).update({
+      firebaseRef.current.getGame(id).update({
         hostMove: move,
       });
     } else {
-      firebaseRef.current.game(id).update({
+      firebaseRef.current.getGame(id).update({
         challengerMove: move,
       });
     }

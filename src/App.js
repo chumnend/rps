@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import Router from './Router';
 import Header from './components/Header';
 import Loader from './components/Loader';
-import { useAuth } from './store/auth';
+import useFirebase from './hooks/useFirebase';
 import { color } from './themes';
 
 const App = () => {
-  const auth = useAuth();
+  const firebase = useFirebase();
 
-  if (auth.loading) {
+  if (firebase.loading) {
     return <Loader />;
   }
 
   return (
     <StyledApp>
-      <Header auth={auth} />
-      <Router auth={auth} />
+      <Header user={firebase.user} />
+      <Router user={firebase.user} />
     </StyledApp>
   );
 };

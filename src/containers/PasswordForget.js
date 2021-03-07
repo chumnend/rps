@@ -4,7 +4,7 @@ import Form from '../components/Form';
 import FormInput from '../components/FormInput';
 import FormTag from '../components/FormTag';
 import Page from '../components/Page';
-import { useFirebase } from '../store/firebase';
+import useFirebase from '../hooks/useFirebase';
 import useInputState from '../hooks/useInputState';
 
 export const PasswordForgetForm = () => {

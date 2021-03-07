@@ -47,7 +47,7 @@ const Header = (props) => {
         <Icon classname="fas fa-home" title="Home" to={ROUTES.LANDING} />
         <StyledNav>
           <StyledUl>
-            {props.auth.user && (
+            {props.user && (
               <StyledLi>
                 <Icon
                   classname="fas fa-user"
@@ -56,7 +56,7 @@ const Header = (props) => {
                 />
               </StyledLi>
             )}
-            {props.auth.user && props.auth.user.admin && (
+            {props.user && props.user.admin && (
               <StyledLi>
                 <Icon
                   classname="fas fa-user-shield"
@@ -65,7 +65,7 @@ const Header = (props) => {
                 />
               </StyledLi>
             )}
-            {props.auth.user && (
+            {props.user && (
               <StyledLi>
                 <Icon
                   classname="fas fa-sign-out-alt"
@@ -75,7 +75,7 @@ const Header = (props) => {
               </StyledLi>
             )}
 
-            {!props.auth.user && (
+            {!props.user && (
               <StyledLi>
                 <Icon
                   classname="fas fa-user-plus"
@@ -84,7 +84,7 @@ const Header = (props) => {
                 />
               </StyledLi>
             )}
-            {!props.auth.user && (
+            {!props.user && (
               <StyledLi>
                 <Icon
                   classname="fas fa-sign-in-alt"
@@ -101,7 +101,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  auth: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default Header;

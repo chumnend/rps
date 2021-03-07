@@ -6,8 +6,8 @@ import FormInput from '../components/FormInput';
 import FormLink from '../components/FormLink';
 import FormTag from '../components/FormTag';
 import Page from '../components/Page';
-import { useFirebase } from '../store/firebase';
 import * as ROUTES from '../constants/routes';
+import useFirebase from '../hooks/useFirebase';
 import useInputState from '../hooks/useInputState';
 
 const SignUp = () => {
@@ -33,9 +33,9 @@ const SignUp = () => {
     event.preventDefault();
 
     firebase
-      .register(email, password)
+      .registerUser(email, password)
       .then((authUser) => {
-        return firebase.user(authUser.user.uid).set({
+        return firebase.getUser(authUser.user.uid).set({
           id: authUser.user.uid,
           username,
           email,
