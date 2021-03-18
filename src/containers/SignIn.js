@@ -6,8 +6,8 @@ import FormInput from '../components/FormInput';
 import FormLink from '../components/FormLink';
 import FormTag from '../components/FormTag';
 import Page from '../components/Page';
-import { useFirebase } from '../store/firebase';
 import * as ROUTES from '../constants/routes';
+import useFirebase from '../hooks/useFirebase';
 import useInputState from '../hooks/useInputState';
 
 const SignIn = () => {
@@ -26,7 +26,7 @@ const SignIn = () => {
     event.preventDefault();
 
     firebase
-      .login(email, password)
+      .loginUser(email, password)
       .then(() => {
         history.push(ROUTES.LANDING);
       })

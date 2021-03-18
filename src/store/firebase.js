@@ -1,22 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { auth, db } from '../config';
 
 const FirebaseContext = React.createContext();
 
-const useFirebase = () => React.useContext(FirebaseContext);
-
 const FirebaseProvider = (props) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const listener = auth.onAuthStateChanged((authUser) => {
+      setLoading(true);
+
+      if (!authUser) {
+        setUser(null);
+        setLoading(false);
+      } else {
+        getUser(authUser.uid)
+          .get()
+          .then((doc) => {
+            const user = doc.data();
+
+            getUser(user.id).onSnapshot((doc) => {
+              setUser(doc.data());
+            });
+
+            setUser(user);
+            setLoading(false);
+          });
+      }
+    });
+
+    return () => {
+      listener(); // unsubscribe to listener
+    };
+  }, []);
+
   // USER API
-  const register = (email, password) => {
+  const registerUser = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
 
-  const login = (email, password) => {
+  const loginUser = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
   };
 
-  const logout = () => {
+  const logoutUser = () => {
     return auth.signOut();
   };
 
@@ -25,37 +54,40 @@ const FirebaseProvider = (props) => {
   };
 
   const updatePassword = (password) => {
-    return auth.currentUser.updatePassword(password);
+    return auth.user.updatePassword(password);
   };
 
-  const users = () => {
+  const getUsers = () => {
     return db.collection('users');
   };
-  const user = (id) => {
+  const getUser = (id) => {
     return db.collection('users').doc(id);
   };
 
   // GAME API
-  const games = () => {
+  const getGames = () => {
     return db.collection('games');
   };
 
-  const game = (id) => {
+  const getGame = (id) => {
     return db.collection('games').doc(id);
   };
 
   const firebaseValues = {
+    user,
+    loading,
+
     auth,
     db,
-    register,
-    login,
-    logout,
+    registerUser,
+    loginUser,
+    logoutUser,
     resetPassword,
     updatePassword,
-    users,
-    user,
-    games,
-    game,
+    getUsers,
+    getUser,
+    getGames,
+    getGame,
   };
 
   return (
@@ -69,4 +101,4 @@ FirebaseProvider.propTypes = {
   children: PropTypes.node,
 };
 
-export { FirebaseContext, FirebaseProvider, useFirebase };
+export { FirebaseContext, FirebaseProvider };

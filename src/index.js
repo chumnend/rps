@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AuthProvider } from './store/auth';
 import { FirebaseProvider } from './store/firebase';
 import './index.css';
 import App from './App';
@@ -10,11 +9,9 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <FirebaseProvider>
-      <AuthProvider>
-        <Router>
-          <App />
-        </Router>
-      </AuthProvider>
+      <Router>
+        <App />
+      </Router>
     </FirebaseProvider>
   </React.StrictMode>,
   document.getElementById('root'),

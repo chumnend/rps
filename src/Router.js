@@ -21,63 +21,63 @@ const Router = (props) => {
       <ProtectedRoute
         exact
         path={ROUTES.HOME}
-        condition={props.auth.user !== null}
+        condition={props.user !== null}
         redirect={ROUTES.LANDING}
         component={Home}
       />
       <ProtectedRoute
         exact
         path={ROUTES.ADMIN}
-        condition={props.auth.user !== null && props.auth.user.admin}
+        condition={props.user !== null && props.user.admin}
         redirect={ROUTES.LANDING}
         component={Admin}
       />
       <ProtectedRoute
         exact
         path={ROUTES.ACCOUNT}
-        condition={props.auth.user !== null}
+        condition={props.user !== null}
         redirect={ROUTES.SIGN_IN}
         component={Account}
       />
       <ProtectedRoute
         exact
         path={ROUTES.GAMES}
-        condition={props.auth.user !== null}
+        condition={props.user !== null}
         redirect={ROUTES.SIGN_IN}
         component={Games}
       />
       <ProtectedRoute
         exact
         path={ROUTES.GAME}
-        condition={props.auth.user !== null}
+        condition={props.user !== null}
         redirect={ROUTES.SIGN_IN}
         component={Game}
       />
       <ProtectedRoute
         exact
         path={ROUTES.LANDING}
-        condition={props.auth.user === null}
+        condition={props.user === null}
         redirect={ROUTES.HOME}
         component={Landing}
       />
       <ProtectedRoute
         exact
         path={ROUTES.SIGN_UP}
-        condition={props.auth.user === null}
+        condition={props.user === null}
         redirect={ROUTES.LANDING}
         component={SignUp}
       />
       <ProtectedRoute
         exact
         path={ROUTES.SIGN_IN}
-        condition={props.auth.user === null}
+        condition={props.user === null}
         redirect={ROUTES.LANDING}
         component={SignIn}
       />
       <ProtectedRoute
         exact
         path={ROUTES.PASSWORD_FORGET}
-        condition={props.auth.user === null}
+        condition={props.user === null}
         redirect={ROUTES.ACCOUNT}
         component={PasswordForget}
       />
@@ -88,7 +88,7 @@ const Router = (props) => {
 };
 
 Router.propTypes = {
-  auth: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default Router;
