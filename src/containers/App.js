@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Router from './Router';
-import Header from './components/Header';
-import Loader from './components/Loader';
-import useFirebase from './hooks/useFirebase';
-import { color } from './themes';
+
+import Header from '../components/Header';
+import Loader from '../components/Loader';
+import Router from '../components/Router';
+import useFirebase from '../hooks/useFirebase';
+import { color } from '../themes';
 
 const App = () => {
   const firebase = useFirebase();

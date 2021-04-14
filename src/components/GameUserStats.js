@@ -1,7 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import GameUserStatsCard from './GameUserStatsCard';
+import React from 'react';
 import styled from 'styled-components';
+
+import GameUserStatsCard from './GameUserStatsCard';
 
 // Styles =================================================
 const StyledGameUserStats = styled.div`

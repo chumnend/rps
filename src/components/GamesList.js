@@ -1,8 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import GamesListItem from './GamesListItem';
+import React from 'react';
 import styled from 'styled-components';
+
 import { device } from '../themes';
+import GamesListItem from './GamesListItem';
 
 // Styles =================================================
 const StyledGamesList = styled.div`

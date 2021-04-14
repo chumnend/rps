@@ -1,9 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from './Icon';
-import * as ROUTES from '../constants/routes';
+import React from 'react';
 import styled from 'styled-components';
+
+import * as ROUTES from '../constants/routes';
 import { device, layout } from '../themes';
+import Icon from './Icon';
 
 // Styles =================================================
 const StyledHeader = styled.header`

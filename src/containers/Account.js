@@ -1,9 +1,10 @@
 import React from 'react';
-import { PasswordChangeForm } from './PasswordChange';
-import { PasswordForgetForm } from './PasswordForget';
+
 import AccountCard from '../components/AccountCard';
 import Page from '../components/Page';
 import useFirebase from '../hooks/useFirebase';
+import { PasswordChangeForm } from './PasswordChange';
+import { PasswordForgetForm } from './PasswordForget';
 
 const Account = () => {
   const firebase = useFirebase();
