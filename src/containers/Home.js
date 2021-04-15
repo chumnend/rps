@@ -1,9 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+
 import Button from '../components/Button';
 import List from '../components/List';
-import ListTitle from '../components/ListTitle';
 import ListItem from '../components/ListItem';
+import ListTitle from '../components/ListTitle';
 import Page from '../components/Page';
 import * as GAME from '../constants/game';
 import * as ROUTES from '../constants/routes';

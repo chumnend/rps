@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+
 import Button from '../components/Button';
 import GameScoreboard from '../components/GameScoreboard';
 import GameUserStats from '../components/GameUserStats';
 import Loader from '../components/Loader';
 import Page from '../components/Page';
-import useFirebase from '../hooks/useFirebase';
 import * as GAME from '../constants/game';
 import * as ROUTES from '../constants/routes';
+import useFirebase from '../hooks/useFirebase';
 
 const Game = () => {
   const [loading, setLoading] = useState(true);
@@ -413,7 +414,6 @@ const Game = () => {
         challenger={game.challenger}
         isHost={isHost}
       />
-      <hr />
       {gameState}
     </Page>
   );

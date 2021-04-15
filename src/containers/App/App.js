@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Router from './Router';
-import Header from './components/Header';
-import Loader from './components/Loader';
-import useFirebase from './hooks/useFirebase';
-import { color } from './themes';
+
+import AppRoutes from '../../components/AppRoutes';
+import Header from '../../components/Header';
+import Loader from '../../components/Loader';
+import useFirebase from '../../hooks/useFirebase';
+import { color } from '../../themes';
 
 const App = () => {
   const firebase = useFirebase();
@@ -16,7 +17,7 @@ const App = () => {
   return (
     <StyledApp>
       <Header user={firebase.user} />
-      <Router user={firebase.user} />
+      <AppRoutes user={firebase.user} />
     </StyledApp>
   );
 };
