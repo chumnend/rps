@@ -16,7 +16,7 @@ import SignIn from '../containers/SignIn';
 import SignUp from '../containers/SignUp';
 import ProtectedRoute from './ProtectedRoute';
 
-const Router = (props) => {
+const AppRoutes = (props) => {
   return (
     <Switch>
       <ProtectedRoute
@@ -88,8 +88,8 @@ const Router = (props) => {
   );
 };
 
-Router.propTypes = {
+AppRoutes.propTypes = {
   user: PropTypes.object,
 };
 
-export default Router;
+export default AppRoutes;

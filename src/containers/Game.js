@@ -414,7 +414,6 @@ const Game = () => {
         challenger={game.challenger}
         isHost={isHost}
       />
-      <hr />
       {gameState}
     </Page>
   );
