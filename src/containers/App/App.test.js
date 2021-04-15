@@ -4,7 +4,7 @@ import { createMemoryHistory } from 'history';
 import { FirebaseProvider } from '../../store/firebase';
 import App from './App';
 
-const renderWithWrappers = (component) => {
+const renderWithContext = (component) => {
   const history = createMemoryHistory();
   return render(
     <FirebaseProvider>
@@ -13,6 +13,12 @@ const renderWithWrappers = (component) => {
   );
 };
 
-it('should render <App /> correctly', async() => {
-  renderWithWrappers(<App />);
+describe("<App />", () => {
+  it('expects to render correctly', async () => {
+    renderWithContext(<App />);
+  
+    expect(screen.queryByText(/Loading.../)).toBeInTheDocument();
+
+    expect(await screen.findByText(/How To Play/)).toBeInTheDocument();
+  });
 });
