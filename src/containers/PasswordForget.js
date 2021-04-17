@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import Form from '../components/Form';
 import FormInput from '../components/FormInput';
 import FormTag from '../components/FormTag';
-import Page from '../components/Page';
+import PageContent from '../components/PageContent';
 import useFirebase from '../hooks/useFirebase';
 import useInputState from '../hooks/useInputState';
 
@@ -57,9 +57,9 @@ export const PasswordForgetForm = () => {
 
 const PasswordForget = () => {
   return (
-    <Page>
+    <PageContent>
       <PasswordForgetForm />
-    </Page>
+    </PageContent>
   );
 };
 

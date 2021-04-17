@@ -5,12 +5,12 @@ import Banner from '../components/Banner';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
 import ListTitle from '../components/ListTitle';
-import Page from '../components/Page';
+import PageContent from '../components/PageContent';
 import * as ROUTES from '../constants/routes';
 
 const Landing = () => {
   return (
-    <Page>
+    <PageContent>
       <Banner />
       <List>
         <ListTitle>How To Play</ListTitle>
@@ -22,7 +22,7 @@ const Landing = () => {
         <ListItem>3. Ready up and wait for your opponent</ListItem>
         <ListItem>4. Face off in an epic duel!</ListItem>
       </List>
-    </Page>
+    </PageContent>
   );
 };
 

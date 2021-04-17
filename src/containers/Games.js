@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import GamesList from '../components/GamesList';
 import Loader from '../components/Loader';
-import Page from '../components/Page';
+import PageContent from '../components/PageContent';
 import * as GAME from '../constants/game';
 import * as ROUTES from '../constants/routes';
 import useFirebase from '../hooks/useFirebase';
@@ -42,9 +42,9 @@ const Games = () => {
   }
 
   return (
-    <Page>
+    <PageContent>
       <GamesList games={games} handleJoin={handleJoin} />
-    </Page>
+    </PageContent>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import AccountCard from '../components/AccountCard';
-import Page from '../components/Page';
+import PageContent from '../components/PageContent';
 import useFirebase from '../hooks/useFirebase';
 import { PasswordChangeForm } from './PasswordChange';
 import { PasswordForgetForm } from './PasswordForget';
@@ -10,13 +10,13 @@ const Account = () => {
   const firebase = useFirebase();
 
   return (
-    <Page>
+    <PageContent>
       <AccountCard user={firebase.user} />
       <br />
       <PasswordChangeForm />
       <br />
       <PasswordForgetForm />
-    </Page>
+    </PageContent>
   );
 };
 

@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import GameScoreboard from '../components/GameScoreboard';
 import GameUserStats from '../components/GameUserStats';
 import Loader from '../components/Loader';
-import Page from '../components/Page';
+import PageContent from '../components/PageContent';
 import * as GAME from '../constants/game';
 import * as ROUTES from '../constants/routes';
 import useFirebase from '../hooks/useFirebase';
@@ -408,14 +408,14 @@ const Game = () => {
   }
 
   return (
-    <Page>
+    <PageContent>
       <GameUserStats
         host={game.host}
         challenger={game.challenger}
         isHost={isHost}
       />
       {gameState}
-    </Page>
+    </PageContent>
   );
 };
 

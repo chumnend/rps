@@ -1,10 +1,10 @@
 import React from 'react';
 
-import AppPage from '../../components/AppPage';
-import AppRoutes from '../../components/AppRoutes';
-import Header from '../../components/Header';
-import Loader from '../../components/Loader';
-import useFirebase from '../../hooks/useFirebase';
+import AppPage from '../components/AppPage';
+import AppRoutes from '../components/AppRoutes';
+import Header from '../components/Header';
+import Loader from '../components/Loader';
+import useFirebase from '../hooks/useFirebase';
 
 const App = () => {
   const firebase = useFirebase();

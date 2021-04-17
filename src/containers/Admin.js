@@ -4,7 +4,7 @@ import List from '../components/List';
 import ListItem from '../components/ListItem';
 import ListTitle from '../components/ListTitle';
 import Loader from '../components/Loader';
-import Page from '../components/Page';
+import PageContent from '../components/PageContent';
 import useFirebase from '../hooks/useFirebase';
 
 const Admin = () => {
@@ -61,7 +61,7 @@ const Admin = () => {
   }
 
   return (
-    <Page>
+    <PageContent>
       <List>
         <ListTitle>Users</ListTitle>
         {userList}
@@ -71,7 +71,7 @@ const Admin = () => {
         <ListTitle>Games</ListTitle>
         {gameList}
       </List>
-    </Page>
+    </PageContent>
   );
 };
 

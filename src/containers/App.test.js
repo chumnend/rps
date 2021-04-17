@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { FirebaseProvider } from '../../store/firebase';
+import { FirebaseProvider } from '../store/firebase';
 import App from './App';
 
 const renderWithContext = (component) => {

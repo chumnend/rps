@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
 import ListTitle from '../components/ListTitle';
-import Page from '../components/Page';
+import PageContent from '../components/PageContent';
 import * as GAME from '../constants/game';
 import * as ROUTES from '../constants/routes';
 import useFirebase from '../hooks/useFirebase';
@@ -47,7 +47,7 @@ const Home = () => {
   };
 
   return (
-    <Page>
+    <PageContent>
       <List>
         <ListTitle>Ready for a match?</ListTitle>
         <ListItem>
@@ -62,7 +62,7 @@ const Home = () => {
           </Button>
         </ListItem>
       </List>
-    </Page>
+    </PageContent>
   );
 };
 
