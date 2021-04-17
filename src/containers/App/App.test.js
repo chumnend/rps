@@ -23,9 +23,9 @@ describe('<App />', () => {
     await waitFor(() => {
       expect(screen.queryByText(/How To Play/)).toBeInTheDocument();
 
-      expect(screen.queryAllByRole("header")).toHaveLength(1);
-      expect(screen.queryAllByRole("navigation")).toHaveLength(1);
-      expect(screen.queryAllByRole("button")).toHaveLength(3);
-    })
+      expect(screen.queryAllByRole('header')).toHaveLength(1);
+      expect(screen.queryAllByRole('navigation')).toHaveLength(1);
+      expect(screen.queryAllByRole('button')).toHaveLength(3);
+    });
   });
 });

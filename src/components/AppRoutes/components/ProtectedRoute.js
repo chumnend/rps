@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-// Component ==============================================
 const ProtectedRoute = (props) => {
   const { condition, redirect, ...otherProps } = props;
 
