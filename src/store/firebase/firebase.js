@@ -5,7 +5,7 @@ import { auth, db } from './config';
 
 const FirebaseContext = React.createContext();
 
-const FirebaseProvider = (props) => {
+const FirebaseProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -93,7 +93,7 @@ const FirebaseProvider = (props) => {
 
   return (
     <FirebaseContext.Provider value={firebaseValues}>
-      {props.children}
+      {children}
     </FirebaseContext.Provider>
   );
 };

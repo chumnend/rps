@@ -4,8 +4,8 @@ import PageContent from '../components/PageContent';
 
 const NotFound = () => {
   return (
-    <PageContent>
-      <h1>NotFound</h1>
+    <PageContent data-testid="notfound">
+      <h2>Sorry, page not found.</h2>
     </PageContent>
   );
 };

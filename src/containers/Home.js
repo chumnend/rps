@@ -47,7 +47,7 @@ const Home = () => {
   };
 
   return (
-    <PageContent>
+    <PageContent data-testid="home">
       <List>
         <ListTitle>Ready for a match?</ListTitle>
         <ListItem>

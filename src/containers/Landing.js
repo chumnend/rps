@@ -10,7 +10,7 @@ import * as ROUTES from '../constants/routes';
 
 const Landing = () => {
   return (
-    <PageContent>
+    <PageContent data-testid="landing">
       <Banner />
       <List>
         <ListTitle>How To Play</ListTitle>

@@ -1,14 +1,14 @@
 import { screen, waitFor } from '@testing-library/react';
 import { customRender } from '../utils/test-utils';
-import Home from './Home';
+import Landing from './Landing';
 
 describe('<Home />', () => {
   it('expects to render correctly', async () => {
-    customRender(<Home />);
+    customRender(<Landing />);
 
     await waitFor(() => {
       // sanity check
-      expect(screen.queryByTestId('home')).toBeInTheDocument();
+      expect(screen.queryByTestId('landing')).toBeInTheDocument();
     });
   });
 });
