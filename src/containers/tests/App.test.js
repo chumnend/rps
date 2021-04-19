@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react';
-import { customRender } from '../utils/test-utils';
-import App from './App';
+import { customRender } from '../../utils/test-utils';
+import App from '../App';
 
 describe('<App />', () => {
   it('expects to render correctly', async () => {

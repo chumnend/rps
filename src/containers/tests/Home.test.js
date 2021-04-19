@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react';
-import { customRender } from '../utils/test-utils';
-import Home from './Home';
+import { customRender } from '../../utils/test-utils';
+import Home from '../Home';
 
 describe('<Home />', () => {
   it('expects to render correctly', async () => {
