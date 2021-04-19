@@ -1,11 +1,8 @@
-import PropTypes from 'prop-types';
-import React from 'react';
 import styled from 'styled-components';
 
-import { color } from '../themes';
+import { color } from '../../themes';
 
-// Styles =================================================
-const StyledButton = styled.button`
+export const Button = styled.button`
   border-radius: 3px;
   text-align: center;
   text-decoration: none;
@@ -67,20 +64,3 @@ const StyledButton = styled.button`
     }
   }}
 `;
-
-// Component ==============================================
-const Button = (props) => {
-  return <StyledButton {...props}>{props.children}</StyledButton>;
-};
-
-Button.defaultProps = {
-  theme: 'primary',
-};
-
-Button.propTypes = {
-  children: PropTypes.node,
-  theme: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-};
-
-export default Button;

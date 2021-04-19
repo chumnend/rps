@@ -2,9 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Button from '../components/Button';
-import List from '../components/List';
-import ListItem from '../components/ListItem';
-import ListTitle from '../components/ListTitle';
 import PageContent from '../components/PageContent';
 import * as GAME from '../constants/game';
 import * as ROUTES from '../constants/routes';
@@ -48,20 +45,15 @@ const Home = () => {
 
   return (
     <PageContent data-testid="home">
-      <List>
-        <ListTitle>Ready for a match?</ListTitle>
-        <ListItem>
-          <Button size="lg" onClick={findGames}>
-            Find Games
-          </Button>
-        </ListItem>
-        <ListItem>OR</ListItem>
-        <ListItem>
-          <Button size="lg" onClick={hostGame}>
-            Host Game
-          </Button>
-        </ListItem>
-      </List>
+      <div>
+        <h3>Ready for a match?</h3>
+        <Button size="lg" onClick={findGames}>
+          Find Games
+        </Button>
+        <Button size="lg" onClick={hostGame}>
+          Host Game
+        </Button>
+      </div>
     </PageContent>
   );
 };

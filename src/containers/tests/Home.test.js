@@ -9,6 +9,9 @@ describe('<Home />', () => {
     await waitFor(() => {
       // sanity check
       expect(screen.queryByTestId('home')).toBeInTheDocument();
+
+      // check for two buttons
+      expect(screen.queryAllByRole('button')).toHaveLength(2);
     });
   });
 });
