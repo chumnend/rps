@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Button from '../components/Button';
+import MatchFinder from '../components/MatchFinder';
 import PageContent from '../components/PageContent';
 import * as GAME from '../constants/game';
 import * as ROUTES from '../constants/routes';
@@ -45,15 +45,7 @@ const Home = () => {
 
   return (
     <PageContent data-testid="home">
-      <div>
-        <h3>Ready for a match?</h3>
-        <Button size="lg" onClick={findGames}>
-          Find Games
-        </Button>
-        <Button size="lg" onClick={hostGame}>
-          Host Game
-        </Button>
-      </div>
+      <MatchFinder onFind={findGames} onHost={hostGame} />
     </PageContent>
   );
 };
