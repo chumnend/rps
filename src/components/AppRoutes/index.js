@@ -3,17 +3,17 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
-import Account from '../../containers/Account';
-import Admin from '../../containers/Admin';
-import Game from '../../containers/Game';
-import Games from '../../containers/Games';
-import Home from '../../containers/Home';
-import Landing from '../../containers/Landing';
-import Logout from '../../containers/Logout';
-import NotFound from '../../containers/NotFound';
-import PasswordForget from '../../containers/PasswordForget';
-import SignIn from '../../containers/SignIn';
-import SignUp from '../../containers/SignUp';
+import Account from '../../pages/Account';
+import Admin from '../../pages/Admin';
+import Game from '../../pages/Game';
+import Games from '../../pages/Games';
+import Home from '../../pages/Home';
+import Landing from '../../pages/Landing';
+import Logout from '../../pages/Logout';
+import NotFound from '../../pages/NotFound';
+import PasswordForget from '../../pages/PasswordForget';
+import SignIn from '../../pages/SignIn';
+import SignUp from '../../pages/SignUp';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const AppRoutes = (props) => {
