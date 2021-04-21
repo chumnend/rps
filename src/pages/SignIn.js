@@ -3,10 +3,10 @@ import { useHistory } from 'react-router-dom';
 
 import Button from '../components/Button';
 import Form from '../components/Form';
-import FormInput from '../components/FormInput';
-import FormLink from '../components/FormLink';
-import FormTag from '../components/FormTag';
+import Input from '../components/Input';
+import Link from '../components/Link';
 import PageContent from '../components/PageContent';
+import Tag from '../components/Tag';
 import * as ROUTES from '../constants/routes';
 import useFirebase from '../hooks/useFirebase';
 import useInputState from '../hooks/useInputState';
@@ -39,11 +39,11 @@ const SignIn = () => {
   return (
     <PageContent>
       <Form onSubmit={onSubmit}>
-        <FormTag>Log in to your account and get playing!</FormTag>
+        <Tag>Log in to your account and get playing!</Tag>
 
         {error && <p>{error.message}</p>}
 
-        <FormInput
+        <Input
           label="Email"
           type="email"
           placeholder="Enter Email"
@@ -51,7 +51,7 @@ const SignIn = () => {
           value={email}
           onChange={changeEmail}
         />
-        <FormInput
+        <Input
           label="Password"
           type="password"
           placeholder="Enter Password"
@@ -64,14 +64,13 @@ const SignIn = () => {
           Sign In
         </Button>
 
-        <FormTag>
-          Don&apos;t have an account?{' '}
-          <FormLink to={ROUTES.SIGN_UP}>Sign Up</FormLink>
-        </FormTag>
+        <Tag>
+          Don&apos;t have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+        </Tag>
 
-        <FormTag>
-          <FormLink to={ROUTES.PASSWORD_FORGET}>Forgot your password?</FormLink>
-        </FormTag>
+        <Tag>
+          <Link to={ROUTES.PASSWORD_FORGET}>Forgot your password?</Link>
+        </Tag>
       </Form>
     </PageContent>
   );

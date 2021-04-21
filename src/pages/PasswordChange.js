@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import Button from '../components/Button';
 import Form from '../components/Form';
-import FormInput from '../components/FormInput';
-import FormTag from '../components/FormTag';
+import Input from '../components/Input';
 import PageContent from '../components/PageContent';
+import Tag from '../components/Tag';
 import useFirebase from '../hooks/useFirebase';
 import useInputState from '../hooks/useInputState';
 
@@ -35,11 +35,11 @@ export const PasswordChangeForm = () => {
   return (
     <div>
       <Form onSubmit={onSubmit}>
-        <FormTag>Change your password</FormTag>
+        <Tag>Change your password</Tag>
 
         {error && <p>{error.message}</p>}
 
-        <FormInput
+        <Input
           label="New Password"
           type="password"
           placeholder="Enter Password"
@@ -47,7 +47,7 @@ export const PasswordChangeForm = () => {
           value={password}
           onChange={changePassword}
         />
-        <FormInput
+        <Input
           label="Confirm Password"
           type="password"
           placeholder="Confirm your Password"

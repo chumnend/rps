@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import Button from '../components/Button';
 import Form from '../components/Form';
-import FormInput from '../components/FormInput';
-import FormTag from '../components/FormTag';
+import Input from '../components/Input';
 import PageContent from '../components/PageContent';
+import Tag from '../components/Tag';
 import useFirebase from '../hooks/useFirebase';
 import useInputState from '../hooks/useInputState';
 
@@ -34,11 +34,11 @@ export const PasswordForgetForm = () => {
   return (
     <div>
       <Form onSubmit={onSubmit}>
-        <FormTag>Enter email to set new password</FormTag>
+        <Tag>Enter email to set new password</Tag>
 
         {error && <p>{error.message}</p>}
 
-        <FormInput
+        <Input
           label="Email"
           type="email"
           placeholder="Enter Email"

@@ -3,10 +3,10 @@ import { useHistory } from 'react-router-dom';
 
 import Button from '../components/Button';
 import Form from '../components/Form';
-import FormInput from '../components/FormInput';
-import FormLink from '../components/FormLink';
-import FormTag from '../components/FormTag';
+import Input from '../components/Input';
+import Link from '../components/Link';
 import PageContent from '../components/PageContent';
+import Tag from '../components/Tag';
 import * as ROUTES from '../constants/routes';
 import useFirebase from '../hooks/useFirebase';
 import useInputState from '../hooks/useInputState';
@@ -55,11 +55,11 @@ const SignUp = () => {
   return (
     <PageContent>
       <Form onSubmit={onSubmit}>
-        <FormTag>Create an account to get started!</FormTag>
+        <Tag>Create an account to get started!</Tag>
 
         {error && <p>{error.message}</p>}
 
-        <FormInput
+        <Input
           label="Username"
           type="text"
           placeholder="Enter Username"
@@ -67,7 +67,7 @@ const SignUp = () => {
           value={username}
           onChange={changeUsername}
         />
-        <FormInput
+        <Input
           label="Email"
           type="email"
           placeholder="Enter Email"
@@ -75,7 +75,7 @@ const SignUp = () => {
           value={email}
           onChange={changeEmail}
         />
-        <FormInput
+        <Input
           label="Password"
           type="password"
           placeholder="Enter Password"
@@ -83,7 +83,7 @@ const SignUp = () => {
           value={password}
           onChange={changePassword}
         />
-        <FormInput
+        <Input
           label="Confirm Password"
           type="password"
           placeholder="Confirm your Password"
@@ -96,10 +96,9 @@ const SignUp = () => {
           Sign up
         </Button>
 
-        <FormTag>
-          Already have an account?{' '}
-          <FormLink to={ROUTES.SIGN_IN}>Sign In</FormLink>
-        </FormTag>
+        <Tag>
+          Already have an account? <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+        </Tag>
       </Form>
     </PageContent>
   );
