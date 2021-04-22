@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-import { color, device } from '../themes';
+import { color, device } from '../common/themes';
 
 // Styles =================================================
 const StyledAccountCard = styled.div`
