@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { color } from '../../themes';
+import { color } from '../../common/themes';
 
 export const InputContainer = styled.div`
   display: flex;

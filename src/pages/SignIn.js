@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import * as ROUTES from '../common/constants/routes';
+import useFirebase from '../common/hooks/useFirebase';
+import useInputState from '../common/hooks/useInputState';
 import Button from '../components/Button';
 import Form from '../components/Form';
 import Input from '../components/Input';
 import Link from '../components/Link';
 import PageContent from '../components/PageContent';
 import Tag from '../components/Tag';
-import * as ROUTES from '../constants/routes';
-import useFirebase from '../hooks/useFirebase';
-import useInputState from '../hooks/useInputState';
 
 const SignIn = () => {
   const [email, changeEmail] = useInputState('');

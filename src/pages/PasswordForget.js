@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
+import useFirebase from '../common/hooks/useFirebase';
+import useInputState from '../common/hooks/useInputState';
 import Button from '../components/Button';
 import Form from '../components/Form';
 import Input from '../components/Input';
 import PageContent from '../components/PageContent';
 import Tag from '../components/Tag';
-import useFirebase from '../hooks/useFirebase';
-import useInputState from '../hooks/useInputState';
 
 export const PasswordForgetForm = () => {
   const [email, changeEmail] = useInputState('');

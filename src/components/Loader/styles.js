@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-import { color } from '../../themes';
+import { color } from '../../common/themes';
 
 const load = keyframes`
   0%,

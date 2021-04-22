@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
+import * as GAME from '../common/constants/game';
+import * as ROUTES from '../common/constants/routes';
+import useFirebase from '../common/hooks/useFirebase';
 import Button from '../components/Button';
 import GameScoreboard from '../components/GameScoreboard';
 import GameUserStats from '../components/GameUserStats';
 import Loader from '../components/Loader';
 import PageContent from '../components/PageContent';
-import * as GAME from '../constants/game';
-import * as ROUTES from '../constants/routes';
-import useFirebase from '../hooks/useFirebase';
 
 const Game = () => {
   const [loading, setLoading] = useState(true);

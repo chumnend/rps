@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { color, device } from '../../themes';
+import { color, device } from '../../common/themes';
 
 export const Form = styled.form`
   width: 100%;
