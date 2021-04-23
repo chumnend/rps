@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-import { color } from '../themes';
+import { color } from '../../../common/themes';
 
 // Styles =================================================
 export const StyledList = styled.ul`

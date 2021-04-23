@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import List from '../../common/components/List';
-import ListItem from '../../common/components/ListItem';
-import ListTitle from '../../common/components/ListTitle';
 import Loader from '../../common/components/Loader';
 import useFirebase from '../../common/hooks/useFirebase';
 import Layout from './components/Layout';
+import List from './components/List';
+import ListItem from './components/ListItem';
+import ListTitle from './components/ListTitle';
 
 const Admin = () => {
   const [loading, setLoading] = useState(true);

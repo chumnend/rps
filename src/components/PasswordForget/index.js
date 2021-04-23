@@ -1,4 +1,4 @@
-import { PasswordForgetForm } from './PasswordForget';
+import PasswordForgetForm from './components/PasswordForgetForm';
 
 export { PasswordForgetForm };
 

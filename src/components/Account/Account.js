@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useFirebase from '../../common/hooks/useFirebase';
 import { PasswordChangeForm } from '../PasswordChange';
@@ -7,15 +7,45 @@ import AccountCard from './components/AccountCard';
 import Layout from './components/Layout';
 
 const Account = () => {
+  const [error, setError] = useState(null);
+
   const firebase = useFirebase();
+
+  const updatePassword = (newPassword) => {
+    firebase
+      .updatePassword(newPassword)
+      .then(() => {
+        console.log('done');
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
+
+  const resetPassword = (email) => {
+    firebase
+      .resetPassword(email)
+      .then(() => {
+        console.log('done');
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
 
   return (
     <Layout>
       <AccountCard user={firebase.user} />
       <br />
-      <PasswordChangeForm />
+      <PasswordChangeForm
+        updatePassword={updatePassword}
+        error={error?.message}
+      />
       <br />
-      <PasswordForgetForm />
+      <PasswordForgetForm
+        resetPassword={resetPassword}
+        error={error?.message}
+      />
     </Layout>
   );
 };

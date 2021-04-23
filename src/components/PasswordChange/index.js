@@ -1,4 +1,4 @@
-import { PasswordChangeForm } from './PasswordChange';
+import PasswordChangeForm from './components/PasswordChangeForm';
 
 export { PasswordChangeForm };
 
