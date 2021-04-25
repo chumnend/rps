@@ -218,6 +218,32 @@ const FirebaseProvider = ({ children }) => {
     return games;
   };
 
+  const hostGame = async () => {
+    // setup game in firestore
+    const gamesRef = db.collection('games');
+    const gameDoc = await gamesRef.add({});
+
+    const id = gameDoc.id;
+
+    await gamesRef.doc(id).set({
+      id: id,
+      name: `vs. ${state.user.username}`,
+      host: state.user,
+      challenger: null,
+      state: GAME.STATE_MATCHMAKING,
+      round: 1,
+      roundResult: null,
+      hostReady: false,
+      hostMove: null,
+      hostScore: 0,
+      challengerReady: false,
+      challengerMove: null,
+      challengerScore: 0,
+    });
+
+    return id;
+  };
+
   const firebaseValues = {
     ...state,
 
@@ -231,6 +257,7 @@ const FirebaseProvider = ({ children }) => {
     findGames,
 
     findOpenGames,
+    hostGame,
   };
 
   return (
