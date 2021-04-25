@@ -5,7 +5,7 @@ import * as ROUTES from '../../../../common/constants/routes';
 import useInputState from '../../../../common/hooks/useInputState';
 import * as Styles from './styles';
 
-const LoginForm = ({ login, error }) => {
+const LoginForm = ({ loginUser, error }) => {
   const [email, changeEmail] = useInputState('');
   const [password, changePassword] = useInputState('');
 
@@ -16,7 +16,7 @@ const LoginForm = ({ login, error }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    login(email, password);
+    loginUser(email, password);
   };
 
   return (
@@ -66,7 +66,7 @@ const LoginForm = ({ login, error }) => {
 };
 
 LoginForm.propTypes = {
-  login: PropTypes.func,
+  loginUser: PropTypes.func,
   error: PropTypes.string,
 };
 

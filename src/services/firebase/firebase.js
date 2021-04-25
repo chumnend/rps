@@ -4,8 +4,8 @@ import React, { useEffect, useReducer } from 'react';
 import { auth, db } from './config';
 
 const initialState = {
-  loading: false,
-  error: false,
+  loading: true,
+  error: '',
   user: null,
 };
 
@@ -20,13 +20,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        error: null,
+        error: '',
       };
     case AUTH_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: false,
+        error: '',
         user: action.user,
       };
     case AUTH_ERROR:
@@ -40,6 +40,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        error: '',
         user: null,
       };
     default:
@@ -94,6 +95,7 @@ const FirebaseProvider = ({ children }) => {
         admin: false,
       });
 
+      // store user in state
       const userSnapshot = await userRef.get();
       const userData = userSnapshot.data();
 
@@ -101,8 +103,33 @@ const FirebaseProvider = ({ children }) => {
         type: AUTH_SUCCESS,
         user: userData,
       });
+
+      return true;
     } catch (error) {
       dispatch({ type: AUTH_ERROR, error: error.message });
+      return false;
+    }
+  };
+
+  const loginUser = async (email, password) => {
+    try {
+      const cred = await auth.signInWithEmailAndPassword(email, password);
+
+      // store user in state
+      const user = cred.user;
+      const userRef = db.collection('users').doc(user.uid);
+      const userSnapshot = await userRef.get();
+      const userData = userSnapshot.data();
+
+      dispatch({
+        type: AUTH_SUCCESS,
+        user: userData,
+      });
+
+      return true;
+    } catch (error) {
+      dispatch({ type: AUTH_ERROR, error: error.message });
+      return false;
     }
   };
 
@@ -115,6 +142,7 @@ const FirebaseProvider = ({ children }) => {
     ...state,
 
     registerUser,
+    loginUser,
     logoutUser,
   };
 

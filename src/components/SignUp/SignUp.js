@@ -11,9 +11,9 @@ const SignUp = () => {
   const firebase = useFirebase();
 
   const registerUser = async (username, email, password) => {
-    await firebase.registerUser(username, email, password);
+    const success = await firebase.registerUser(username, email, password);
 
-    if (!firebase.user) {
+    if (success) {
       history.push(ROUTES.ACCOUNT);
     }
   };

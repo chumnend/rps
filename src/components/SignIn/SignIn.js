@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import * as ROUTES from '../../common/constants/routes';
@@ -7,25 +7,20 @@ import Layout from './components/Layout';
 import LoginForm from './components/LoginForm';
 
 const SignIn = () => {
-  const [error, setError] = useState(null);
-
   const history = useHistory();
   const firebase = useFirebase();
 
-  const login = (email, password) => {
-    firebase
-      .loginUser(email, password)
-      .then(() => {
-        history.push(ROUTES.LANDING);
-      })
-      .catch((error) => {
-        setError(error);
-      });
+  const loginUser = async (email, password) => {
+    const success = await firebase.loginUser(email, password);
+
+    if (success) {
+      history.push(ROUTES.LANDING);
+    }
   };
 
   return (
     <Layout>
-      <LoginForm login={login} error={error?.message} />
+      <LoginForm loginUser={loginUser} error={firebase.error} />
     </Layout>
   );
 };
