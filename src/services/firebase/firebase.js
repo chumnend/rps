@@ -106,10 +106,16 @@ const FirebaseProvider = ({ children }) => {
     }
   };
 
+  const logoutUser = async () => {
+    await auth.signOut();
+    dispatch({ type: AUTH_LOGOUT });
+  };
+
   const firebaseValues = {
     ...state,
 
     registerUser,
+    logoutUser,
   };
 
   return (
