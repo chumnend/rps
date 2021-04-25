@@ -166,11 +166,35 @@ const FirebaseProvider = ({ children }) => {
   };
 
   const findUsers = async () => {
-    // db.collection('games');
+    const users = [];
+
+    const usersRef = db.collection('users');
+    const snapshot = await usersRef.get();
+    if (snapshot.empty) {
+      return [];
+    }
+
+    snapshot.forEach((doc) => {
+      users.push(doc.data());
+    });
+
+    return users;
   };
 
   const findGames = async () => {
-    // db.collection('games').doc();
+    const games = [];
+
+    const gamesRef = db.collection('games');
+    const snapshot = await gamesRef.get();
+    if (snapshot.empty) {
+      return [];
+    }
+
+    snapshot.forEach((doc) => {
+      games.push(doc.data());
+    });
+
+    return games;
   };
 
   const firebaseValues = {

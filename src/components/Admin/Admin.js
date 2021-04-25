@@ -16,27 +16,18 @@ const Admin = () => {
   const firebaseRef = useRef(firebase);
 
   useEffect(() => {
-    firebaseRef.current
-      .getUsers()
-      .get()
-      .then((snapshot) => {
-        const foundUsers = [];
-        snapshot.forEach((doc) => {
-          foundUsers.push(doc.data());
-        });
-        setUsers(foundUsers);
-      });
+    const getUsers = async () => {
+      const users = await firebaseRef.current.findUsers();
+      setUsers(users);
+    };
 
-    firebaseRef.current
-      .getGames()
-      .get()
-      .then((snapshot) => {
-        const foundGames = [];
-        snapshot.forEach((doc) => {
-          foundGames.push(doc.data());
-        });
-        setGames(foundGames);
-      });
+    const getGames = async () => {
+      const games = await firebaseRef.current.findGames();
+      setGames(games);
+    };
+
+    getUsers();
+    getGames();
 
     setLoading(false);
   }, []);
