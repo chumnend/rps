@@ -58,18 +58,20 @@ const FirebaseProvider = ({ children }) => {
       dispatch({ type: AUTHENTICATING });
 
       // check to see if user exists
-      if (!user) {
-        dispatch({ type: AUTH_LOGOUT });
+      if (user) {
+        // pull user info from firebase
+        const userRef = db.collection('users').doc(user.uid);
+        const userSnapshot = await userRef.get();
+        const userData = userSnapshot.data();
+
+        // update user state
+        dispatch({ type: AUTH_SUCCESS, user: userData });
         return;
       }
 
-      // pull user info from firebase
-      const userRef = db.collection('users').doc(user.uid);
-      const userSnapshot = await userRef.get();
-      const userData = userSnapshot.data();
-
-      // update user state
-      dispatch({ type: AUTH_SUCCESS, user: userData });
+      // clear user state if not signed in
+      dispatch({ type: AUTH_LOGOUT });
+      return;
     });
 
     return () => {
@@ -78,6 +80,8 @@ const FirebaseProvider = ({ children }) => {
   }, []);
 
   const registerUser = async (username, email, password) => {
+    dispatch({ type: AUTHENTICATING });
+
     try {
       // create user in firebase auth
       const cred = await auth.createUserWithEmailAndPassword(email, password);
@@ -112,6 +116,8 @@ const FirebaseProvider = ({ children }) => {
   };
 
   const loginUser = async (email, password) => {
+    dispatch({ type: AUTHENTICATING });
+
     try {
       const cred = await auth.signInWithEmailAndPassword(email, password);
 
@@ -133,9 +139,38 @@ const FirebaseProvider = ({ children }) => {
     }
   };
 
+  const resetPassword = async (email) => {
+    try {
+      await auth.sendPasswordResetEmail(email);
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const updatePassword = async (password) => {
+    try {
+      const user = auth.currentUser;
+      await user.updatePassword(password);
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
   const logoutUser = async () => {
     await auth.signOut();
     dispatch({ type: AUTH_LOGOUT });
+  };
+
+  const findUsers = async () => {
+    // db.collection('games');
+  };
+
+  const findGames = async () => {
+    // db.collection('games').doc();
   };
 
   const firebaseValues = {
@@ -143,7 +178,12 @@ const FirebaseProvider = ({ children }) => {
 
     registerUser,
     loginUser,
+    resetPassword,
+    updatePassword,
     logoutUser,
+
+    findUsers,
+    findGames,
   };
 
   return (

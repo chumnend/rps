@@ -1,36 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
+import * as ROUTES from '../../common/constants/routes';
 import useFirebase from '../../common/hooks/useFirebase';
-import { PasswordChangeForm } from '../PasswordChange';
-import { PasswordForgetForm } from '../PasswordForget';
 import AccountCard from './components/AccountCard';
 import Layout from './components/Layout';
+import PasswordChangeForm from './components/PasswordChangeForm';
 
 const Account = () => {
-  const [error, setError] = useState(null);
-
   const firebase = useFirebase();
+  const history = useHistory();
 
-  const updatePassword = (newPassword) => {
-    firebase
-      .updatePassword(newPassword)
-      .then(() => {
-        console.log('done');
-      })
-      .catch((error) => {
-        setError(error);
-      });
-  };
+  const updatePassword = async (newPassword) => {
+    const success = await firebase.updatePassword(newPassword);
 
-  const resetPassword = (email) => {
-    firebase
-      .resetPassword(email)
-      .then(() => {
-        console.log('done');
-      })
-      .catch((error) => {
-        setError(error);
-      });
+    if (success) {
+      history.push(ROUTES.LOGOUT);
+    }
   };
 
   return (
@@ -39,12 +25,7 @@ const Account = () => {
       <br />
       <PasswordChangeForm
         updatePassword={updatePassword}
-        error={error?.message}
-      />
-      <br />
-      <PasswordForgetForm
-        resetPassword={resetPassword}
-        error={error?.message}
+        error={firebase.error}
       />
     </Layout>
   );

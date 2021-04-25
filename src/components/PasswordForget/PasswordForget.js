@@ -1,30 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import useFirebase from '../../common/hooks/useFirebase';
 import Layout from './components/Layout';
 import PasswordForgetForm from './components/PasswordForgetForm';
 
 const PasswordForget = () => {
-  const [error, setError] = useState(null);
-
   const firebase = useFirebase();
 
-  const resetPassword = (email) => {
-    firebase
-      .resetPassword(email)
-      .then(() => {
-        console.log('done');
-      })
-      .catch((error) => {
-        setError(error);
-      });
+  const resetPassword = async (email) => {
+    await firebase.resetPassword(email);
   };
 
   return (
     <Layout>
       <PasswordForgetForm
         resetPassword={resetPassword}
-        error={error?.message}
+        error={firebase.error}
       />
     </Layout>
   );
