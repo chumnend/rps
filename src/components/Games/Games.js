@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Loader from '../../common/components/Loader';
-import * as GAME from '../../common/constants/game';
 import * as ROUTES from '../../common/constants/routes';
 import useFirebase from '../../common/hooks/useFirebase';
 import GamesList from './components/GamesList';
@@ -17,20 +16,13 @@ const Games = () => {
   const firebaseRef = useRef(firebase);
 
   useEffect(() => {
-    firebaseRef.current
-      .getGames()
-      .get()
-      .then((snapshot) => {
-        const foundGames = [];
-        snapshot.forEach((doc) => {
-          const gameData = doc.data();
-          if (gameData.state === GAME.STATE_MATCHMAKING) {
-            foundGames.push(doc.data());
-          }
-        });
-        setGames(foundGames);
-        setLoading(false);
-      });
+    const findOpenGames = async () => {
+      const games = await firebaseRef.current.findOpenGames();
+      setGames(games);
+    };
+
+    findOpenGames();
+    setLoading(false);
   }, []);
 
   const handleJoin = (id) => {

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
 
+import * as GAME from '../../common/constants/game';
 import { auth, db } from './config';
 
 const initialState = {
@@ -197,6 +198,26 @@ const FirebaseProvider = ({ children }) => {
     return games;
   };
 
+  const findOpenGames = async () => {
+    const games = [];
+
+    const gamesRef = db.collection('games');
+    const snapshot = await gamesRef.get();
+    if (snapshot.empty) {
+      return [];
+    }
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+
+      if (data.state === GAME.STATE_MATCHMAKING) {
+        games.push(data);
+      }
+    });
+
+    return games;
+  };
+
   const firebaseValues = {
     ...state,
 
@@ -208,6 +229,8 @@ const FirebaseProvider = ({ children }) => {
 
     findUsers,
     findGames,
+
+    findOpenGames,
   };
 
   return (
