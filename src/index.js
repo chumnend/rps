@@ -2,7 +2,7 @@ import './index.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
@@ -11,9 +11,9 @@ import { FirebaseProvider } from './services/firebase';
 ReactDOM.render(
   <React.StrictMode>
     <FirebaseProvider>
-      <Router>
+      <BrowserRouter>
         <App />
-      </Router>
+      </BrowserRouter>
     </FirebaseProvider>
   </React.StrictMode>,
   document.getElementById('root'),
