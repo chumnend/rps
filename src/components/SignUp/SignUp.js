@@ -12,7 +12,7 @@ const SignUp = () => {
   const history = useHistory();
   const firebase = useFirebase();
 
-  const registerUser = ({ username, email, password }) => {
+  const registerUser = (username, email, password) => {
     firebase
       .registerUser(email, password)
       .then((authUser) => {
@@ -22,6 +22,7 @@ const SignUp = () => {
           email,
           wins: 0,
           losses: 0,
+          admin: false,
         });
       })
       .then(() => {
