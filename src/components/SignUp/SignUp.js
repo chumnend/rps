@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import * as ROUTES from '../../common/constants/routes';
-import useFirebase from '../../common/hooks/useFirebase';
+import { useFirebase } from '../../services/firebase';
 import Layout from './components/Layout';
 import RegisterForm from './components/RegisterForm';
 

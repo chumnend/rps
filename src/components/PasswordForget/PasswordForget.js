@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useFirebase from '../../common/hooks/useFirebase';
+import { useFirebase } from '../../services/firebase';
 import Layout from './components/Layout';
 import PasswordForgetForm from './components/PasswordForgetForm';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import Loader from '../../common/components/Loader';
-import useFirebase from '../../common/hooks/useFirebase';
+import { useFirebase } from '../../services/firebase';
 import Layout from './components/Layout';
 import List from './components/List';
 import ListItem from './components/ListItem';

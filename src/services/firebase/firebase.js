@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer } from 'react';
 
 import * as GAME from '../../common/constants/game';
 import { auth, db } from './config';
+import * as FIREBASE from './constants';
 
 const initialState = {
   loading: true,
@@ -89,7 +90,7 @@ const FirebaseProvider = ({ children }) => {
 
       // add user to firestore and append schema
       const user = cred.user;
-      const userRef = db.collection('users').doc(user.uid);
+      const userRef = db.collection(FIREBASE.USERS_COLLECTION_ID).doc(user.uid);
 
       await userRef.set({
         id: user.uid,
@@ -124,7 +125,7 @@ const FirebaseProvider = ({ children }) => {
 
       // store user in state
       const user = cred.user;
-      const userRef = db.collection('users').doc(user.uid);
+      const userRef = db.collection(FIREBASE.USERS_COLLECTION_ID).doc(user.uid);
       const userSnapshot = await userRef.get();
       const userData = userSnapshot.data();
 
@@ -169,7 +170,7 @@ const FirebaseProvider = ({ children }) => {
   const findUsers = async () => {
     const users = [];
 
-    const usersRef = db.collection('users');
+    const usersRef = db.collection(FIREBASE.USERS_COLLECTION_ID);
     const snapshot = await usersRef.get();
     if (snapshot.empty) {
       return [];
@@ -185,7 +186,7 @@ const FirebaseProvider = ({ children }) => {
   const findGames = async () => {
     const games = [];
 
-    const gamesRef = db.collection('games');
+    const gamesRef = db.collection(FIREBASE.GAMES_COLLECTION_ID);
     const snapshot = await gamesRef.get();
     if (snapshot.empty) {
       return [];
@@ -201,7 +202,7 @@ const FirebaseProvider = ({ children }) => {
   const findOpenGames = async () => {
     const games = [];
 
-    const gamesRef = db.collection('games');
+    const gamesRef = db.collection(FIREBASE.GAMES_COLLECTION_ID);
     const snapshot = await gamesRef.get();
     if (snapshot.empty) {
       return [];
@@ -220,7 +221,7 @@ const FirebaseProvider = ({ children }) => {
 
   const hostGame = async () => {
     // setup game in firestore
-    const gamesRef = db.collection('games');
+    const gamesRef = db.collection(FIREBASE.GAMES_COLLECTION_ID);
     const gameDoc = await gamesRef.add({});
 
     const id = gameDoc.id;
@@ -245,12 +246,12 @@ const FirebaseProvider = ({ children }) => {
   };
 
   const getGame = (id) => {
-    const gameRef = db.collection('games').doc(id);
+    const gameRef = db.collection(FIREBASE.GAMES_COLLECTION_ID).doc(id);
     return gameRef;
   };
 
   const getUser = (id) => {
-    const userRef = db.collection('users').doc(id);
+    const userRef = db.collection(FIREBASE.USERS_COLLECTION_ID).doc(id);
     return userRef;
   };
 
@@ -284,4 +285,6 @@ FirebaseProvider.propTypes = {
   children: PropTypes.node,
 };
 
-export { FirebaseContext, FirebaseProvider };
+const useFirebase = () => useContext(FirebaseContext);
+
+export { FirebaseContext, FirebaseProvider, useFirebase };

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import * as ROUTES from '../../common/constants/routes';
-import useFirebase from '../../common/hooks/useFirebase';
+import { useFirebase } from '../../services/firebase';
 
 const Logout = () => {
   const firebase = useFirebase();

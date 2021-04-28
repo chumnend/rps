@@ -5,7 +5,7 @@ import Button from '../../common/components/Button';
 import Loader from '../../common/components/Loader';
 import * as GAME from '../../common/constants/game';
 import * as ROUTES from '../../common/constants/routes';
-import useFirebase from '../../common/hooks/useFirebase';
+import { useFirebase } from '../../services/firebase';
 import Layout from './components/Layout';
 import Scoreboard from './components/Scoreboard';
 import UserStats from './components/UserStats';
