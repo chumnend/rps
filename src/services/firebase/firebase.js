@@ -244,6 +244,16 @@ const FirebaseProvider = ({ children }) => {
     return id;
   };
 
+  const getGame = (id) => {
+    const gameRef = db.collection('games').doc(id);
+    return gameRef;
+  };
+
+  const getUser = (id) => {
+    const userRef = db.collection('users').doc(id);
+    return userRef;
+  };
+
   const firebaseValues = {
     ...state,
 
@@ -258,6 +268,9 @@ const FirebaseProvider = ({ children }) => {
 
     findOpenGames,
     hostGame,
+
+    getGame,
+    getUser,
   };
 
   return (
