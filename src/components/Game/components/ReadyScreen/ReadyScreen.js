@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 
 import Button from '../../../../common/components/Button';
 
-const ReadyScreen = ({ onReadyUp, isReady }) => {
+const ReadyScreen = ({ isReady, handleReadyUp }) => {
   return (
     <div>
       <p>Waiting for players to be ready...</p>
 
-      <Button onClick={() => onReadyUp()} disabled={isReady}>
+      <Button onClick={handleReadyUp} disabled={isReady}>
         Ready Up
       </Button>
     </div>
@@ -15,8 +15,8 @@ const ReadyScreen = ({ onReadyUp, isReady }) => {
 };
 
 ReadyScreen.propTypes = {
-  onReadyUp: PropTypes.func,
   isReady: PropTypes.bool,
+  handleReadyUp: PropTypes.func,
 };
 
 export default ReadyScreen;

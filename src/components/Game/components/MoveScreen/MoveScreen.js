@@ -8,8 +8,8 @@ const MoveScreen = ({
   round,
   hostScore,
   challengerScore,
-  onMove,
   hasMadeMove,
+  handleMove,
 }) => {
   return (
     <div>
@@ -21,13 +21,19 @@ const MoveScreen = ({
 
       {hasMadeMove ? <p>Waiting for opponent</p> : <p>Make your move</p>}
 
-      <Button onClick={() => onMove(GAME.MOVE_ROCK)} disabled={hasMadeMove}>
+      <Button onClick={() => handleMove(GAME.MOVE_ROCK)} disabled={hasMadeMove}>
         Rock
       </Button>
-      <Button onClick={() => onMove(GAME.MOVE_PAPER)} disabled={hasMadeMove}>
+      <Button
+        onClick={() => handleMove(GAME.MOVE_PAPER)}
+        disabled={hasMadeMove}
+      >
         Paper
       </Button>
-      <Button onClick={() => onMove(GAME.MOVE_SCISSOR)} disabled={hasMadeMove}>
+      <Button
+        onClick={() => handleMove(GAME.MOVE_SCISSOR)}
+        disabled={hasMadeMove}
+      >
         Scissor
       </Button>
     </div>
@@ -38,8 +44,8 @@ MoveScreen.propTypes = {
   round: PropTypes.number,
   hostScore: PropTypes.number,
   challengerScore: PropTypes.number,
-  onMove: PropTypes.func,
   hasMadeMove: PropTypes.bool,
+  handleMove: PropTypes.func,
 };
 
 export default MoveScreen;

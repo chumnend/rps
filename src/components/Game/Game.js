@@ -304,7 +304,9 @@ const Game = () => {
       gameState = <WaitScreen />;
       break;
     case GAME.STATE_READY_UP:
-      gameState = <ReadyScreen onReady={handleReadyUp} isReady={isReady} />;
+      gameState = (
+        <ReadyScreen isReady={isReady} handleReadyUp={handleReadyUp} />
+      );
       break;
     case GAME.STATE_MAKE_MOVE:
       gameState = (
@@ -312,8 +314,8 @@ const Game = () => {
           round={game.round}
           hostScore={game.hostScore}
           challengerScore={game.challengerScore}
-          onMove={handleMove}
           hasMadeMove={hasMadeMove}
+          handleMove={handleMove}
         />
       );
       break;
@@ -327,8 +329,8 @@ const Game = () => {
           hostMove={game.hostMove}
           challengerMove={game.challengerMove}
           isHost={isHost}
-          onReadyUp={handleReadyUp}
           isReady={isReady}
+          handleReadyUp={handleReadyUp}
         />
       );
       break;
@@ -340,9 +342,9 @@ const Game = () => {
           hostScore={game.number}
           challengerScore={game.number}
           isHost={isHost}
-          onReadyUp={handleReadyUp}
           isReady={isReady}
-          onLeave={handleLeave}
+          handleReadyUp={handleReadyUp}
+          handleLeave={handleLeave}
         />
       );
       break;

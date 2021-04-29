@@ -12,8 +12,8 @@ const ResultScreen = ({
   hostMove,
   challengerMove,
   isHost,
-  onReadyUp,
   isReady,
+  handleReadyUp,
 }) => {
   return (
     <div>
@@ -41,7 +41,7 @@ const ResultScreen = ({
       )}
       {roundResult === GAME.RESULT_DRAW && <p>Draw!</p>}
 
-      <Button onClick={() => onReadyUp()} disabled={isReady}>
+      <Button onClick={handleReadyUp} disabled={isReady}>
         Next
       </Button>
     </div>
@@ -56,8 +56,8 @@ ResultScreen.propTypes = {
   hostMove: PropTypes.string,
   challengerMove: PropTypes.string,
   isHost: PropTypes.bool,
-  onReadyUp: PropTypes.func,
   isReady: PropTypes.bool,
+  handleReadyUp: PropTypes.func,
 };
 
 export default ResultScreen;

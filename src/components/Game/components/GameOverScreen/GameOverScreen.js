@@ -10,9 +10,9 @@ const GameOverScreen = ({
   hostScore,
   challengerScore,
   isHost,
-  onReadyUp,
   isReady,
-  onLeave,
+  handleReadyUp,
+  handleLeave,
 }) => {
   return (
     <div>
@@ -35,11 +35,11 @@ const GameOverScreen = ({
         <p>Game Over, You win!</p>
       )}
 
-      <Button onClick={() => onReadyUp()} disabled={isReady}>
+      <Button onClick={handleReadyUp} disabled={isReady}>
         Rematch?
       </Button>
 
-      <Button onClick={() => onLeave()}>Leave</Button>
+      <Button onClick={handleLeave}>Leave</Button>
     </div>
   );
 };
@@ -50,9 +50,9 @@ GameOverScreen.propTypes = {
   hostScore: PropTypes.number,
   challengerScore: PropTypes.number,
   isHost: PropTypes.bool,
-  onReadyUp: PropTypes.func,
   isReady: PropTypes.bool,
-  onLeave: PropTypes.func,
+  handleReadyUp: PropTypes.func,
+  handleLeave: PropTypes.func,
 };
 
 export default GameOverScreen;
