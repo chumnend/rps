@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import * as Styles from './styles';
 
 const WaitScreen = ({ id }) => {
-  const copyURL = () => {
+  const copyURL = async () => {
     const url = window.location.href;
-    navigator.clipboard.writeText(url);
+    await navigator.clipboard.writeText(url);
     alert('Copied URL'); // TODO: Create alert message after/during RPS-28
   };
 
