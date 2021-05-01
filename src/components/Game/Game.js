@@ -301,7 +301,7 @@ const Game = () => {
   let gameState = null;
   switch (game.state) {
     case GAME.STATE_MATCHMAKING:
-      gameState = <WaitScreen />;
+      gameState = <WaitScreen id={id} />;
       break;
     case GAME.STATE_READY_UP:
       gameState = (
