@@ -3,13 +3,14 @@ import React from 'react';
 
 import Card from './components/Card';
 import Container from './components/Container';
+import VersusIcon from './components/VersusIcon';
 
-const UserStats = (props) => {
+const UserStats = ({ host, challenger, isHost }) => {
   return (
     <Container>
-      <Card user={props.host} isUser={props.isHost} />
-      <p>VS.</p>
-      <Card user={props.challenger} isUser={!props.isHost} />
+      <Card user={host} isUser={isHost} />
+      <VersusIcon />
+      <Card user={challenger} isUser={!isHost} />
     </Container>
   );
 };

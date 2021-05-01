@@ -7,7 +7,7 @@ const Card = (props) => {
   if (!props.user) {
     return (
       <Styles.Card>
-        <p>None</p>
+        <p>Waiting for opponent...</p>
       </Styles.Card>
     );
   }
@@ -15,8 +15,9 @@ const Card = (props) => {
   return (
     <Styles.Card>
       <h3>{props.user.username}</h3>
-      <p>Wins: {props.user.wins}</p>
-      <p>Losses: {props.user.losses}</p>
+      <p>
+        W: {props.user.wins} - L: {props.user.losses}
+      </p>
       <p>{props.isUser && '(YOU)'}</p>
     </Styles.Card>
   );

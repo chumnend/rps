@@ -3,8 +3,8 @@ import React from 'react';
 
 import * as Styles from './styles';
 
-const Layout = (props) => {
-  return <Styles.Div {...props}>{props.children}</Styles.Div>;
+const Layout = ({ children }) => {
+  return <Styles.Layout>{children}</Styles.Layout>;
 };
 
 Layout.propTypes = {
