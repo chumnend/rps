@@ -2,16 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Card from './components/Card';
-import Container from './components/Container';
-import VersusIcon from './components/VersusIcon';
+import * as Styles from './styles';
 
 const UserStats = ({ host, challenger, isHost }) => {
   return (
-    <Container>
+    <Styles.Container>
       <Card user={host} isUser={isHost} />
-      <VersusIcon />
+      <Styles.VersusIcon>VS</Styles.VersusIcon>
       <Card user={challenger} isUser={!isHost} />
-    </Container>
+    </Styles.Container>
   );
 };
 
