@@ -3,7 +3,7 @@ import React from 'react';
 
 import * as Styles from './styles';
 
-const IconButton = (props) => {
+const NavIcon = (props) => {
   return (
     <Styles.Icon to={props.to} role="button">
       <i className={props.classname} />
@@ -12,10 +12,10 @@ const IconButton = (props) => {
   );
 };
 
-IconButton.propTypes = {
+NavIcon.propTypes = {
   to: PropTypes.string,
   classname: PropTypes.string,
   title: PropTypes.string,
 };
 
-export default IconButton;
+export default NavIcon;

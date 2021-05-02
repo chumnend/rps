@@ -1,20 +1,20 @@
-import IconButton from '../../../../../common/components/IconButton';
-import * as ROUTES from '../../../../../common/constants/routes';
-import * as Styles from '../styles';
+import * as ROUTES from '../../../../../../common/constants/routes';
+import NavIcon from '../NavIcon';
+import * as Styles from './styles';
 
 const GuestNav = () => {
   return (
     <Styles.Nav role="navigation">
       <Styles.Ul>
         <Styles.Li>
-          <IconButton
+          <NavIcon
             classname="fas fa-user-plus"
             title="Sign Up"
             to={ROUTES.SIGN_UP}
           />
         </Styles.Li>
         <Styles.Li>
-          <IconButton
+          <NavIcon
             classname="fas fa-sign-in-alt"
             title="Sign In"
             to={ROUTES.SIGN_IN}

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { color, device } from '../../themes';
+import { color, device } from '../../../../../../common/themes';
 
 export const Icon = styled(Link)`
   height: 100%;

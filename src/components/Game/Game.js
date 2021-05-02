@@ -1,21 +1,24 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import Button from '../../common/components/Button';
 import Loader from '../../common/components/Loader';
 import * as GAME from '../../common/constants/game';
 import * as ROUTES from '../../common/constants/routes';
 import { useFirebase } from '../../services/firebase';
+import GameOverScreen from './components/GameOverScreen';
 import Layout from './components/Layout';
-import Scoreboard from './components/Scoreboard';
+import MoveScreen from './components/MoveScreen';
+import ReadyScreen from './components/ReadyScreen';
+import ResultScreen from './components/ResultScreen';
 import UserStats from './components/UserStats';
+import WaitScreen from './components/WaitScreen';
 
 const Game = () => {
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState(null);
   const [isHost, setHost] = useState(false);
   const [isReady, setReady] = useState(false);
-  const [moveMade, setMove] = useState(false);
+  const [hasMadeMove, setMove] = useState(false);
 
   const { id } = useParams();
   const history = useHistory();
@@ -244,163 +247,105 @@ const Game = () => {
 
   // on page render, initialize the game
   useEffect(() => {
-    const listener = onJoin();
+    const unsubscribe = onJoin();
 
     return () => {
-      listener(); // unsubscribe to listener
+      unsubscribe(); // unsubscribe to listener
       onLeave(); // clean up the room
     };
   }, [onJoin, onLeave]);
 
-  if (loading) {
-    return <Loader />;
-  }
-
   // set this user to ready up
-  const handleReadyUp = () => {
+  const handleReadyUp = useCallback(async () => {
     if (isHost) {
-      firebaseRef.current.getGame(id).update({
+      await firebaseRef.current.getGame(id).update({
         hostReady: true,
       });
     } else {
-      firebaseRef.current.getGame(id).update({
+      await firebaseRef.current.getGame(id).update({
         challengerReady: true,
       });
     }
 
     setReady(true);
-  };
+  }, [id, isHost]);
 
   // set user move
-  const handleMove = (move) => {
-    if (isHost) {
-      firebaseRef.current.getGame(id).update({
-        hostMove: move,
-      });
-    } else {
-      firebaseRef.current.getGame(id).update({
-        challengerMove: move,
-      });
-    }
+  const handleMove = useCallback(
+    async (move) => {
+      if (isHost) {
+        await firebaseRef.current.getGame(id).update({
+          hostMove: move,
+        });
+      } else {
+        await firebaseRef.current.getGame(id).update({
+          challengerMove: move,
+        });
+      }
 
-    setMove(true);
-  };
+      setMove(true);
+    },
+    [id, isHost],
+  );
 
   // leave match
-  const handleLeave = () => {
+  const handleLeave = useCallback(() => {
     history.push(ROUTES.HOME);
-  };
+  }, [history]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   // set game state view
   let gameState = null;
   switch (game.state) {
     case GAME.STATE_MATCHMAKING:
-      gameState = <p>Waiting for Challenger</p>;
+      gameState = <WaitScreen id={id} />;
       break;
     case GAME.STATE_READY_UP:
       gameState = (
-        <div>
-          <p>Waiting for players to be ready...</p>
-
-          <Button onClick={handleReadyUp} disabled={isReady}>
-            Ready Up
-          </Button>
-        </div>
+        <ReadyScreen isReady={isReady} handleReadyUp={handleReadyUp} />
       );
       break;
     case GAME.STATE_MAKE_MOVE:
       gameState = (
-        <div>
-          <Scoreboard
-            round={game.round}
-            hostScore={game.hostScore}
-            challengerScore={game.challengerScore}
-          />
-
-          {moveMade ? <p>Waiting for opponent</p> : <p>Make your move</p>}
-
-          <Button
-            onClick={() => handleMove(GAME.MOVE_ROCK)}
-            disabled={moveMade}
-          >
-            Rock
-          </Button>
-          <Button
-            onClick={() => handleMove(GAME.MOVE_PAPER)}
-            disabled={moveMade}
-          >
-            Paper
-          </Button>
-          <Button
-            onClick={() => handleMove(GAME.MOVE_SCISSOR)}
-            disabled={moveMade}
-          >
-            Scissor
-          </Button>
-        </div>
+        <MoveScreen
+          round={game.round}
+          hostScore={game.hostScore}
+          challengerScore={game.challengerScore}
+          hasMadeMove={hasMadeMove}
+          handleMove={handleMove}
+        />
       );
       break;
     case GAME.STATE_ROUND_RESULT:
       gameState = (
-        <div>
-          <Scoreboard
-            round={game.round}
-            hostScore={game.hostScore}
-            challengerScore={game.challengerScore}
-          />
-
-          <div>
-            {game.hostMove} - {game.challengerMove}
-          </div>
-
-          {isHost && game.roundResult === GAME.RESULT_HOST_WIN && (
-            <p>You win this round!</p>
-          )}
-          {!isHost && game.roundResult === GAME.RESULT_HOST_WIN && (
-            <p>You lost this round!</p>
-          )}
-          {isHost && game.roundResult === GAME.RESULT_CHALLENGER_WIN && (
-            <p>You lost this round!</p>
-          )}
-          {!isHost && game.roundResult === GAME.RESULT_CHALLENGER_WIN && (
-            <p>You win this round!</p>
-          )}
-          {game.roundResult === GAME.RESULT_DRAW && <p>Draw!</p>}
-
-          <Button onClick={handleReadyUp} disabled={isReady}>
-            Next
-          </Button>
-        </div>
+        <ResultScreen
+          round={game.round}
+          roundResult={game.roundResult}
+          hostScore={game.hostScore}
+          challengerScore={game.challengerScore}
+          hostMove={game.hostMove}
+          challengerMove={game.challengerMove}
+          isHost={isHost}
+          isReady={isReady}
+          handleReadyUp={handleReadyUp}
+        />
       );
       break;
     case GAME.STATE_GAME_OVER:
       gameState = (
-        <div>
-          <Scoreboard
-            round={game.round}
-            hostScore={game.hostScore}
-            challengerScore={game.challengerScore}
-          />
-
-          {isHost && game.roundResult === GAME.RESULT_HOST_WIN && (
-            <p>Game Over, You win!</p>
-          )}
-          {!isHost && game.roundResult === GAME.RESULT_HOST_WIN && (
-            <p>Game Over, You lose!</p>
-          )}
-          {isHost && game.roundResult === GAME.RESULT_CHALLENGER_WIN && (
-            <p>Game Over, You lose!</p>
-          )}
-          {!isHost && game.roundResult === GAME.RESULT_CHALLENGER_WIN && (
-            <p>Game Over, You win!</p>
-          )}
-
-          <Button onClick={handleReadyUp} disabled={isReady}>
-            Rematch?
-          </Button>
-
-          <Button onClick={handleLeave}>Leave</Button>
-        </div>
+        <GameOverScreen
+          round={game.round}
+          roundResult={game.roundResult}
+          hostScore={game.hostScore}
+          challengerScore={game.challengerScore}
+          isHost={isHost}
+          isReady={isReady}
+          handleReadyUp={handleReadyUp}
+          handleLeave={handleLeave}
+        />
       );
       break;
     default:
