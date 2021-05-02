@@ -247,10 +247,10 @@ const Game = () => {
 
   // on page render, initialize the game
   useEffect(() => {
-    const listener = onJoin();
+    const unsubscribe = onJoin();
 
     return () => {
-      listener(); // unsubscribe to listener
+      unsubscribe(); // unsubscribe to listener
       onLeave(); // clean up the room
     };
   }, [onJoin, onLeave]);

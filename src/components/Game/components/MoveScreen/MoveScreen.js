@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '../../../../common/components/Button';
 import * as GAME from '../../../../common/constants/game';
 import Scoreboard from '../Scoreboard';
+import * as Styles from './styles';
 
 const MoveScreen = ({
   round,
@@ -12,31 +13,40 @@ const MoveScreen = ({
   handleMove,
 }) => {
   return (
-    <div>
+    <Styles.Container>
       <Scoreboard
         round={round}
         hostScore={hostScore}
         challengerScore={challengerScore}
       />
 
-      {hasMadeMove ? <p>Waiting for opponent</p> : <p>Make your move</p>}
+      {hasMadeMove ? (
+        <Styles.Heading>Waiting for opponent</Styles.Heading>
+      ) : (
+        <Styles.Heading>Make your move</Styles.Heading>
+      )}
 
-      <Button onClick={() => handleMove(GAME.MOVE_ROCK)} disabled={hasMadeMove}>
-        Rock
-      </Button>
-      <Button
-        onClick={() => handleMove(GAME.MOVE_PAPER)}
-        disabled={hasMadeMove}
-      >
-        Paper
-      </Button>
-      <Button
-        onClick={() => handleMove(GAME.MOVE_SCISSOR)}
-        disabled={hasMadeMove}
-      >
-        Scissor
-      </Button>
-    </div>
+      <Styles.ButtonContainer>
+        <Button
+          onClick={() => handleMove(GAME.MOVE_ROCK)}
+          disabled={hasMadeMove}
+        >
+          Rock
+        </Button>
+        <Button
+          onClick={() => handleMove(GAME.MOVE_PAPER)}
+          disabled={hasMadeMove}
+        >
+          Paper
+        </Button>
+        <Button
+          onClick={() => handleMove(GAME.MOVE_SCISSOR)}
+          disabled={hasMadeMove}
+        >
+          Scissor
+        </Button>
+      </Styles.ButtonContainer>
+    </Styles.Container>
   );
 };
 

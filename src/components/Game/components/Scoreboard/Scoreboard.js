@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Scoreboard = (props) => {
+import * as Styles from './styles';
+
+const Scoreboard = ({ round, hostScore, challengerScore }) => {
   return (
-    <div>
-      <p>Round {props.round}</p>
-      <p>
-        {props.hostScore} - {props.challengerScore}
-      </p>
-    </div>
+    <Styles.Container>
+      <Styles.Score>{hostScore}</Styles.Score>
+      <Styles.Round>Round {round}</Styles.Round>
+      <Styles.Score>{challengerScore}</Styles.Score>
+    </Styles.Container>
   );
 };
 
