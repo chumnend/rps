@@ -6,7 +6,7 @@ export const STATE_GAME_OVER = 'game_over';
 
 export const MOVE_ROCK = 'rock';
 export const MOVE_PAPER = 'paper';
-export const MOVE_SCISSOR = 'scissor';
+export const MOVE_SCISSOR = 'scissors';
 
 export const RESULT_HOST_WIN = 'host_win';
 export const RESULT_CHALLENGER_WIN = 'challenger_win';

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '../../../../common/components/Button';
 import * as GAME from '../../../../common/constants/game';
 import Scoreboard from '../Scoreboard';
+import * as Styles from './styles';
 
 const ResultScreen = ({
   round,
@@ -15,36 +16,41 @@ const ResultScreen = ({
   isReady,
   handleReadyUp,
 }) => {
+  let resultText;
+  if (roundResult === GAME.RESULT_HOST_WIN) {
+    resultText = isHost ? 'You win this round!' : 'You lost this round!';
+  } else if (roundResult === GAME.RESULT_CHALLENGER_WIN) {
+    resultText = isHost ? 'You lost this round!' : 'You win this round!';
+  } else {
+    // draw
+    resultText = 'Draw!';
+  }
+
   return (
-    <div>
+    <Styles.Container>
       <Scoreboard
         round={round}
         hostScore={hostScore}
         challengerScore={challengerScore}
       />
 
-      <div>
-        {hostMove} - {challengerMove}
-      </div>
+      <Styles.MoveContainer>
+        <Styles.MoveCard>
+          <Styles.MoveIcon className={`fas fa-hand-${hostMove}`} />
+          <Styles.MoveText>{hostMove}</Styles.MoveText>
+        </Styles.MoveCard>
+        <Styles.MoveCard>
+          <Styles.MoveIcon className={`fas fa-hand-${challengerMove}`} />
+          <Styles.MoveText>{challengerMove}</Styles.MoveText>
+        </Styles.MoveCard>
+      </Styles.MoveContainer>
 
-      {isHost && roundResult === GAME.RESULT_HOST_WIN && (
-        <p>You win this round!</p>
-      )}
-      {!isHost && roundResult === GAME.RESULT_HOST_WIN && (
-        <p>You lost this round!</p>
-      )}
-      {isHost && roundResult === GAME.RESULT_CHALLENGER_WIN && (
-        <p>You lost this round!</p>
-      )}
-      {!isHost && roundResult === GAME.RESULT_CHALLENGER_WIN && (
-        <p>You win this round!</p>
-      )}
-      {roundResult === GAME.RESULT_DRAW && <p>Draw!</p>}
+      <Styles.Result>{resultText}</Styles.Result>
 
       <Button onClick={handleReadyUp} disabled={isReady}>
         Next
       </Button>
-    </div>
+    </Styles.Container>
   );
 };
 

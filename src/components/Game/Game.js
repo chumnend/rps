@@ -324,8 +324,8 @@ const Game = () => {
         <ResultScreen
           round={game.round}
           roundResult={game.roundResult}
-          hostScore={game.number}
-          challengerScore={game.number}
+          hostScore={game.hostScore}
+          challengerScore={game.challengerScore}
           hostMove={game.hostMove}
           challengerMove={game.challengerMove}
           isHost={isHost}
@@ -339,8 +339,8 @@ const Game = () => {
         <GameOverScreen
           round={game.round}
           roundResult={game.roundResult}
-          hostScore={game.number}
-          challengerScore={game.number}
+          hostScore={game.hostScore}
+          challengerScore={game.challengerScore}
           isHost={isHost}
           isReady={isReady}
           handleReadyUp={handleReadyUp}
