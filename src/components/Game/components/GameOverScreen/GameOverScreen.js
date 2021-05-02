@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '../../../../common/components/Button';
 import * as GAME from '../../../../common/constants/game';
 import Scoreboard from '../Scoreboard';
+import * as Styles from './styles';
 
 const GameOverScreen = ({
   round,
@@ -14,33 +15,33 @@ const GameOverScreen = ({
   handleReadyUp,
   handleLeave,
 }) => {
+  let resultText;
+  if (roundResult === GAME.RESULT_HOST_WIN) {
+    resultText = isHost ? 'Game Over, You win!' : 'Game Over, You lose!';
+  } else if (roundResult === GAME.RESULT_CHALLENGER_WIN) {
+    resultText = isHost ? 'Game Over, You lose!' : 'Game Over, You win!';
+  } else {
+    // draw
+    resultText = 'Draw!';
+  }
+
   return (
-    <div>
+    <Styles.Container>
       <Scoreboard
         round={round}
         hostScore={hostScore}
         challengerScore={challengerScore}
       />
 
-      {isHost && roundResult === GAME.RESULT_HOST_WIN && (
-        <p>Game Over, You win!</p>
-      )}
-      {!isHost && roundResult === GAME.RESULT_HOST_WIN && (
-        <p>Game Over, You lose!</p>
-      )}
-      {isHost && roundResult === GAME.RESULT_CHALLENGER_WIN && (
-        <p>Game Over, You lose!</p>
-      )}
-      {!isHost && roundResult === GAME.RESULT_CHALLENGER_WIN && (
-        <p>Game Over, You win!</p>
-      )}
+      <Styles.Result>{resultText}</Styles.Result>
 
-      <Button onClick={handleReadyUp} disabled={isReady}>
-        Rematch?
-      </Button>
-
-      <Button onClick={handleLeave}>Leave</Button>
-    </div>
+      <Styles.ButtonContainer>
+        <Button onClick={handleReadyUp} disabled={isReady}>
+          Rematch?
+        </Button>
+        <Button onClick={handleLeave}>Leave</Button>
+      </Styles.ButtonContainer>
+    </Styles.Container>
   );
 };
 
