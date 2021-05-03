@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 
-import * as GAME from '../../common/constants/game';
 import { auth, db } from './config';
-import * as FIREBASE from './constants';
+import * as firebaseHelpers from './helpers';
 
 const initialState = {
   loading: true,
@@ -81,33 +80,19 @@ const FirebaseProvider = ({ children }) => {
     };
   }, []);
 
-  const registerUser = async (username, email, password) => {
+  const register = async (username, email, password) => {
     dispatch({ type: AUTHENTICATING });
 
     try {
-      // create user in firebase auth
-      const cred = await auth.createUserWithEmailAndPassword(email, password);
-
-      // add user to firestore and append schema
-      const user = cred.user;
-      const userRef = db.collection(FIREBASE.USERS_COLLECTION_ID).doc(user.uid);
-
-      await userRef.set({
-        id: user.uid,
+      const user = await firebaseHelpers.registerUser(
         username,
         email,
-        wins: 0,
-        losses: 0,
-        admin: false,
-      });
-
-      // store user in state
-      const userSnapshot = await userRef.get();
-      const userData = userSnapshot.data();
+        password,
+      );
 
       dispatch({
         type: AUTH_SUCCESS,
-        user: userData,
+        user: user,
       });
 
       return true;
@@ -117,21 +102,15 @@ const FirebaseProvider = ({ children }) => {
     }
   };
 
-  const loginUser = async (email, password) => {
+  const login = async (email, password) => {
     dispatch({ type: AUTHENTICATING });
 
     try {
-      const cred = await auth.signInWithEmailAndPassword(email, password);
-
-      // store user in state
-      const user = cred.user;
-      const userRef = db.collection(FIREBASE.USERS_COLLECTION_ID).doc(user.uid);
-      const userSnapshot = await userRef.get();
-      const userData = userSnapshot.data();
+      const user = await firebaseHelpers.loginUser(email, password);
 
       dispatch({
         type: AUTH_SUCCESS,
-        user: userData,
+        user: user,
       });
 
       return true;
@@ -141,137 +120,19 @@ const FirebaseProvider = ({ children }) => {
     }
   };
 
-  const resetPassword = async (email) => {
-    try {
-      await auth.sendPasswordResetEmail(email);
-
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
-
-  const updatePassword = async (password) => {
-    try {
-      const user = auth.currentUser;
-      await user.updatePassword(password);
-
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
-
-  const logoutUser = async () => {
-    await auth.signOut();
+  const logout = async () => {
+    await firebaseHelpers.logoutUser();
     dispatch({ type: AUTH_LOGOUT });
-  };
-
-  const findUsers = async () => {
-    const users = [];
-
-    const usersRef = db.collection(FIREBASE.USERS_COLLECTION_ID);
-    const snapshot = await usersRef.get();
-    if (snapshot.empty) {
-      return [];
-    }
-
-    snapshot.forEach((doc) => {
-      users.push(doc.data());
-    });
-
-    return users;
-  };
-
-  const findGames = async () => {
-    const games = [];
-
-    const gamesRef = db.collection(FIREBASE.GAMES_COLLECTION_ID);
-    const snapshot = await gamesRef.get();
-    if (snapshot.empty) {
-      return [];
-    }
-
-    snapshot.forEach((doc) => {
-      games.push(doc.data());
-    });
-
-    return games;
-  };
-
-  const findOpenGames = async () => {
-    const games = [];
-
-    const gamesRef = db.collection(FIREBASE.GAMES_COLLECTION_ID);
-    const snapshot = await gamesRef.get();
-    if (snapshot.empty) {
-      return [];
-    }
-
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-
-      if (data.state === GAME.STATE_MATCHMAKING) {
-        games.push(data);
-      }
-    });
-
-    return games;
-  };
-
-  const hostGame = async () => {
-    // setup game in firestore
-    const gamesRef = db.collection(FIREBASE.GAMES_COLLECTION_ID);
-    const gameDoc = await gamesRef.add({});
-
-    const id = gameDoc.id;
-
-    await gamesRef.doc(id).set({
-      id: id,
-      name: `vs. ${state.user.username}`,
-      host: state.user,
-      challenger: null,
-      state: GAME.STATE_MATCHMAKING,
-      round: 1,
-      roundResult: null,
-      hostReady: false,
-      hostMove: null,
-      hostScore: 0,
-      challengerReady: false,
-      challengerMove: null,
-      challengerScore: 0,
-    });
-
-    return id;
-  };
-
-  const getGame = (id) => {
-    const gameRef = db.collection(FIREBASE.GAMES_COLLECTION_ID).doc(id);
-    return gameRef;
-  };
-
-  const getUser = (id) => {
-    const userRef = db.collection(FIREBASE.USERS_COLLECTION_ID).doc(id);
-    return userRef;
   };
 
   const firebaseValues = {
     ...state,
 
-    registerUser,
-    loginUser,
-    resetPassword,
-    updatePassword,
-    logoutUser,
+    register,
+    login,
+    logout,
 
-    findUsers,
-    findGames,
-
-    findOpenGames,
-    hostGame,
-
-    getGame,
-    getUser,
+    ...firebaseHelpers,
   };
 
   return (
@@ -285,6 +146,4 @@ FirebaseProvider.propTypes = {
   children: PropTypes.node,
 };
 
-const useFirebase = () => useContext(FirebaseContext);
-
-export { FirebaseContext, FirebaseProvider, useFirebase };
+export { FirebaseContext, FirebaseProvider };

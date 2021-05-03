@@ -17,7 +17,7 @@ const Games = () => {
 
   useEffect(() => {
     const findOpenGames = async () => {
-      const games = await firebaseRef.current.findOpenGames();
+      const games = await firebaseRef.current.listOpenGames();
       setGames(games);
     };
 
