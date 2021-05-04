@@ -17,12 +17,12 @@ const Admin = () => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const users = await firebaseRef.current.findUsers();
+      const users = await firebaseRef.current.listUsers();
       setUsers(users);
     };
 
     const getGames = async () => {
-      const games = await firebaseRef.current.findGames();
+      const games = await firebaseRef.current.listGames();
       setGames(games);
     };
 

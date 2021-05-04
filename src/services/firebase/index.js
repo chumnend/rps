@@ -1,3 +1,4 @@
-export { auth, db } from './config';
-export { GAMES_COLLECTION_ID, USERS_COLLECTION_ID } from './constants';
-export { FirebaseContext, FirebaseProvider, useFirebase } from './firebase';
+import { FirebaseContext, FirebaseProvider } from './context';
+import useFirebase from './hooks/useFirebase';
+
+export { useFirebase, FirebaseContext, FirebaseProvider };
