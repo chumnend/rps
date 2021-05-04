@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
 
-import { auth, db } from './config';
-import * as firebaseHelpers from './helpers';
+import { auth, db } from '../config';
+import * as firebaseHelpers from '../helpers';
 
 const initialState = {
   loading: true,
