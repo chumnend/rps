@@ -1,4 +1,4 @@
-import { FirebaseContext, FirebaseProvider } from './context';
+import FirebaseProvider from './context/FirebaseProvider';
 import useFirebase from './hooks/useFirebase';
 
-export { useFirebase, FirebaseContext, FirebaseProvider };
+export { useFirebase, FirebaseProvider };

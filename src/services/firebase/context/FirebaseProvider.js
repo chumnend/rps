@@ -49,7 +49,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const FirebaseContext = React.createContext();
+export const FirebaseContext = React.createContext();
 
 const FirebaseProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -146,4 +146,4 @@ FirebaseProvider.propTypes = {
   children: PropTypes.node,
 };
 
-export { FirebaseContext, FirebaseProvider };
+export default FirebaseProvider;
