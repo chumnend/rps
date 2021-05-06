@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Button from '../../../../../../common/components/Button';
 import * as Styles from './styles';
 
 const GamesListItem = (props) => {
@@ -14,9 +13,7 @@ const GamesListItem = (props) => {
       <Styles.Title>{props.name}</Styles.Title>
       <br />
       <Styles.ButtonRightAlign>
-        <Button size="sm" theme="secondary" onClick={handleClick}>
-          Join
-        </Button>
+        <Styles.Button onClick={handleClick}>Join</Styles.Button>
       </Styles.ButtonRightAlign>
     </Styles.GamesListItem>
   );
