@@ -37,3 +37,28 @@ export const ButtonContainer = styled.div`
     flex-direction: row;
   }
 `;
+
+export const Button = styled.button`
+  padding: 1.5rem 2.5rem;
+  border-radius: 3px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: inline-block;
+  background: ${color.white};
+  color: ${color.black};
+  border: 1px solid ${color.white};
+
+  &:disabled {
+    background: ${color.grey};
+    color: ${color.white};
+    font-weight: 500;
+    border: 1px solid ${color.grey};
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+`;
