@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import Loader from '../../common/components/Loader';
 import * as GAME from '../../common/constants/game';
 import * as ROUTES from '../../common/constants/routes';
 import { useFirebase } from '../../services/firebase';
 import GameOverScreen from './components/GameOverScreen';
 import Layout from './components/Layout';
+import Loader from './components/Loader';
 import MoveScreen from './components/MoveScreen';
 import ReadyScreen from './components/ReadyScreen';
 import ResultScreen from './components/ResultScreen';

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Loader from '../../common/components/Loader';
 import { useFirebase } from '../../services/firebase';
 import Header from './components/Header';
 import Layout from './components/Layout';
+import Loader from './components/Loader';
 import Routes from './components/Routes';
 
 const App = () => {
