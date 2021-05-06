@@ -10,8 +10,6 @@ const ToastProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
 
   const addMessage = (message) => {
-    console.log('adding message...');
-
     // create new message
     const newMessage = {
       id,
@@ -27,14 +25,16 @@ const ToastProvider = ({ children }) => {
   };
 
   const deleteMessage = (id) => {
-    console.log('deleting message...');
-
     const updatedMessages = messages.filter((m) => m.id !== id);
     setMessages(updatedMessages);
   };
 
   const toasts = messages.map((m) => (
-    <Toast key={m.id} deleteToast={() => deleteMessage(m.id)} />
+    <Toast
+      key={m.id}
+      message={m.message}
+      deleteToast={() => deleteMessage(m.id)}
+    />
   ));
 
   const toastValues = {
