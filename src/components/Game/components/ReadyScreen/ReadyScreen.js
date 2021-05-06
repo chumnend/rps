@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import Button from '../../../../common/components/Button';
 import * as Styles from './styles';
 
 const ReadyScreen = ({ isReady, handleReadyUp }) => {
@@ -8,9 +7,9 @@ const ReadyScreen = ({ isReady, handleReadyUp }) => {
     <Styles.Container>
       <Styles.Heading>Waiting for players to be ready...</Styles.Heading>
 
-      <Button onClick={handleReadyUp} disabled={isReady}>
+      <Styles.Button onClick={handleReadyUp} disabled={isReady}>
         Ready Up
-      </Button>
+      </Styles.Button>
     </Styles.Container>
   );
 };

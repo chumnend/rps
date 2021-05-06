@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import Button from '../../../../common/components/Button';
 import * as ROUTES from '../../../../common/constants/routes';
 import useInputState from '../../../../common/hooks/useInputState';
 import * as Styles from './styles';
@@ -76,9 +75,7 @@ const RegisterForm = ({ registerUser, error }) => {
         />
       </Styles.InputContainer>
 
-      <Button theme="secondary" disabled={isInvalid()}>
-        Sign up
-      </Button>
+      <Styles.Button disabled={isInvalid()}>Sign up</Styles.Button>
 
       <Styles.Text>
         Already have an account?{' '}

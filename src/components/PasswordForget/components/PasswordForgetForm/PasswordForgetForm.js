@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import Button from '../../../../common/components/Button';
 import useInputState from '../../../../common/hooks/useInputState';
 import * as Styles from './styles';
 
@@ -35,9 +34,7 @@ const PasswordForgetForm = ({ resetPassword, error }) => {
           />
         </Styles.InputContainer>
 
-        <Button theme="secondary" disabled={isInvalid()}>
-          Reset Password
-        </Button>
+        <Styles.Button disabled={isInvalid()}>Reset Password</Styles.Button>
       </Styles.Form>
     </div>
   );

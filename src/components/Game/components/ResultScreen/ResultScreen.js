@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import Button from '../../../../common/components/Button';
 import * as GAME from '../../../../common/constants/game';
 import Scoreboard from '../Scoreboard';
 import * as Styles from './styles';
@@ -47,9 +46,9 @@ const ResultScreen = ({
 
       <Styles.Result>{resultText}</Styles.Result>
 
-      <Button onClick={handleReadyUp} disabled={isReady}>
+      <Styles.Button onClick={handleReadyUp} disabled={isReady}>
         Next
-      </Button>
+      </Styles.Button>
     </Styles.Container>
   );
 };

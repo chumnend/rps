@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import Button from '../../../../common/components/Button';
 import * as GAME from '../../../../common/constants/game';
 import Scoreboard from '../Scoreboard';
 import * as Styles from './styles';
@@ -36,10 +35,10 @@ const GameOverScreen = ({
       <Styles.Result>{resultText}</Styles.Result>
 
       <Styles.ButtonContainer>
-        <Button onClick={handleReadyUp} disabled={isReady}>
+        <Styles.Button onClick={handleReadyUp} disabled={isReady}>
           Rematch?
-        </Button>
-        <Button onClick={handleLeave}>Leave</Button>
+        </Styles.Button>
+        <Styles.Button onClick={handleLeave}>Leave</Styles.Button>
       </Styles.ButtonContainer>
     </Styles.Container>
   );

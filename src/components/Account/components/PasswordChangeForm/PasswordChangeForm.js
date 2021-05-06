@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import Button from '../../../../common/components/Button';
 import useInputState from '../../../../common/hooks/useInputState';
 import * as Styles from './styles';
 
@@ -47,9 +46,7 @@ const PasswordChangeForm = ({ updatePassword, error }) => {
           />
         </Styles.InputContainer>
 
-        <Button theme="secondary" disabled={isInvalid()}>
-          Change Password
-        </Button>
+        <Styles.Button disabled={isInvalid()}>Change Password</Styles.Button>
       </Styles.Form>
     </div>
   );

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import Button from '../../../../common/components/Button';
 import * as GAME from '../../../../common/constants/game';
 import Scoreboard from '../Scoreboard';
 import * as Styles from './styles';
@@ -27,24 +26,24 @@ const MoveScreen = ({
       )}
 
       <Styles.ButtonContainer>
-        <Button
+        <Styles.Button
           onClick={() => handleMove(GAME.MOVE_ROCK)}
           disabled={hasMadeMove}
         >
           Rock
-        </Button>
-        <Button
+        </Styles.Button>
+        <Styles.Button
           onClick={() => handleMove(GAME.MOVE_PAPER)}
           disabled={hasMadeMove}
         >
           Paper
-        </Button>
-        <Button
+        </Styles.Button>
+        <Styles.Button
           onClick={() => handleMove(GAME.MOVE_SCISSOR)}
           disabled={hasMadeMove}
         >
           Scissor
-        </Button>
+        </Styles.Button>
       </Styles.ButtonContainer>
     </Styles.Container>
   );

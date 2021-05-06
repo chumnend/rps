@@ -58,3 +58,28 @@ export const Link = styled(ReactLink)`
     color: ${color.grey};
   }
 `;
+
+export const Button = styled.button`
+  border-radius: 3px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background: ${color.lightblue};
+  color: ${color.white};
+  border: 1px solid ${color.lightblue};
+
+  &:disabled {
+    background: ${color.grey};
+    color: ${color.white};
+    font-weight: 500;
+    border: 1px solid ${color.grey};
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+`;
