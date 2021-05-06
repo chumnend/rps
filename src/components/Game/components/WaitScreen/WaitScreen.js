@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types';
 
+import { useToast } from '../../../../services/toast';
 import * as Styles from './styles';
 
 const WaitScreen = ({ id }) => {
-  const copyURL = async () => {
+  const { addMessage } = useToast();
+
+  const copyURL = async (e) => {
+    e.preventDefault();
+
     const url = window.location.href;
     await navigator.clipboard.writeText(url);
-    alert('Copied URL'); // TODO: Create alert message after/during RPS-28
+    addMessage('Copied URL');
   };
 
   return (

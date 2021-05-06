@@ -7,13 +7,16 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { FirebaseProvider } from './services/firebase';
+import { ToastProvider } from './services/toast';
 
 ReactDOM.render(
   <React.StrictMode>
     <FirebaseProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ToastProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ToastProvider>
     </FirebaseProvider>
   </React.StrictMode>,
   document.getElementById('root'),

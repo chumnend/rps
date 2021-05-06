@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import * as GAME from '../../common/constants/game';
 import * as ROUTES from '../../common/constants/routes';
 import { useFirebase } from '../../services/firebase';
+import { useToast } from '../../services/toast';
 import GameOverScreen from './components/GameOverScreen';
 import Layout from './components/Layout';
 import Loader from './components/Loader';
@@ -24,6 +25,8 @@ const Game = () => {
   const history = useHistory();
   const firebase = useFirebase();
   const firebaseRef = useRef(firebase);
+  const toast = useToast();
+  const toastRef = useRef(toast);
 
   // onJoin - Setups on game listener for updating from firebase
   const onJoin = useCallback(() => {
@@ -35,6 +38,7 @@ const Game = () => {
         // if game does not exist, bounce to home
         if (!gameData) {
           history.push(ROUTES.LANDING);
+          toastRef.current.addMessage('Game no longer exists');
           return;
         }
 
@@ -53,6 +57,7 @@ const Game = () => {
         ) {
           // if challenger already exists
           history.push(ROUTES.GAMES);
+          toastRef.current.addMessage('Game is full');
         }
 
         // if challenger left mid game, re-initialize host
