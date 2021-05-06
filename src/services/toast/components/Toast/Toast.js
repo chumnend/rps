@@ -17,8 +17,10 @@ const Toast = ({ id, message, deleteToast }) => {
 
   return (
     <Styles.Toast>
-      <button>X</button>
-      <div>{message}</div>
+      <Styles.Header>
+        <Styles.CloseButton onClick={deleteToast}>X</Styles.CloseButton>
+      </Styles.Header>
+      <Styles.Message>{message}</Styles.Message>
     </Styles.Toast>
   );
 };

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import Toast from '../Toast';
+import ToastList from '../ToastList';
 
 export const ToastContext = React.createContext();
 
@@ -29,22 +29,13 @@ const ToastProvider = ({ children }) => {
     setMessages(updatedMessages);
   };
 
-  const toasts = messages.map((m) => (
-    <Toast
-      key={m.id}
-      message={m.message}
-      deleteToast={() => deleteMessage(m.id)}
-    />
-  ));
-
   const toastValues = {
-    messages,
     addMessage,
   };
 
   return (
     <ToastContext.Provider value={toastValues}>
-      {toasts}
+      <ToastList messages={messages} deleteMessage={deleteMessage} />
       {children}
     </ToastContext.Provider>
   );
