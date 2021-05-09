@@ -1,7 +1,17 @@
 import PropTypes from 'prop-types';
 
-const UserList = () => {
-  return null;
+import * as Styles from './styles';
+
+const UserList = ({ users }) => {
+  return (
+    <Styles.List>
+      {users.map((u) => (
+        <Styles.ListItem key={u.id}>
+          {u.username} - {u.email}
+        </Styles.ListItem>
+      ))}
+    </Styles.List>
+  );
 };
 
 UserList.propTypes = {

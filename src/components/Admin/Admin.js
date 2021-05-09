@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useFirebase } from '../../services/firebase';
+import GameList from './components/GameList';
 import Layout from './components/Layout';
-import List from './components/List';
-import ListItem from './components/ListItem';
-import ListTitle from './components/ListTitle';
 import Loader from './components/Loader';
+import UserList from './components/UserList';
 
 const Admin = () => {
   const [loading, setLoading] = useState(true);
@@ -36,32 +35,10 @@ const Admin = () => {
     return <Loader />;
   }
 
-  const userList = users.map((u) => (
-    <ListItem key={u.id}>
-      {u.username} - {u.email}
-    </ListItem>
-  ));
-
-  let gameList = <ListItem>No games have been created.</ListItem>;
-  if (games.length > 0) {
-    gameList = games.map((g) => (
-      <ListItem key={g.id}>
-        {g.name} - {g.host.username}
-      </ListItem>
-    ));
-  }
-
   return (
     <Layout>
-      <List>
-        <ListTitle>Users</ListTitle>
-        {userList}
-      </List>
-      <br />
-      <List>
-        <ListTitle>Games</ListTitle>
-        {gameList}
-      </List>
+      <UserList users={users} />
+      <GameList games={games} />
     </Layout>
   );
 };
