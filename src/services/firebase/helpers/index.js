@@ -1,25 +1,24 @@
-import getGame from './getGame';
-import getUser from './getUser';
-import hostGame from './hostGame';
-import listGames from './listGames';
-import listOpenGames from './listOpenGames';
-import listUsers from './listUsers';
-import loginUser from './loginUser';
-import logoutUser from './logoutUser';
-import registerUser from './registerUser';
-import resetPassword from './resetPassword';
-import updatePassword from './updatePassword';
-
-export {
+import { getGame, hostGame, listGames, listOpenGames } from './games';
+import {
+  getUser,
+  listUsers,
   loginUser,
   logoutUser,
   registerUser,
+  resetPassword,
+  updatePassword,
+} from './users';
+
+export {
   getGame,
-  getUser,
-  hostGame,
   listGames,
   listOpenGames,
+  hostGame,
+  getUser,
   listUsers,
+  loginUser,
+  logoutUser,
+  registerUser,
   resetPassword,
   updatePassword,
 };
