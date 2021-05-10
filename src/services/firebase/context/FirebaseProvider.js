@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
 
 import { auth, db } from '../config';
-import * as firebaseHelpers from '../helpers';
+import { gameHelpers, userHelpers } from '../helpers';
 
 const initialState = {
   loading: true,
@@ -84,11 +84,7 @@ const FirebaseProvider = ({ children }) => {
     dispatch({ type: AUTHENTICATING });
 
     try {
-      const user = await firebaseHelpers.registerUser(
-        username,
-        email,
-        password,
-      );
+      const user = await userHelpers.registerUser(username, email, password);
 
       dispatch({
         type: AUTH_SUCCESS,
@@ -106,7 +102,7 @@ const FirebaseProvider = ({ children }) => {
     dispatch({ type: AUTHENTICATING });
 
     try {
-      const user = await firebaseHelpers.loginUser(email, password);
+      const user = await userHelpers.loginUser(email, password);
 
       dispatch({
         type: AUTH_SUCCESS,
@@ -121,7 +117,7 @@ const FirebaseProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await firebaseHelpers.logoutUser();
+    await userHelpers.logoutUser();
     dispatch({ type: AUTH_LOGOUT });
   };
 
@@ -132,7 +128,8 @@ const FirebaseProvider = ({ children }) => {
     login,
     logout,
 
-    ...firebaseHelpers,
+    ...gameHelpers,
+    ...userHelpers,
   };
 
   return (

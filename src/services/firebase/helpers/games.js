@@ -91,3 +91,17 @@ export const listOpenGames = async () => {
 
   return games;
 };
+
+/*
+ * Deletes the game document in firebase
+ * @param {string} id - the document identifier for the game
+ * @return {boolean} - true if successful, else false
+ */
+export const deleteGame = async (id) => {
+  try {
+    await db.collection(GAMES_ID).doc(id).delete();
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useFirebase } from '../../services/firebase';
+import { useToast } from '../../services/toast';
 import GameList from './components/GameList';
 import Layout from './components/Layout';
 import Loader from './components/Loader';
@@ -13,6 +14,7 @@ const Admin = () => {
 
   const firebase = useFirebase();
   const firebaseRef = useRef(firebase);
+  const toast = useToast();
 
   useEffect(() => {
     const getUsers = async () => {
@@ -31,14 +33,29 @@ const Admin = () => {
     setLoading(false);
   }, []);
 
+  const deleteUser = async (id) => {
+    toast.addMessage('This feature is not implemented');
+  };
+
+  const deleteGame = async (id) => {
+    const success = await firebase.deleteGame(id);
+
+    if (success) {
+      window.location.reload();
+    } else {
+      toast.addMessage('Failed to delete game');
+    }
+  };
+
   if (loading) {
     return <Loader />;
   }
 
   return (
     <Layout>
-      <UserList users={users} />
-      <GameList games={games} />
+      <UserList users={users} deleteUser={deleteUser} />
+      <br />
+      <GameList games={games} deleteGame={deleteGame} />
     </Layout>
   );
 };

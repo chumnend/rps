@@ -2,12 +2,15 @@ import PropTypes from 'prop-types';
 
 import * as Styles from './styles';
 
-const UserList = ({ users }) => {
+const UserList = ({ users, deleteUser }) => {
   return (
     <Styles.List>
       {users.map((u) => (
         <Styles.ListItem key={u.id}>
-          {u.username} - {u.email}
+          <p>
+            {u.username} {u.email}
+          </p>
+          <button onClick={() => deleteUser(u.id)}>Delete</button>
         </Styles.ListItem>
       ))}
     </Styles.List>
@@ -16,6 +19,7 @@ const UserList = ({ users }) => {
 
 UserList.propTypes = {
   users: PropTypes.array,
+  deleteUser: PropTypes.func,
 };
 
 export default UserList;

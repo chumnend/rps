@@ -1,24 +1,4 @@
-import { getGame, hostGame, listGames, listOpenGames } from './games';
-import {
-  getUser,
-  listUsers,
-  loginUser,
-  logoutUser,
-  registerUser,
-  resetPassword,
-  updatePassword,
-} from './users';
+import * as gameHelpers from './games';
+import * as userHelpers from './users';
 
-export {
-  getGame,
-  listGames,
-  listOpenGames,
-  hostGame,
-  getUser,
-  listUsers,
-  loginUser,
-  logoutUser,
-  registerUser,
-  resetPassword,
-  updatePassword,
-};
+export { gameHelpers, userHelpers };
