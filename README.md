@@ -2,7 +2,7 @@
 Rock, Paper, Scissors! Built with React and Firebase
 
 ## Demo
-TBD
+![rps-demo](https://user-images.githubusercontent.com/16625073/117898461-017f7900-b293-11eb-8ddb-dbaf096f3808.gif)
 
 ## Development Setup
 
