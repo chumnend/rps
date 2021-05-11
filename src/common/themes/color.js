@@ -3,6 +3,7 @@ export const color = {
   white: '#fff',
   grey: '#c2c2c2',
   lightblue: '#64b5f6',
+  lightred: '#ff8484',
 
   hexToRGBA: (hex, alpha) => {
     if (!hex || [4, 7].indexOf(hex.length) === -1) {

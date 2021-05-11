@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useFirebase } from '../../services/firebase';
+import { useToast } from '../../services/toast';
+import GameList from './components/GameList';
 import Layout from './components/Layout';
-import List from './components/List';
-import ListItem from './components/ListItem';
-import ListTitle from './components/ListTitle';
 import Loader from './components/Loader';
+import UserList from './components/UserList';
 
 const Admin = () => {
   const [loading, setLoading] = useState(true);
@@ -14,6 +14,7 @@ const Admin = () => {
 
   const firebase = useFirebase();
   const firebaseRef = useRef(firebase);
+  const toast = useToast();
 
   useEffect(() => {
     const getUsers = async () => {
@@ -32,36 +33,29 @@ const Admin = () => {
     setLoading(false);
   }, []);
 
+  const deleteUser = async (id) => {
+    toast.addMessage('This feature is not implemented');
+  };
+
+  const deleteGame = async (id) => {
+    const success = await firebase.deleteGame(id);
+
+    if (success) {
+      window.location.reload();
+    } else {
+      toast.addMessage('Failed to delete game');
+    }
+  };
+
   if (loading) {
     return <Loader />;
   }
 
-  const userList = users.map((u) => (
-    <ListItem key={u.id}>
-      {u.username} - {u.email}
-    </ListItem>
-  ));
-
-  let gameList = <ListItem>No games have been created.</ListItem>;
-  if (games.length > 0) {
-    gameList = games.map((g) => (
-      <ListItem key={g.id}>
-        {g.name} - {g.host.username}
-      </ListItem>
-    ));
-  }
-
   return (
     <Layout>
-      <List>
-        <ListTitle>Users</ListTitle>
-        {userList}
-      </List>
+      <UserList users={users} deleteUser={deleteUser} />
       <br />
-      <List>
-        <ListTitle>Games</ListTitle>
-        {gameList}
-      </List>
+      <GameList games={games} deleteGame={deleteGame} />
     </Layout>
   );
 };
