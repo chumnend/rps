@@ -8,10 +8,10 @@ const GameList = ({ games, deleteGame }) => {
   if (games.length > 0) {
     gamesList = games.map((g) => (
       <Styles.ListItem key={g.id}>
-        <p>
-          {g.name} {g.host.username}
-        </p>
-        <button onClick={() => deleteGame(g.id)}>Delete</button>
+        <Styles.Card>
+          <p>{g.name}</p>
+        </Styles.Card>
+        <Styles.Button onClick={() => deleteGame(g.id)}>Delete</Styles.Button>
       </Styles.ListItem>
     ));
   }

@@ -7,10 +7,11 @@ const UserList = ({ users, deleteUser }) => {
     <Styles.List>
       {users.map((u) => (
         <Styles.ListItem key={u.id}>
-          <p>
-            {u.username} {u.email}
-          </p>
-          <button onClick={() => deleteUser(u.id)}>Delete</button>
+          <Styles.Card>
+            <p>{u.username}</p>
+            <p>{u.email}</p>
+          </Styles.Card>
+          <Styles.Button onClick={() => deleteUser(u.id)}>Delete</Styles.Button>
         </Styles.ListItem>
       ))}
     </Styles.List>
