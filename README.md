@@ -1,19 +1,28 @@
 # RPS Game
-Rock, Paper, Scissors! Built with React and Firebase
+Rock, Paper, Scissors! A multiplyar RPS game made using the power of Google Firebase. This project was created to help me learn how to create applications using Firebase and practice when dealing with asynchronous actions between multiple users.
+
+Built with **React** and **Firebase**
 
 ## Demo
 ![rps-demo](https://user-images.githubusercontent.com/16625073/117898461-017f7900-b293-11eb-8ddb-dbaf096f3808.gif)
 
-## Development Setup
+## Getting Started
 
 ### Prerequisites
 - React
-- Firebase
 - npm
+- [Firebase](https://firebase.google.com)
+
 
 ### Configuration
-1) Clone the repo
-2) Run ```npm install``` to install dependencies
+1) Clone this repo
+```
+git clone https://github.com/chumnend/rps.git
+```
+2) Install project dependencies
+```
+npm install
+```
 3) Create a new Firebase project
 4) Go to ```Authentication``` and click ```Get Started```. Enable login using Email/Password
 5) In the new Firebase project, go to ```Firestore Database``` and create a new production database
@@ -21,6 +30,9 @@ Rock, Paper, Scissors! Built with React and Firebase
 7) Go to ```Project Settings``` and create a new web app
 8) Under ```SDK setup and configuration```, select config. You will use this config in for environment configuration in the next step.
 9) Copy the file env.example and rename it to ```.env```. This file contains the name of required environment variables needed for the application to work.
+```
+cp env.example .env
+```
 
 ```
 # APPLICATION SETTINGS
@@ -40,4 +52,4 @@ REACT_APP_APP_ID=                  # appId
 10) Start the application using ```npm start```
 
 ### Deployment
-Not currently deployed
+Not deployed.
