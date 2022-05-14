@@ -1,20 +1,18 @@
 # RPS Game
+
+## About this porject
 Rock, Paper, Scissors! A multiplyar RPS game made using the power of Google Firebase. This project was created to help me learn how to create applications using Firebase and practice when dealing with asynchronous actions between multiple users.
 
-Built with **React** and **Firebase**
+### Demo
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/16625073/117898461-017f7900-b293-11eb-8ddb-dbaf096f3808.gif" alt="animated" />
+</p>
 
-## Demo
-![rps-demo](https://user-images.githubusercontent.com/16625073/117898461-017f7900-b293-11eb-8ddb-dbaf096f3808.gif)
+### Built with
+- React
+- Firebase
 
 ## Getting Started
-
-### Prerequisites
-- React
-- npm
-- [Firebase](https://firebase.google.com)
-
-
-### Configuration
 1) Clone this repo
 ```
 git clone https://github.com/chumnend/rps.git
@@ -51,5 +49,6 @@ REACT_APP_APP_ID=                  # appId
 
 10) Start the application using ```npm start```
 
-### Deployment
-Not deployed.
+## Contact
+
+Nicholas Chumney - [nicholas.chumney@outlook.com](nicholas.chumney@outlook.com)
