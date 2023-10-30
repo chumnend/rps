@@ -1,6 +1,6 @@
 # RPS Game
 
-## About this porject
+## About this project
 Rock, Paper, Scissors! A multiplyar RPS game made using the power of Google Firebase. This project was created to help me learn how to create applications using Firebase and practice when dealing with asynchronous actions between multiple users.
 
 ### Demo
